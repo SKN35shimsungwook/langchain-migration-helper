@@ -50,6 +50,9 @@ def connector_svg(attrs: str, idx: int) -> str:
 
 def build():
     deck = json.loads((HERE / "deck.json").read_text(encoding="utf-8"))
+    # claude.ai 슬라이드의 이미지 주소(/_blob/...)를 저장소 안의 그림 파일로 바꾼다
+    assets_file = HERE / "assets.json"
+    assets = json.loads(assets_file.read_text(encoding="utf-8")) if assets_file.exists() else {}
     font_href = next(iter(deck["faces"].values()))["href"]
     blocks, n = [], 0
     for i, sid in enumerate(deck["order"], 1):
@@ -64,6 +67,8 @@ def build():
             return connector_svg(mm.group(1), n)
 
         src = CONNECTOR.sub(repl, src).strip()
+        for blob, path in assets.items():
+            src = src.replace(f'src="{blob}"', f'src="{path}"')
         note_html = (f'<details class="notes"><summary>발표자 노트</summary><p>{html.escape(notes)}</p></details>'
                      if notes else "")
         blocks.append(f'<figure class="slide" id="slide-{i}" aria-label="{i}번 슬라이드">'

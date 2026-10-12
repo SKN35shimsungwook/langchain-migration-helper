@@ -1,35 +1,25 @@
-<section id="experiment" data-transition="fade" style="background:#F6F5F1;color:#1B2433;font-family:'IBM Plex Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<section id="experiment" data-transition="fade" style="background:#F6F5F1;color:#1B2433;font-family:'IBM Plex Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
 <div style="display:flex;flex-direction:column;gap:16px">
 <p style="font-size:24px;font-weight:600;color:#1F5FAE;letter-spacing:2px">실험 설계</p>
 <h2 style="font-size:64px;font-weight:700;line-height:1.15;color:#1B2433">같은 코드 30개, 같은 조건으로 비교했습니다</h2>
 </div>
-<div style="display:flex;gap:56px;align-items:start">
+<div style="display:flex;gap:48px;align-items:center">
+<img src="/_blob/2f2354beb9046ac4a9ddbcdd26d0f749" alt="시험지 30장을 일반 AI와 우리 프로그램이 풀고, 같은 채점 로봇이 서랍을 직접 열어 판정해 점수판에 기록한다. 규칙: 같은 모델, 같은 문제 30개, 같은 채점 로봇, 꼼수는 실격" style="width:1060px;height:583px;object-fit:contain">
 <div style="flex:1;display:flex;flex-direction:column;gap:20px">
-<div style="display:flex;flex-direction:column;gap:6px;background:#FFFFFF;border:1px solid #E1E0D9;border-radius:16px;padding:28px">
+<div style="display:flex;flex-direction:column;gap:4px;border-top:2px solid #D4D3CC;padding:16px 0px 0px 0px">
 <h3 style="font-size:32px;font-weight:700;color:#1B2433">쉬움 10개</h3>
-<p style="font-size:24px;line-height:1.4;color:#4A5363">import 경로만 바뀜 · chat_models, prompts, loaders</p>
+<p style="font-size:24px;line-height:1.4;color:#4A5363">import 경로만 바뀜</p>
 </div>
-<div style="display:flex;flex-direction:column;gap:6px;background:#FFFFFF;border:1px solid #E1E0D9;border-radius:16px;padding:28px">
+<div style="display:flex;flex-direction:column;gap:4px;border-top:2px solid #D4D3CC;padding:16px 0px 0px 0px">
 <h3 style="font-size:32px;font-weight:700;color:#1B2433">중간 10개</h3>
-<p style="font-size:24px;line-height:1.4;color:#4A5363">체인 구조 변경 · LLMChain, RetrievalQA, 라우터</p>
+<p style="font-size:24px;line-height:1.4;color:#4A5363">체인 구조 변경</p>
 </div>
-<div style="display:flex;flex-direction:column;gap:6px;background:#FFFFFF;border:1px solid #E1E0D9;border-radius:16px;padding:28px">
+<div style="display:flex;flex-direction:column;gap:4px;border-top:2px solid #D4D3CC;padding:16px 0px 0px 0px">
 <h3 style="font-size:32px;font-weight:700;color:#1B2433">어려움 10개</h3>
-<p style="font-size:24px;line-height:1.4;color:#4A5363">에이전트·메모리 변경 · initialize_agent, AgentExecutor</p>
+<p style="font-size:24px;line-height:1.4;color:#4A5363">에이전트·메모리 변경</p>
 </div>
 </div>
-<div style="flex:1.4;display:flex;flex-direction:column">
-<table style="font-size:26px;color:#1B2433;background:#FFFFFF;border:1px solid #E1E0D9">
-<tr style="background:#ECEBE5"><th style="width:28%;text-align:left">항목</th><th style="width:72%;text-align:left">규칙</th></tr>
-<tr><td>비교 대상</td><td>일반 LLM (baseline) vs 우리 시스템</td></tr>
-<tr><td>모델</td><td>양쪽 동일 [모델명], temperature 0</td></tr>
-<tr><td>baseline 질문</td><td>"LangChain 1.x로 변환해 주세요" (문구 고정)</td></tr>
-<tr><td>검증 환경</td><td>langchain 1.4.4 등 버전 고정</td></tr>
-<tr><td>최대 시도</td><td>3회 (우리 시스템)</td></tr>
-<tr><td>성공 기준</td><td>문법 통과 + 모든 import 성공 + 무효 변환 아님</td></tr>
-</table>
 </div>
-</div>
-<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#8A8F98">LangChain 마이그레이션 도우미 · 6</p>
-<aside>공정한 비교를 위해 실험 규칙을 먼저 정했습니다. 테스트 코드는 난이도별로 10개씩 30개이고, 30개 모두 최신 LangChain에서 실제로 깨지는 것을 확인했습니다. 일반 LLM과 우리 시스템은 같은 모델, 같은 입력을 쓰고, 똑같은 검증기로 판정합니다. 또 LangChain import를 지워서 통과하는 식의 꼼수 변환은 실패로 처리했습니다.</aside>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#8A8F98">LangChain 마이그레이션 도우미 · 7</p>
+<aside>공정한 비교를 위해 실험 규칙을 먼저 정했습니다. 저는 요리 대회 심사위원 역할입니다. 시험지는 난이도별로 10개씩 30개이고, 30개 모두 최신 LangChain에서 실제로 깨지는 것을 확인했습니다. 일반 AI와 우리 프로그램은 같은 모델 [모델명], temperature 0, 같은 입력을 쓰고, 똑같은 채점 로봇으로 판정합니다. 일반 AI에게는 "LangChain 1.x로 변환해 주세요"라는 고정된 문구만 줍니다. 성공 기준은 문법 통과, 모든 import 성공, 무효 변환 아님 세 가지입니다. LangChain import를 지워서 통과하는 식의 꼼수는 실격으로 처리했습니다.</aside>
 </section>
