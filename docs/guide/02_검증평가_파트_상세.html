@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>검증·평가 파트 상세</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* layout: one reading column (~46rem) of numbered chapters, a sticky chapter strip on top, kitchen analogy carried through every chapter */
+:root {
+  --bg: #F3F5F7;
+  --paper: #FFFFFF;
+  --ink: #18202B;
+  --ink-2: #4A5565;
+  --line: #DCE1E7;
+  --ours: #2457C5;        /* 우리 시스템 */
+  --ours-soft: #E4ECFB;
+  --old: #B8501F;         /* 옛날 방식 / 일반 AI */
+  --old-soft: #FBEADF;
+  --pass: #1B7A43;
+  --pass-soft: #E1F3E8;
+  --fail: #B42F2A;
+  --fail-soft: #FBE4E2;
+  --code-bg: #17202C;
+  --code-ink: #E6EBF1;
+  --display: 'Do Hyeon', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  --body: 'Noto Sans KR', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+  --mono: 'JetBrains Mono', Consolas, 'Courier New', monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12171E; --paper: #1A212B; --ink: #E9EDF2; --ink-2: #A9B3C1; --line: #2C3644;
+    --ours: #7FA6EE; --ours-soft: #1E2C47; --old: #EE9767; --old-soft: #3A2519;
+    --pass: #5CC98A; --pass-soft: #173126; --fail: #F08079; --fail-soft: #3A1D1C;
+    --code-bg: #0C1117; --code-ink: #E6EBF1; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12171E; --paper: #1A212B; --ink: #E9EDF2; --ink-2: #A9B3C1; --line: #2C3644;
+  --ours: #7FA6EE; --ours-soft: #1E2C47; --old: #EE9767; --old-soft: #3A2519;
+  --pass: #5CC98A; --pass-soft: #173126; --fail: #F08079; --fail-soft: #3A1D1C;
+  --code-bg: #0C1117; --code-ink: #E6EBF1; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.75; padding-inline: 16px; padding-block: 0 64px; }
+.wrap { max-width: 46rem; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.25; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2.2rem, 7vw, 3.2rem); }
+h2 { font-size: clamp(1.7rem, 5vw, 2.2rem); }
+h3 { font-size: 1.35rem; }
+p { margin: 0; }
+a { color: var(--ours); }
+code { font-family: var(--mono); font-size: 0.88em; background: var(--ours-soft); padding: 0.1em 0.35em; border-radius: 4px; overflow-wrap: anywhere; }
+b { font-weight: 700; }
+
+nav.chapters { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); margin-inline: -16px; padding: 10px 16px; }
+nav.chapters ol { list-style: none; margin: 0 auto; padding: 0; max-width: 46rem; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: thin; }
+nav.chapters a { display: block; white-space: nowrap; text-decoration: none; color: var(--ink-2); font-size: 14px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); }
+nav.chapters a:hover, nav.chapters a:focus-visible { color: var(--ours); border-color: var(--ours); outline: none; }
+
+header.hero { padding-block: 48px 32px; display: flex; flex-direction: column; gap: 16px; }
+.eyebrow { font-size: 13px; letter-spacing: 0.08em; color: var(--ours); font-weight: 700; }
+.lead { font-size: 1.15rem; color: var(--ink-2); }
+.meta { font-size: 14px; color: var(--ink-2); }
+
+section.ch { padding-block: 40px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 18px; scroll-margin-top: 64px; }
+.chno { font-family: var(--mono); font-size: 13px; color: var(--ink-2); }
+
+.box { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.remember { border: 2px solid var(--ours); }
+.remember ol { margin: 0; padding-left: 1.3em; display: flex; flex-direction: column; gap: 6px; }
+.tip { background: var(--pass-soft); border-color: transparent; }
+.warn { background: var(--old-soft); border-color: transparent; }
+.label { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; color: var(--ink-2); }
+
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); }
+table { border-collapse: collapse; width: 100%; font-size: 15.5px; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 13.5px; color: var(--ink-2); font-weight: 700; background: var(--bg); }
+tr:last-child td { border-bottom: none; }
+
+pre { margin: 0; background: var(--code-bg); color: var(--code-ink); font-family: var(--mono); font-size: 14px; line-height: 1.6; padding: 14px 16px; border-radius: 10px; overflow-x: auto; }
+pre .err { color: #F49A86; }
+pre .ok { color: #8FD9A8; }
+pre .dim { color: #8D9AAB; }
+
+/* 흐름 그림 */
+.flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 8px; }
+.step { flex: 1 1 8.5rem; min-width: 0; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 4px; }
+.step .who { font-size: 12.5px; color: var(--ink-2); }
+.step .name { font-family: var(--mono); font-weight: 600; font-size: 15px; }
+.step .kitchen { font-size: 14.5px; }
+.step.key { background: var(--ours); border-color: var(--ours); color: #FFFFFF; }
+.step.key .who { color: #DCE6FA; }
+.loop-note { font-size: 14.5px; color: var(--old); font-weight: 700; }
+
+/* 계단 */
+.stairs { display: flex; flex-direction: column; gap: 8px; }
+.stair { display: grid; grid-template-columns: 2.4rem 1fr; gap: 12px; align-items: start; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+.stair .n { font-family: var(--display); font-size: 1.6rem; color: var(--ours); line-height: 1.2; text-align: center; }
+.stair .t { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.stair .t b { font-size: 16.5px; }
+.stair .t span { color: var(--ink-2); font-size: 15px; }
+.stair.goal { border: 2px solid var(--ours); }
+.up { text-align: center; color: var(--ink-2); font-size: 13px; }
+
+/* 두 가지 설계 비교 */
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 560px) { .compare { grid-template-columns: 1fr; } }
+
+/* 막대 예시 */
+.bars { display: flex; flex-direction: column; gap: 10px; }
+.bar-row { display: grid; grid-template-columns: 7.5rem 1fr 3rem; gap: 10px; align-items: center; font-size: 14.5px; }
+.bar-track { height: 18px; background: var(--bg); border-radius: 4px; overflow: hidden; }
+.bar { height: 100%; border-radius: 4px; }
+.bar.ours { background: var(--ours); }
+.bar.old { background: var(--old); }
+.bar-row .v { font-variant-numeric: tabular-nums; text-align: right; }
+
+/* 퀴즈 */
+.quiz { display: flex; flex-direction: column; gap: 14px; }
+.q { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; }
+.q .opts { display: flex; flex-direction: column; gap: 6px; }
+.q button { font: inherit; font-size: 15.5px; text-align: left; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; cursor: pointer; }
+.q button:hover { border-color: var(--ours); }
+.q button:focus-visible { outline: 2px solid var(--ours); outline-offset: 2px; }
+.q button.right { background: var(--pass-soft); border-color: var(--pass); }
+.q button.wrong { background: var(--fail-soft); border-color: var(--fail); }
+.q .why { font-size: 15px; color: var(--ink-2); border-left: 3px solid var(--line); padding-left: 12px; }
+.score { font-weight: 700; }
+
+/* 체크리스트 */
+.checks { display: flex; flex-direction: column; gap: 8px; }
+.checks label { display: grid; grid-template-columns: 1.4rem 1fr; gap: 10px; align-items: start; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; cursor: pointer; }
+.checks input { width: 1.1rem; height: 1.1rem; margin-top: 0.35rem; accent-color: var(--pass); }
+.checks small { display: block; color: var(--ink-2); font-size: 14px; }
+.progress { font-weight: 700; color: var(--pass); }
+
+dl.glossary { margin: 0; display: grid; grid-template-columns: minmax(7rem, 11rem) 1fr; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--paper); }
+dl.glossary dt, dl.glossary dd { margin: 0; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+dl.glossary dt { font-weight: 700; background: var(--bg); overflow-wrap: anywhere; }
+dl.glossary dd { font-size: 15.5px; min-width: 0; }
+@media (max-width: 480px) { dl.glossary { grid-template-columns: 1fr; } dl.glossary dt { border-bottom: none; padding-bottom: 2px; } }
+
+footer { padding-block: 32px; color: var(--ink-2); font-size: 14px; border-top: 1px solid var(--line); }
+
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media print {
+  nav.chapters { display: none; }
+  body { font-size: 11pt; padding: 0; background: #FFFFFF; }
+  section.ch { break-before: page; }
+  .q .why { display: block !important; }
+  .q button { pointer-events: none; }
+  pre { white-space: pre-wrap; }
+  pre, .box, .q, .stair, tr, .checks label { break-inside: avoid; }
+}
+</style>
+
+
+<style>[hidden]{display:none!important} body{margin:0} .badge{display:inline-block;align-self:flex-start;font-size:13px;font-weight:700;color:var(--pass);background:var(--pass-soft);border-radius:999px;padding:2px 10px}</style>
+</head>
+<body>
+<nav class="chapters" aria-label="장 목록">
+  <ol>
+    <li><a href="#s1">1 내 임무</a></li>
+    <li><a href="#s2">2 따라 하기</a></li>
+    <li><a href="#s3">3 결과 읽기</a></li>
+    <li><a href="#s4">4 발표 질문</a></li>
+    <li><a href="#s5">5 퀴즈</a></li>
+    <li><a href="#s6">6 체크리스트</a></li>
+  </ol>
+</nav>
+<div class="wrap">
+<header class="hero">
+  <p class="eyebrow">LANGCHAIN 마이그레이션 도우미 · 4번(검증·평가) 담당 안내서</p>
+  <h1>검증·평가 파트 상세</h1>
+  <span class="badge">최신 버전 · 2026-10-12</span>
+  <p class="lead">4번 담당이 맡은 <b>요리 대회 심사위원</b> 임무를 자세히 설명합니다. 도구, 명령어, 결과 읽는 법, 발표 질문까지 담았습니다.</p>
+  <p class="meta">먼저 읽을 문서: <a href="01_프로젝트_전체_쉽게_보기.html">01 프로젝트 전체 쉽게 보기</a></p>
+  <div class="box remember">
+    <p class="label">이것 세 줄만 기억해도 됩니다</p>
+    <ol>
+      <li>AI는 <b>옛날 주방</b>만 기억해서, 도구가 이사 간 줄 모르고 옛날 레시피를 줍니다.</li>
+      <li>우리 프로그램은 <b>새 주방 안내서를 보고</b> 레시피를 고친 뒤, <b>서랍을 직접 열어 보며</b> 도구가 있는지 확인합니다.</li>
+      <li>나(4번)는 <b>요리 대회 심사위원</b>입니다. 같은 문제 30개로 "우리가 더 잘 고친다"를 숫자로 증명합니다.</li>
+    </ol>
+  </div>
+</header>
+<section class="ch" id="s1">
+  <p class="chno">1장</p>
+  <h2>내 임무: 요리 대회 심사위원</h2>
+  <p>요리사 두 명에게 <b>똑같은 옛날 레시피 30개</b>를 주고 "새 주방에 맞게 고쳐 오세요"라고 합니다. 한 명은 <b>일반 AI</b>, 한 명은 <b>우리 프로그램</b>입니다. 나는 고쳐 온 레시피대로 서랍을 실제로 열어 보고, 도구가 다 있으면 합격을 줍니다.</p>
+  <h3>내 도구 상자 (모두 만들어져 있습니다)</h3>
+  <div class="table-wrap"><table>
+    <tr><th>파일</th><th>주방 비유</th><th>내가 할 일</th></tr>
+    <tr><td><code>EVAL_RULES.md</code></td><td>시합 규칙표</td><td>팀과 빈칸 2개 채우기 (비교 모델, verifier 담당)</td></tr>
+    <tr><td><code>testset.json</code></td><td>문제지 30장</td><td>읽어 보고 왜 깨지는지 몇 개 설명할 수 있게 하기</td></tr>
+    <tr><td><code>check_testset.py</code></td><td>문제지 검사기</td><td>한 번 실행해서 "통과 30/30" 눈으로 보기</td></tr>
+    <tr><td><code>verify.py</code></td><td>채점 로봇</td><td>1번 팀원에게 "우리 시스템도 이걸로 채점해 주세요" 전달</td></tr>
+    <tr><td><code>run_baseline.py</code></td><td>상대 선수 시험 기계</td><td>일반 AI 시험 실행</td></tr>
+    <tr><td><code>make_charts.py</code></td><td>점수판 그리기 기계</td><td>결과가 나오면 실행해서 그래프 받기</td></tr>
+  </table></div>
+  <h3>왜 AI에게 "이거 맞아?"라고 묻지 않나요?</h3>
+  <p>심사위원도 옛날 주방만 기억하면, 틀린 레시피에 합격을 줄 수 있습니다. 그래서 우리는 <b>말이 아니라 서랍을 직접 열어 보는 것</b>으로 채점합니다. 이게 일반 AI와 우리의 가장 큰 차이입니다.</p>
+  <h3>공정한 시합 규칙 (달리기와 같습니다)</h3>
+  <div class="table-wrap"><table>
+    <tr><th>규칙</th><th>달리기로 말하면</th></tr>
+    <tr><td>두 요리사는 같은 AI 두뇌(모델)를 쓴다</td><td>같은 운동화를 신는다</td></tr>
+    <tr><td>같은 문제 30개를 같은 순서로 푼다</td><td>같은 코스를 뛴다</td></tr>
+    <tr><td>같은 채점 로봇(<code>verify.py</code>)으로 채점한다</td><td>같은 시계로 잰다</td></tr>
+    <tr><td>꼼수는 실패로 친다 (어려운 부분을 지워서 에러를 없애기 등)</td><td>코스를 가로지르면 실격</td></tr>
+  </table></div>
+  <div class="compare">
+    <div class="box tip">
+      <p class="label">꼭 알아야 하는 것</p>
+      <p>왜 서랍을 직접 열어 보는지, 시합이 왜 공정한지, 결과 숫자가 무슨 뜻인지, 그리고 한계(아래).</p>
+    </div>
+    <div class="box">
+      <p class="label">몰라도 괜찮은 것</p>
+      <p>파이썬 코드 한 줄 한 줄의 뜻. 실행하는 방법만 알면 됩니다. 막히면 Claude에게 물어보면 됩니다.</p>
+    </div>
+  </div>
+  <div class="box warn">
+    <p class="label">한계 (발표에서 먼저 말하면 신뢰가 올라갑니다)</p>
+    <p>서랍에서 도구를 <b>꺼낼 수 있다</b>고 해서, 그 도구를 <b>올바르게 쓴다</b>는 보장은 없습니다. 예를 들어 국자는 꺼냈는데 국자로 칼질을 하면 요리는 망합니다. 우리 채점은 "꺼낼 수 있나"까지만 확인합니다.</p>
+  </div>
+</section>
+<section class="ch" id="s2">
+  <p class="chno">2장</p>
+  <h2>따라 하기: 명령어와 화면에 나오는 것</h2>
+  <p>아래 명령어를 순서대로 PowerShell이나 터미널에 붙여 넣으면 됩니다. 각 단계마다 <b>화면에 이렇게 나오면 성공</b>을 함께 적었습니다.</p>
+
+  <h3>0단계. 평가 폴더로 이동</h3>
+  <pre>cd "C:\Users\playdata2\Desktop\skn35 report\langchain_migration\eval"</pre>
+
+  <h3>1단계. 새 주방 만들기 (처음 한 번만)</h3>
+  <p>최신 LangChain만 설치된 깨끗한 연습용 주방(가상환경)을 따로 만듭니다. 2~3분 걸립니다.</p>
+  <pre>uv venv verify-env --python 3.12
+uv pip install --python verify-env/Scripts/python.exe langchain langchain-core langchain-openai langchain-community langchain-classic langgraph
+verify-env/Scripts/python.exe -m pip freeze > requirements-verify.txt</pre>
+  <p>마지막 줄은 "오늘 주방에 어떤 도구 몇 번 버전이 있었는지" 기록하는 것입니다. 실험이 끝날 때까지 이 주방은 바꾸지 않습니다.</p>
+
+  <h3>2단계. 문제지 검사 (눈으로 확인하기)</h3>
+  <pre>python check_testset.py testset.json --py verify-env/Scripts/python.exe</pre>
+  <p>이렇게 나오면 성공입니다. 30문제 모두 "옛날 서랍을 열면 에러가 난다"는 뜻입니다.</p>
+  <pre><span class="ok">[PASS]</span> easy_01 (easy)
+        깨지는 줄: from langchain.chat_models import ChatOpenAI
+<span class="err">          -> ImportError: cannot import name 'ChatOpenAI' ...</span>
+<span class="dim">...</span>
+=== 요약 ===
+통과: 30 / 30
+난이도별 개수: easy 10, medium 10, hard 10  (목표: 각 10개)</pre>
+
+  <h3>3단계. 상대 선수(일반 AI) 시험 보기</h3>
+  <p>먼저 OpenAI 열쇠(API 키)를 넣습니다. <code>sk-...</code> 부분에 <b>내 키</b>를 넣으세요. 키는 절대 GitHub에 올리면 안 됩니다.</p>
+  <pre>pip install openai matplotlib
+$env:OPENAI_API_KEY="sk-...내 키..."</pre>
+  <p>처음엔 3문제만 시험해서 잘 되는지 봅니다. <code>[모델명]</code>은 팀이 정한 모델로 바꿉니다.</p>
+  <pre>python run_baseline.py --py verify-env/Scripts/python.exe --model [모델명] --limit 3</pre>
+  <pre><span class="dim">[1/3] easy_01 ...</span> <span class="ok">성공</span>
+<span class="dim">[2/3] easy_02 ...</span> <span class="err">실패 (import: ModuleNotFoundError: No module named 'langchain.llms')</span>
+<span class="dim">...</span>
+=== baseline(A) 결과 ===
+전체 성공률: ?/3 = ?%</pre>
+  <p>문제없으면 <code>--limit 3</code>을 빼고 30문제 전체를 실행합니다. 중간에 멈춰도 다시 실행하면 이어서 합니다.</p>
+
+  <h3>4단계. 우리 프로그램 시험 보기</h3>
+  <p>이건 1번 팀원이 만든 프로그램으로 실행합니다. 나는 <b>"채점은 verify.py로, 성적표는 EVAL_RULES 7장 모양으로 저장해 주세요"</b>라고 부탁만 하면 됩니다.</p>
+
+  <h3>5단계. 점수판 그리기</h3>
+  <pre>python make_charts.py --a results/A_[모델명]_[날짜].json --b results/B_[모델명]_[날짜].json</pre>
+  <p><code>charts</code> 폴더에 그래프 3장과 <code>summary.md</code>(숫자 표)가 생깁니다. 이걸 발표 자료와 README에 넣으면 끝입니다.</p>
+
+  <div class="box tip">
+    <p class="label">막히면 Claude에게 이렇게 물어보세요</p>
+    <p>"langchain_migration/eval 폴더에서 <i>[실행한 명령어]</i>를 실행했더니 이런 에러가 났어. <i>[에러 메시지 전체 붙여넣기]</i> 중학생도 이해하게 원인이랑 해결 방법 알려줘."</p>
+  </div>
+</section>
+<section class="ch" id="s3">
+  <p class="chno">3장</p>
+  <h2>결과 읽는 법</h2>
+  <p>아래 숫자는 <b>읽는 연습용 예시</b>입니다. 진짜 결과가 아닙니다.</p>
+  <div class="box">
+    <p class="label">예시: 난이도별 성공률</p>
+    <div class="bars">
+      <div class="bar-row"><span>쉬움 · 우리</span><div class="bar-track"><div class="bar ours" style="width:100%"></div></div><span class="v">100%</span></div>
+      <div class="bar-row"><span>쉬움 · 일반 AI</span><div class="bar-track"><div class="bar old" style="width:60%"></div></div><span class="v">60%</span></div>
+      <div class="bar-row"><span>어려움 · 우리</span><div class="bar-track"><div class="bar ours" style="width:80%"></div></div><span class="v">80%</span></div>
+      <div class="bar-row"><span>어려움 · 일반 AI</span><div class="bar-track"><div class="bar old" style="width:10%"></div></div><span class="v">10%</span></div>
+    </div>
+    <p><b>읽는 법</b>: 쉬운 문제는 차이가 40%p, 어려운 문제는 70%p입니다. → "어려운 레시피일수록 옛날 기억만으로는 못 고친다"고 말할 수 있습니다.</p>
+  </div>
+  <h3>꼭 알아야 할 숫자 3개</h3>
+  <div class="table-wrap"><table>
+    <tr><th>숫자</th><th>뜻</th><th>예시로 계산하면</th></tr>
+    <tr><td><b>1회차 성공률</b></td><td>우리 프로그램이 처음 한 번에 맞힌 비율</td><td>30개 중 6개 → 20%</td></tr>
+    <tr><td><b>최종 성공률</b></td><td>다시 찾고 고치기를 최대 3번까지 해서 맞힌 비율</td><td>30개 중 27개 → 90%</td></tr>
+    <tr><td><b>검증 루프 효과</b></td><td>최종 − 1회차. "서랍을 열어 보고 다시 고치기"가 만든 차이</td><td>90 − 20 = <b>+70%p</b></td></tr>
+  </table></div>
+  <p><b>%p(퍼센트 포인트)</b>는 퍼센트끼리 뺀 값입니다. 20%에서 90%가 되면 "70%p 올랐다"고 말합니다.</p>
+  <h3>성공에도 품질이 있습니다</h3>
+  <div class="table-wrap"><table>
+    <tr><th>종류</th><th>주방 비유</th></tr>
+    <tr><td>깔끔한 성공</td><td>새 서랍에서 새 도구를 꺼냄</td></tr>
+    <tr><td>성공 (community 경고)</td><td>"이번 달까지만 영업" 가게에서 도구를 사 옴. 지금은 되지만 곧 못 씀</td></tr>
+    <tr><td>성공 (classic 의존)</td><td>창고에 치워 둔 낡은 도구를 꺼내 씀. 되긴 하지만 요즘 방식은 아님</td></tr>
+    <tr><td>실패</td><td>서랍을 열었는데 도구가 없음</td></tr>
+  </table></div>
+  <p>"community 가게가 곧 문 닫는다"는 사실은 <b>우리가 실험하다가 직접 발견한 것</b>입니다(2026-10-12). 발표에서 좋은 이야깃거리가 됩니다.</p>
+</section>
+<section class="ch" id="s4">
+  <p class="chno">4장</p>
+  <h2>발표 질문 대비: 쉬운 말로 답하기</h2>
+  <div class="table-wrap"><table>
+    <tr><th>예상 질문</th><th>이렇게 답하세요</th></tr>
+    <tr><td>import만 확인하면 충분한가요?</td><td>"아닙니다. 도구를 꺼낼 수 있는지만 확인하고, 올바르게 쓰는지는 확인하지 못합니다. 가장 흔한 고장이 import 에러라서 여기부터 확실하게 잡았고, 실제 실행 테스트는 다음 단계입니다."</td></tr>
+    <tr><td>왜 AI에게 검증을 맡기지 않았나요?</td><td>"검증하는 AI도 같은 옛날 지식을 가질 수 있어서, 틀린 코드를 맞다고 할 수 있습니다. 그래서 실제로 실행해 보는 방법을 택했습니다."</td></tr>
+    <tr><td>30개로 충분한가요?</td><td>"통계적으로 일반화하려는 목적보다, 난이도별로 차이가 어떻게 달라지는지 경향을 보려는 목적입니다. 쉬움·중간·어려움을 10개씩 균형 있게 넣었습니다."</td></tr>
+    <tr><td>문제를 AI로 만들었으면 불공평하지 않나요?</td><td>"공식 마이그레이션 가이드에 나온 변경 사항을 기준으로 만들었고, 30개 모두 최신 환경에서 실제로 깨지는 것을 확인했습니다. 두 선수 모두 같은 문제를 풀었습니다."</td></tr>
+    <tr><td>일반 AI에 문서를 주면 되지 않나요?</td><td>"연구에 따르면 문서를 줘도 실행 성공률이 66% 정도에 머뭅니다. 그래서 문서에 더해 실행 확인과 재시도가 필요합니다."</td></tr>
+    <tr><td>실무에서 어떤 가치가 있나요?</td><td>"버전이 바뀔 때마다 개발자가 에러를 하나씩 찾아 고치는 시간을 줄여 줍니다. 근거 링크와 검증 결과가 함께 나와서 믿고 쓸 수 있고, 안내서와 주방만 바꾸면 다른 라이브러리에도 쓸 수 있습니다."</td></tr>
+  </table></div>
+</section>
+<section class="ch" id="s5">
+  <p class="chno">5장</p>
+  <h2>확인 퀴즈</h2>
+  <p>답을 누르면 바로 맞았는지 알려 줍니다. <span class="score" id="score">0 / 5</span></p>
+  <div class="quiz" id="quiz"></div>
+</section>
+<section class="ch" id="s6">
+  <p class="chno">6장</p>
+  <h2>이번 주 체크리스트</h2>
+  <p>체크한 내용은 이 브라우저에만 저장됩니다. <span class="progress" id="progress"></span></p>
+  <div class="checks" id="checks"></div>
+</section>
+<footer>최신 버전 · 2026-10-12 · 같은 내용의 MD와 PDF는 저장소 <code>docs/guide</code> 폴더에 있습니다. 이전 버전: <code>docs/역순설계_쉽게_이해하기.md</code></footer>
+</div>
+<script>
+let QUIZ = [
+  { q: "옛날 코드 from langchain.chat_models import ChatOpenAI 를 최신 LangChain에서 실행하면?",
+    opts: ["잘 실행된다", "에러가 난다. ChatOpenAI가 langchain_openai 서랍으로 이사 갔기 때문", "경고만 나오고 실행된다"],
+    a: 1, why: "1.0에서 OpenAI 관련 도구는 langchain_openai라는 새 서랍장으로 이사 갔습니다. 옛날 칸을 열면 ImportError가 납니다." },
+  { q: "우리 프로그램이 일반 AI와 다른 두 가지 근거는?",
+    opts: ["속도 근거 + 가격 근거", "문서 근거 + 실행 근거", "인기 근거 + 기억 근거"],
+    a: 1, why: "새 주방 안내서(공식 문서)를 보고 고치고(문서 근거), 서랍을 직접 열어 확인합니다(실행 근거)." },
+  { q: "verifier에서 도구가 없다고 나오면 어떻게 하나요?",
+    opts: ["그냥 끝낸다", "에러 메시지를 들고 retriever로 돌아가 다시 찾는다 (최대 3번)", "사용자에게 직접 고치라고 한다"],
+    a: 1, why: "이 되돌아가는 길이 검증 루프입니다. 일반 AI에는 이 길이 없습니다." },
+  { q: "왜 AI에게 \"이 코드 맞아?\"라고 물어서 채점하지 않나요?",
+    opts: ["돈이 많이 들어서", "채점하는 AI도 옛날 주방만 기억할 수 있어서", "AI는 한국어를 못 해서"],
+    a: 1, why: "심사위원도 옛날 기억만 있으면 틀린 레시피에 합격을 줄 수 있습니다. 그래서 직접 실행해서 확인합니다." },
+  { q: "import가 성공하면 코드가 완벽하다고 말할 수 있나요?",
+    opts: ["네, 완벽하다", "아니요. 도구를 꺼낼 수는 있지만 올바르게 쓰는지는 모른다"],
+    a: 1, why: "국자를 꺼냈다고 국자를 제대로 쓰는 건 아닙니다. 이게 우리 채점의 한계이고, 발표에서 먼저 말해야 합니다." },
+  { q: "baseline은 무슨 뜻인가요?",
+    opts: ["우리 시스템의 최종 점수", "비교 기준. 여기서는 일반 AI의 성적", "시험 문제 30개"],
+    a: 1, why: "\"우리가 더 잘한다\"를 말하려면 비교할 기준이 필요합니다. 그게 baseline입니다." },
+  { q: "공정한 시합 규칙이 아닌 것은?",
+    opts: ["두 선수가 같은 AI 모델을 쓴다", "같은 문제 30개를 푼다", "우리 시스템에만 더 쉬운 문제를 준다", "같은 채점 로봇으로 채점한다"],
+    a: 2, why: "같은 코스를 뛰어야 공정한 달리기입니다. 문제를 다르게 주면 비교가 의미 없어집니다." },
+  { q: "1회차 성공률 20%, 최종 성공률 90%일 때 검증 루프 효과는?",
+    opts: ["+20%p", "+70%p", "+90%p"],
+    a: 1, why: "최종 − 1회차 = 90 − 20 = 70. 퍼센트끼리 뺀 값이라 %p를 붙입니다." }
+];
+const CHECKS = [
+  ["이 안내서를 끝까지 읽고 퀴즈 8개 중 6개 이상 맞히기", "틀린 문제는 해설을 다시 읽기"],
+  ["팀과 비교 모델 하나 정하기", "EVAL_RULES.md 9장 빈칸 채우기"],
+  ["1번 팀원에게 verifier 구현과 결과 형식 부탁하기", "\"채점은 verify.py로, 성적표는 EVAL_RULES 7장 모양으로\""],
+  ["새 주방(verify-env) 만들고 requirements-verify.txt 저장하기", "2장 1단계"],
+  ["check_testset.py 실행해서 통과 30/30 눈으로 보기", "2장 2단계"],
+  ["testset.json에서 쉬움·중간·어려움 하나씩 골라 왜 깨지는지 말로 설명해 보기", "발표 질문 대비"],
+  ["일반 AI 시험(run_baseline.py) 3문제 → 30문제 실행하기", "2장 3단계"],
+  ["우리 시스템 결과 받기", "1번 팀원"],
+  ["make_charts.py로 그래프 3장 만들기", "2장 5단계"],
+  ["발표 자료 [__] 칸에 숫자와 그래프 넣기", "8~10번 슬라이드"],
+  ["4장 예상 질문 6개를 소리 내어 답해 보기", "리허설"]
+];
+QUIZ = QUIZ.filter((_, i) => [3, 4, 5, 6, 7].includes(i));
+function store(k, v) { try { if (v === undefined) return JSON.parse(localStorage.getItem(k)); localStorage.setItem(k, JSON.stringify(v)); } catch (e) { return null; } }
+
+const quizEl = document.getElementById("quiz"), scoreEl = document.getElementById("score");
+const answered = {};
+function renderScore() { const right = Object.values(answered).filter(Boolean).length; scoreEl.textContent = right + " / " + QUIZ.length + " 맞힘"; }
+QUIZ.forEach((item, i) => {
+  const box = document.createElement("div"); box.className = "q";
+  const t = document.createElement("p"); t.innerHTML = "<b>Q" + (i + 1) + ".</b> "; t.append(item.q); box.append(t);
+  const opts = document.createElement("div"); opts.className = "opts";
+  const why = document.createElement("p"); why.className = "why"; why.hidden = true; why.textContent = "해설: " + item.why;
+  item.opts.forEach((o, j) => {
+    const b = document.createElement("button"); b.type = "button"; b.textContent = o;
+    b.addEventListener("click", () => {
+      opts.querySelectorAll("button").forEach(x => x.classList.remove("right", "wrong"));
+      b.classList.add(j === item.a ? "right" : "wrong");
+      if (j !== item.a) opts.children[item.a].classList.add("right");
+      why.hidden = false;
+      if (!(i in answered)) { answered[i] = j === item.a; renderScore(); }
+    });
+    opts.append(b);
+  });
+  box.append(opts, why); quizEl.append(box);
+});
+renderScore();
+
+const checksEl = document.getElementById("checks"), progEl = document.getElementById("progress");
+const saved = store("guide-checks") || {};
+function renderProgress() { const n = Object.values(saved).filter(Boolean).length; progEl.textContent = n + " / " + CHECKS.length + " 완료"; }
+CHECKS.forEach(([title, sub], i) => {
+  const id = "chk-" + i;
+  const l = document.createElement("label"); l.htmlFor = id;
+  const c = document.createElement("input"); c.type = "checkbox"; c.id = id; c.checked = !!saved[i];
+  c.addEventListener("change", () => { saved[i] = c.checked; store("guide-checks", saved); renderProgress(); });
+  const s = document.createElement("span"); s.textContent = title;
+  const sm = document.createElement("small"); sm.textContent = sub; s.append(sm);
+  l.append(c, s); checksEl.append(l);
+});
+renderProgress();
+</script>
+
+</body>
+</html>
