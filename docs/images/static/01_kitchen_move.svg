@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400" role="img" aria-label="LangChain 1.0에서 도구가 새 서랍으로 이사 간 모습">
+<rect width="800" height="400" rx="16" fill="#F7F8FA"/>
+<text x="32" y="44" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 22px;font-weight: 700">LangChain 1.0: 주방을 새로 정리했어요</text>
+<text x="32" y="68" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 13px;fill: #4A5565">import = "어느 서랍에서 어떤 도구를 꺼내라"  ·  도구가 다른 서랍으로 이사 갔습니다</text>
+
+<!-- 옛날 주방 -->
+<text x="40" y="104" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 16px;font-weight: 700;fill:#B8501F">옛날 주방 (0.x)</text>
+<rect x="40" y="114" width="290" height="250" rx="12" fill="#FBEADF"/>
+<g>
+  <rect x="56" y="128" width="258" height="64" rx="8" fill="#FFFFFF" stroke="#E7C9B6"/>
+  <text x="68" y="146" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-family: Consolas, 'Courier New', monospace;font-size: 12.5px;fill: #4A5565">langchain.chat_models</text>
+  <rect x="56" y="208" width="258" height="64" rx="8" fill="#FFFFFF" stroke="#E7C9B6"/>
+  <text x="68" y="226" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-family: Consolas, 'Courier New', monospace;font-size: 12.5px;fill: #4A5565">langchain.chains</text>
+  <rect x="56" y="288" width="258" height="64" rx="8" fill="#FFFFFF" stroke="#E7C9B6"/>
+  <text x="68" y="306" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-family: Consolas, 'Courier New', monospace;font-size: 12.5px;fill: #4A5565">langchain.agents</text>
+</g>
+
+<!-- 새 주방 -->
+<text x="470" y="104" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 16px;font-weight: 700;fill:#2457C5">새 주방 (1.x)</text>
+<rect x="470" y="114" width="290" height="250" rx="12" fill="#E4ECFB"/>
+<rect x="486" y="128" width="258" height="64" rx="8" fill="#FFFFFF" stroke="#C3D3F3"/>
+<text x="498" y="146" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-family: Consolas, 'Courier New', monospace;font-size: 12.5px;fill: #4A5565">langchain_openai</text>
+<rect x="486" y="208" width="258" height="64" rx="8" fill="#FFFFFF" stroke="#C3D3F3"/>
+<text x="498" y="226" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-family: Consolas, 'Courier New', monospace;font-size: 12.5px;fill: #4A5565">langchain_core</text>
+<rect x="486" y="288" width="258" height="64" rx="8" fill="#ECECEC" stroke="#C9C9C9" stroke-dasharray="5 4"/>
+<text x="498" y="306" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-family: Consolas, 'Courier New', monospace;font-size: 12.5px;fill: #4A5565">창고: langchain_classic</text>
+
+<!-- 가운데 화살표 -->
+<path d="M346 240 H448" stroke="#4A5565" stroke-width="3" fill="none"/>
+<path d="M448 232 L460 240 L448 248 z" fill="#4A5565"/>
+<text x="403" y="228" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 13px;fill: #4A5565">1.0 업데이트</text>
+
+<!-- 흐린 도착 자리 (정지 화면에서도 의미가 보이도록) -->
+<rect x="498" y="156" width="130" height="28" rx="14" fill="none" stroke="#2457C5" stroke-dasharray="4 4"/>
+<text x="563" y="175" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-family: Consolas, 'Courier New', monospace;font-size:13.5px;font-weight:700;fill:#2457C5;opacity:.45">ChatOpenAI</text>
+<rect x="498" y="316" width="130" height="28" rx="14" fill="none" stroke="#7A7A7A" stroke-dasharray="4 4"/>
+<text x="563" y="335" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-family: Consolas, 'Courier New', monospace;font-size:13.5px;font-weight:700;fill:#555;opacity:.45">LLMChain</text>
+
+<!-- 움직이는 도구 -->
+<g><rect x="68" y="156" width="130" height="28" rx="14" fill="#2457C5"/><text x="133" y="175" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-family: Consolas, 'Courier New', monospace;font-size: 13.5px;font-weight: 700;fill: #FFFFFF">ChatOpenAI</text></g>
+<g><rect x="68" y="236" width="130" height="28" rx="14" fill="#7A7A7A"/><text x="133" y="255" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-family: Consolas, 'Courier New', monospace;font-size: 13.5px;font-weight: 700;fill: #FFFFFF">LLMChain</text></g>
+<g><rect x="68" y="316" width="150" height="28" rx="14" fill="#B8501F"/><text x="143" y="335" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-family: Consolas, 'Courier New', monospace;font-size: 13.5px;font-weight: 700;fill: #FFFFFF">initialize_agent</text></g>
+<text x="236" y="336" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 16px;font-weight: 700;fill:#B42F2A">→ 없어짐</text>
+
+<text x="400" y="388" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 13px;fill: #4A5565">옛날 서랍을 열면 → ImportError "그런 도구 없어요" · ModuleNotFoundError "그런 서랍 없어요"</text>
+</svg>

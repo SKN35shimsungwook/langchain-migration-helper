@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 380" width="800" height="380" role="img" aria-label="일반 AI와 우리 프로그램 비교">
+<style>
+text { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; fill: #18202B; }
+.mono { font-family: Consolas, 'Courier New', monospace; }
+.t { font-size: 22px; font-weight: 700; }
+.h { font-size: 18px; font-weight: 700; }
+.s { font-size: 14px; fill: #4A5565; }
+.c { font-size: 13px; }
+@keyframes think { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+@keyframes draw { 0%,30% { stroke-dashoffset: 60; } 55%,100% { stroke-dashoffset: 0; } }
+@keyframes pulse { 0%,100% { opacity: .35; } 50% { opacity: 1; } }
+@keyframes shake { 0%,60%,100% { transform: translateX(0); } 65% { transform: translateX(-4px); } 70% { transform: translateX(4px); } 75% { transform: translateX(-3px); } 80% { transform: translateX(0); } }
+.think { animation: think 2.4s ease-in-out infinite; }
+.check { stroke-dasharray: 60; animation: draw 3s ease-out infinite; }
+.pulse { animation: pulse 3s ease-in-out infinite; }
+.shake { animation: shake 3s ease-in-out infinite; transform-box: fill-box; }
+@media (prefers-reduced-motion: reduce) { .think,.check,.pulse,.shake { animation: none; stroke-dashoffset: 0; } }
+</style>
+<rect width="800" height="380" rx="16" fill="#F7F8FA"/>
+<text x="32" y="44" class="t">같은 옛날 레시피, 두 요리사</text>
+
+<!-- 왼쪽: 일반 AI -->
+<rect x="24" y="64" width="368" height="292" rx="14" fill="#FBEADF"/>
+<text x="44" y="96" class="h" style="fill:#B8501F">일반 AI</text>
+<circle cx="90" cy="168" r="30" fill="#FFFFFF" stroke="#B8501F" stroke-width="3"/>
+<circle cx="80" cy="164" r="3.5" fill="#18202B"/><circle cx="100" cy="164" r="3.5" fill="#18202B"/>
+<path d="M78 180 Q90 188 102 180" stroke="#18202B" stroke-width="2.5" fill="none"/>
+<g class="think">
+  <rect x="140" y="112" width="220" height="56" rx="28" fill="#FFFFFF" stroke="#E7C9B6"/>
+  <text x="250" y="137" class="c" text-anchor="middle">기억 속 옛날 주방만 보고</text>
+  <text x="250" y="156" class="c" text-anchor="middle">레시피를 고침</text>
+</g>
+<rect x="56" y="222" width="300" height="40" rx="8" fill="#FFFFFF" stroke="#E7C9B6"/>
+<text x="70" y="247" class="c mono">from langchain.chat_models ...</text>
+<g class="shake">
+  <rect x="56" y="276" width="300" height="56" rx="10" fill="#FBE4E2"/>
+  <text x="76" y="300" class="h" style="fill:#B42F2A">✗ 실행하면 에러</text>
+  <text x="76" y="321" class="s">그런데 틀린 줄 모르고 그대로 끝</text>
+</g>
+
+<!-- 오른쪽: 우리 프로그램 -->
+<rect x="408" y="64" width="368" height="292" rx="14" fill="#E4ECFB"/>
+<text x="428" y="96" class="h" style="fill:#2457C5">우리 프로그램</text>
+<g>
+  <rect x="432" y="118" width="96" height="66" rx="6" fill="#FFFFFF" stroke="#2457C5" stroke-width="2"/>
+  <path d="M480 118 V184" stroke="#2457C5" stroke-width="2"/>
+  <text x="480" y="204" class="c" text-anchor="middle">① 안내서 보기</text>
+  <text x="480" y="222" class="s" text-anchor="middle">문서 근거</text>
+</g>
+<path d="M538 151 H572" stroke="#2457C5" stroke-width="2.5"/><path d="M572 145 L582 151 L572 157 z" fill="#2457C5"/>
+<g>
+  <rect x="592" y="118" width="160" height="66" rx="8" fill="#FFFFFF" stroke="#2457C5" stroke-width="2"/>
+  <rect x="604" y="150" width="136" height="26" rx="5" fill="#E4ECFB"/>
+  <text x="672" y="140" class="c" text-anchor="middle">서랍 직접 열기</text>
+  <text x="672" y="168" class="c mono pulse" text-anchor="middle">langchain_openai</text>
+  <text x="672" y="204" class="c" text-anchor="middle">② 실제로 확인</text>
+  <text x="672" y="222" class="s" text-anchor="middle">실행 근거</text>
+</g>
+<rect x="440" y="250" width="312" height="82" rx="10" fill="#E1F3E8"/>
+<path class="check" d="M462 290 l12 12 l24 -26" stroke="#1B7A43" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="512" y="285" class="h" style="fill:#1B7A43">도구 있음 → 통과</text>
+<text x="512" y="308" class="s">없으면 에러를 힌트로</text>
+<text x="512" y="326" class="s">다시 찾아서 고침 (최대 3번)</text>
+</svg>

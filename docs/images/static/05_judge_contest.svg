@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440" width="800" height="440" role="img" aria-label="4번 임무: 요리 대회 심사위원">
+<rect width="800" height="440" rx="16" fill="#F7F8FA"/>
+<text x="28" y="40" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 22px;font-weight: 700">내 임무: 요리 대회 심사위원 (4번)</text>
+
+<!-- 시험지 30장 -->
+<g>
+  <rect x="40" y="148" width="104" height="120" rx="8" fill="#FFFFFF" stroke="#C9D2DD"/>
+  <rect x="34" y="142" width="104" height="120" rx="8" fill="#FFFFFF" stroke="#C9D2DD"/>
+  <rect x="28" y="136" width="104" height="120" rx="8" fill="#FFFFFF" stroke="#18202B" stroke-width="1.5"/>
+  <path d="M44 166 H116 M44 182 H116 M44 198 H100" stroke="#8A94A3" stroke-width="2"/>
+  <text x="80" y="232" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 15px;font-weight: 700">시험지 30장</text>
+  <text x="80" y="290" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 12.5px;fill: #4A5565">옛날 레시피</text>
+  <text x="80" y="306" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-family: Consolas, 'Courier New', monospace;font-size: 12.5px;fill: #4A5565">testset.json</text>
+</g>
+
+<!-- 두 요리사 -->
+<rect x="200" y="78" width="160" height="100" rx="12" fill="#FBEADF"/>
+<text x="280" y="116" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 15px;font-weight: 700;fill:#B8501F">일반 AI</text>
+<text x="280" y="140" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 12.5px;fill: #4A5565">기억만으로 고침</text>
+<text x="280" y="158" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-family: Consolas, 'Courier New', monospace;font-size: 12.5px;fill: #4A5565">run_baseline.py</text>
+<rect x="200" y="226" width="160" height="100" rx="12" fill="#E4ECFB"/>
+<text x="280" y="264" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 15px;font-weight: 700;fill:#2457C5">우리 프로그램</text>
+<text x="280" y="288" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 12.5px;fill: #4A5565">안내서 + 확인 + 재시도</text>
+<text x="280" y="306" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 12.5px;fill: #4A5565">1번 팀원이 실행</text>
+
+<!-- 채점 로봇 -->
+<rect x="420" y="146" width="150" height="112" rx="12" fill="#FFFFFF" stroke="#18202B" stroke-width="2"/>
+<rect x="452" y="166" width="86" height="34" rx="6" fill="#E1F3E8"/>
+<circle cx="474" cy="183" r="5" fill="#1B7A43"/><circle cx="516" cy="183" r="5" fill="#1B7A43"/>
+<text x="495" y="226" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 15px;font-weight: 700">채점 로봇</text>
+<text x="495" y="246" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-family: Consolas, 'Courier New', monospace;font-size: 12.5px;fill: #4A5565">verify.py</text>
+<text x="495" y="280" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 12.5px;fill: #4A5565">서랍을 직접 열어 보고</text>
+<text x="495" y="296" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 12.5px;fill: #4A5565">⭕ ❌ 판정</text>
+
+<!-- 화살표 -->
+<g stroke="#8A94A3" stroke-width="2.5" fill="none">
+  <path d="M140 180 L196 132"/><path d="M140 214 L196 272"/>
+  <path d="M362 128 L416 186"/><path d="M362 276 L416 220"/>
+  <path d="M572 202 H612"/>
+</g>
+<g fill="#8A94A3"><path d="M188 132 L198 130 L194 140 z"/><path d="M188 270 L198 274 L190 280 z"/><path d="M408 182 L418 188 L410 192 z"/><path d="M408 222 L418 218 L412 228 z"/><path d="M610 196 L620 202 L610 208 z"/></g>
+
+<!-- 움직이는 레시피 점 -->
+<!-- 점수판 -->
+<rect x="626" y="110" width="150" height="190" rx="12" fill="#FFFFFF" stroke="#C9D2DD"/>
+<text x="701" y="138" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 15px;font-weight: 700">점수판</text>
+<text x="701" y="156" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 12.5px;fill: #4A5565">(예시 막대)</text>
+<text x="640" y="190" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 12.5px;fill: #4A5565">일반 AI</text>
+<rect x="650" y="198" width="56" height="20" rx="4" fill="#B8501F"/>
+<text x="640" y="246" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 12.5px;fill: #4A5565">우리</text>
+<rect x="650" y="254" width="112" height="20" rx="4" fill="#2457C5"/>
+
+<!-- 공정한 규칙 -->
+<text x="28" y="364" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 15px;font-weight: 700">공정한 시합 규칙</text>
+<g>
+  <rect x="28" y="376" width="172" height="40" rx="20" fill="#FFFFFF" stroke="#C9D2DD"/><text x="114" y="401" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 13px;font-weight: 700">같은 AI 두뇌(모델)</text>
+  <rect x="212" y="376" width="172" height="40" rx="20" fill="#FFFFFF" stroke="#C9D2DD"/><text x="298" y="401" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 13px;font-weight: 700">같은 문제 30개</text>
+  <rect x="396" y="376" width="172" height="40" rx="20" fill="#FFFFFF" stroke="#C9D2DD"/><text x="482" y="401" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 13px;font-weight: 700">같은 채점 로봇</text>
+  <rect x="580" y="376" width="192" height="40" rx="20" fill="#FBE4E2"/><text x="676" y="401" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 13px;font-weight: 700;fill:#B42F2A">꼼수는 실격</text>
+</g>
+</svg>

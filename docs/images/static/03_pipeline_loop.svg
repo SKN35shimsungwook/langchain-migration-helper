@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 310" width="800" height="310" role="img" aria-label="다섯 단계 파이프라인과 검증 실패 시 되돌아가는 길">
+<rect width="800" height="310" rx="16" fill="#F7F8FA"/>
+<text x="28" y="40" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 22px;font-weight: 700">프로그램이 일하는 순서 (기본 설계: 앞 → 뒤)</text>
+
+<g>
+  <rect x="25" y="70" width="130" height="96" rx="10" fill="#FFFFFF" stroke="#C9D2DD"/>
+  <text x="90" y="92" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 11.5px;fill: #4A5565">① 담당 3번</text>
+  <text x="90" y="116" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-family: Consolas, 'Courier New', monospace;font-size: 14.5px;font-weight: 700">analyzer</text>
+  <text x="90" y="140" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 13px">레시피 읽고</text>
+  <text x="90" y="156" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 13px">바꿀 곳 표시</text>
+</g>
+<g>
+  <rect x="180" y="70" width="130" height="96" rx="10" fill="#FFFFFF" stroke="#C9D2DD"/>
+  <text x="245" y="92" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 11.5px;fill: #4A5565">② 담당 2번</text>
+  <text x="245" y="116" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-family: Consolas, 'Courier New', monospace;font-size: 14.5px;font-weight: 700">retriever</text>
+  <text x="245" y="140" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 13px">새 주방</text>
+  <text x="245" y="156" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 13px">안내서 찾기</text>
+</g>
+<g>
+  <rect x="335" y="70" width="130" height="96" rx="10" fill="#FFFFFF" stroke="#C9D2DD"/>
+  <text x="400" y="92" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 11.5px;fill: #4A5565">③ 담당 3번</text>
+  <text x="400" y="116" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-family: Consolas, 'Courier New', monospace;font-size: 14.5px;font-weight: 700">rewriter</text>
+  <text x="400" y="140" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 13px">안내서 보고</text>
+  <text x="400" y="156" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 13px">고쳐 쓰기</text>
+</g>
+<g>
+  <rect x="490" y="70" width="130" height="96" rx="10" fill="#2457C5"/>
+  <text x="555" y="92" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 11.5px;fill: #4A5565;fill: #FFFFFF;fill:#DCE6FA">④ 담당 1번</text>
+  <text x="555" y="116" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-family: Consolas, 'Courier New', monospace;font-size: 14.5px;font-weight: 700;fill: #FFFFFF">verifier</text>
+  <text x="555" y="140" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 13px;fill: #FFFFFF">서랍 직접</text>
+  <text x="555" y="156" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 13px;fill: #FFFFFF">열어 보기</text>
+</g>
+<g>
+  <rect x="645" y="70" width="130" height="96" rx="10" fill="#FFFFFF" stroke="#C9D2DD"/>
+  <text x="710" y="92" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 11.5px;fill: #4A5565">⑤ 담당 3번</text>
+  <text x="710" y="116" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-family: Consolas, 'Courier New', monospace;font-size: 14.5px;font-weight: 700">report</text>
+  <text x="710" y="140" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 13px">고친 레시피</text>
+  <text x="710" y="156" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 13px">+ 근거 + 횟수</text>
+</g>
+<g stroke="#8A94A3" stroke-width="2.5">
+  <path d="M155 118 H174"/><path d="M310 118 H329"/><path d="M465 118 H484"/><path d="M620 118 H639"/>
+</g>
+<g fill="#8A94A3">
+  <path d="M172 112 L180 118 L172 124 z"/><path d="M327 112 L335 118 L327 124 z"/><path d="M482 112 L490 118 L482 124 z"/><path d="M637 112 L645 118 L637 124 z"/>
+</g>
+
+<!-- 되돌아가는 길 -->
+<path d="M555 166 V226 H245 V174" stroke="#B8501F" stroke-width="2.5" stroke-dasharray="7 6" fill="none"/>
+<path d="M239 176 L245 166 L251 176 z" fill="#B8501F"/>
+<text x="400" y="250" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 13.5px;fill: #4A5565;fill:#B8501F;font-weight:700">도구가 없으면 → 에러 메시지를 들고 ②로 돌아가 다시 찾기 (최대 3번)</text>
+<text x="400" y="284" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 13.5px;fill: #4A5565">일반 AI에는 이 되돌아가는 길이 없어서, 틀려도 그대로 끝납니다</text>
+
+<!-- 판정 표시 -->
+<!-- 움직이는 레시피 카드 -->
+</svg>

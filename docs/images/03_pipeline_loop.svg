@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 310" width="800" height="310" role="img" aria-label="다섯 단계 파이프라인과 검증 실패 시 되돌아가는 길">
+<style>
+text { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; fill: #18202B; }
+.mono { font-family: Consolas, 'Courier New', monospace; }
+.t { font-size: 22px; font-weight: 700; }
+.n { font-size: 14.5px; font-weight: 700; }
+.k { font-size: 13px; }
+.o { font-size: 11.5px; fill: #4A5565; }
+.w { fill: #FFFFFF; }
+.s { font-size: 13.5px; fill: #4A5565; }
+</style>
+<rect width="800" height="310" rx="16" fill="#F7F8FA"/>
+<text x="28" y="40" class="t">프로그램이 일하는 순서 (기본 설계: 앞 → 뒤)</text>
+
+<g>
+  <rect x="25" y="70" width="130" height="96" rx="10" fill="#FFFFFF" stroke="#C9D2DD"/>
+  <text x="90" y="92" class="o" text-anchor="middle">① 담당 3번</text>
+  <text x="90" y="116" class="n mono" text-anchor="middle">analyzer</text>
+  <text x="90" y="140" class="k" text-anchor="middle">레시피 읽고</text>
+  <text x="90" y="156" class="k" text-anchor="middle">바꿀 곳 표시</text>
+</g>
+<g>
+  <rect x="180" y="70" width="130" height="96" rx="10" fill="#FFFFFF" stroke="#C9D2DD"/>
+  <text x="245" y="92" class="o" text-anchor="middle">② 담당 2번</text>
+  <text x="245" y="116" class="n mono" text-anchor="middle">retriever</text>
+  <text x="245" y="140" class="k" text-anchor="middle">새 주방</text>
+  <text x="245" y="156" class="k" text-anchor="middle">안내서 찾기</text>
+</g>
+<g>
+  <rect x="335" y="70" width="130" height="96" rx="10" fill="#FFFFFF" stroke="#C9D2DD"/>
+  <text x="400" y="92" class="o" text-anchor="middle">③ 담당 3번</text>
+  <text x="400" y="116" class="n mono" text-anchor="middle">rewriter</text>
+  <text x="400" y="140" class="k" text-anchor="middle">안내서 보고</text>
+  <text x="400" y="156" class="k" text-anchor="middle">고쳐 쓰기</text>
+</g>
+<g>
+  <rect x="490" y="70" width="130" height="96" rx="10" fill="#2457C5"/>
+  <text x="555" y="92" class="o w" text-anchor="middle" style="fill:#DCE6FA">④ 담당 1번</text>
+  <text x="555" y="116" class="n mono w" text-anchor="middle">verifier</text>
+  <text x="555" y="140" class="k w" text-anchor="middle">서랍 직접</text>
+  <text x="555" y="156" class="k w" text-anchor="middle">열어 보기</text>
+</g>
+<g>
+  <rect x="645" y="70" width="130" height="96" rx="10" fill="#FFFFFF" stroke="#C9D2DD"/>
+  <text x="710" y="92" class="o" text-anchor="middle">⑤ 담당 3번</text>
+  <text x="710" y="116" class="n mono" text-anchor="middle">report</text>
+  <text x="710" y="140" class="k" text-anchor="middle">고친 레시피</text>
+  <text x="710" y="156" class="k" text-anchor="middle">+ 근거 + 횟수</text>
+</g>
+<g stroke="#8A94A3" stroke-width="2.5">
+  <path d="M155 118 H174"/><path d="M310 118 H329"/><path d="M465 118 H484"/><path d="M620 118 H639"/>
+</g>
+<g fill="#8A94A3">
+  <path d="M172 112 L180 118 L172 124 z"/><path d="M327 112 L335 118 L327 124 z"/><path d="M482 112 L490 118 L482 124 z"/><path d="M637 112 L645 118 L637 124 z"/>
+</g>
+
+<!-- 되돌아가는 길 -->
+<path d="M555 166 V226 H245 V174" stroke="#B8501F" stroke-width="2.5" stroke-dasharray="7 6" fill="none"/>
+<path d="M239 176 L245 166 L251 176 z" fill="#B8501F"/>
+<text x="400" y="250" class="s" text-anchor="middle" style="fill:#B8501F;font-weight:700">도구가 없으면 → 에러 메시지를 들고 ②로 돌아가 다시 찾기 (최대 3번)</text>
+<text x="400" y="284" class="s" text-anchor="middle">일반 AI에는 이 되돌아가는 길이 없어서, 틀려도 그대로 끝납니다</text>
+
+<!-- 판정 표시 -->
+<g opacity="0">
+  <circle cx="606" cy="64" r="15" fill="#B42F2A"/><text x="606" y="70" text-anchor="middle" style="fill:#fff;font-size:17px;font-weight:700">✗</text>
+  <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.25;0.27;0.40;0.42;1" dur="9s" repeatCount="indefinite"/>
+</g>
+<g opacity="0">
+  <circle cx="606" cy="64" r="15" fill="#1B7A43"/><text x="606" y="70" text-anchor="middle" style="fill:#fff;font-size:17px;font-weight:700">✓</text>
+  <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.74;0.76;0.97;1" dur="9s" repeatCount="indefinite"/>
+</g>
+
+<!-- 움직이는 레시피 카드 -->
+<g>
+  <rect x="-22" y="-14" width="44" height="28" rx="5" fill="#FFFFFF" stroke="#18202B" stroke-width="2"/>
+  <path d="M-14 -5 H14 M-14 2 H14 M-14 9 H6" stroke="#18202B" stroke-width="1.6"/>
+  <animateMotion dur="9s" repeatCount="indefinite" path="M90 197 H555 V226 H245 V197 H555 H710" keyPoints="0;1;1" keyTimes="0;0.85;1" calcMode="linear"/>
+</g>
+</svg>
