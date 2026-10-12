@@ -1,0 +1,302 @@
+[
+  {
+    "id": "easy_01",
+    "difficulty": "easy",
+    "old_code": "from langchain.chat_models import ChatOpenAI\n\nllm = ChatOpenAI(model=\"gpt-4o-mini\", temperature=0)\nprint(llm)",
+    "why_broken": "OpenAI 채팅 모델이 langchain-openai 패키지로 분리됨",
+    "target_imports": "from langchain_openai import ChatOpenAI",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "easy_02",
+    "difficulty": "easy",
+    "old_code": "from langchain.llms import OpenAI\n\nllm = OpenAI(temperature=0)\nprint(llm)",
+    "why_broken": "langchain.llms 모듈이 1.x에서 제거됨. OpenAI 연동은 langchain-openai로 분리",
+    "target_imports": "from langchain_openai import OpenAI",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "easy_03",
+    "difficulty": "easy",
+    "old_code": "from langchain.prompts import PromptTemplate\nfrom langchain.schema import HumanMessage, SystemMessage\n\nprompt = PromptTemplate.from_template(\"{topic}에 대해 설명해줘\")\nmessages = [SystemMessage(content=\"너는 선생님이다\"), HumanMessage(content=\"안녕\")]\nprint(prompt, messages)",
+    "why_broken": "프롬프트와 메시지 클래스가 langchain-core로 이동, langchain.schema 제거",
+    "target_imports": "from langchain_core.prompts import PromptTemplate\nfrom langchain_core.messages import HumanMessage, SystemMessage",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "easy_04",
+    "difficulty": "easy",
+    "old_code": "from langchain.text_splitter import RecursiveCharacterTextSplitter\nfrom langchain.document_loaders import TextLoader\n\nsplitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)\nloader = TextLoader(\"sample.txt\", encoding=\"utf-8\")\nprint(splitter, loader)",
+    "why_broken": "텍스트 분할기는 langchain-text-splitters, 문서 로더는 langchain-community로 분리",
+    "target_imports": "from langchain_text_splitters import RecursiveCharacterTextSplitter\nfrom langchain_community.document_loaders import TextLoader",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "easy_05",
+    "difficulty": "easy",
+    "old_code": "from langchain.embeddings import OpenAIEmbeddings\nfrom langchain.vectorstores import FAISS\n\nembeddings = OpenAIEmbeddings()\nprint(embeddings, FAISS)",
+    "why_broken": "임베딩은 langchain-openai, 벡터스토어는 langchain-community로 분리",
+    "target_imports": "from langchain_openai import OpenAIEmbeddings\nfrom langchain_community.vectorstores import FAISS",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "easy_06",
+    "difficulty": "easy",
+    "old_code": "from langchain.schema.output_parser import StrOutputParser\nfrom langchain.schema import Document\n\nparser = StrOutputParser()\ndoc = Document(page_content=\"LangChain 문서\", metadata={\"source\": \"a.txt\"})\nprint(parser, doc)",
+    "why_broken": "langchain.schema 하위 모듈이 제거됨. 출력 파서와 Document는 langchain-core로 이동",
+    "target_imports": "from langchain_core.output_parsers import StrOutputParser\nfrom langchain_core.documents import Document",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "easy_07",
+    "difficulty": "easy",
+    "old_code": "from langchain.callbacks import get_openai_callback\nfrom langchain.chat_models import ChatOpenAI\n\nllm = ChatOpenAI(temperature=0)\nwith get_openai_callback() as cb:\n    pass  # llm.invoke(\"안녕\")\n    print(cb.total_tokens)",
+    "why_broken": "langchain.callbacks 모듈이 제거됨. get_openai_callback은 langchain-community로 이동",
+    "target_imports": "from langchain_community.callbacks import get_openai_callback\nfrom langchain_openai import ChatOpenAI",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "easy_08",
+    "difficulty": "easy",
+    "old_code": "from langchain.document_loaders import PyPDFLoader, WebBaseLoader, CSVLoader\n\npdf_loader = PyPDFLoader(\"report.pdf\")\nweb_loader = WebBaseLoader(\"https://example.com\")\ncsv_loader = CSVLoader(\"data.csv\")\nprint(pdf_loader, web_loader, csv_loader)",
+    "why_broken": "문서 로더가 langchain-community로 분리됨",
+    "target_imports": "from langchain_community.document_loaders import PyPDFLoader, WebBaseLoader, CSVLoader",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "easy_09",
+    "difficulty": "easy",
+    "old_code": "from langchain.prompts import ChatPromptTemplate, FewShotPromptTemplate, PromptTemplate\nfrom langchain.prompts.chat import SystemMessagePromptTemplate, HumanMessagePromptTemplate\n\nsystem = SystemMessagePromptTemplate.from_template(\"너는 {role}이다\")\nhuman = HumanMessagePromptTemplate.from_template(\"{question}\")\nchat_prompt = ChatPromptTemplate.from_messages([system, human])\nexample_prompt = PromptTemplate.from_template(\"Q: {q}\\nA: {a}\")\nfew_shot = FewShotPromptTemplate(examples=[{\"q\": \"1+1\", \"a\": \"2\"}], example_prompt=example_prompt,\n                                 suffix=\"Q: {input}\\nA:\", input_variables=[\"input\"])\nprint(chat_prompt, few_shot)",
+    "why_broken": "langchain.prompts 모듈이 제거됨. 모든 프롬프트 템플릿은 langchain-core로 이동",
+    "target_imports": "from langchain_core.prompts import ChatPromptTemplate, FewShotPromptTemplate, PromptTemplate\nfrom langchain_core.prompts import SystemMessagePromptTemplate, HumanMessagePromptTemplate",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "easy_10",
+    "difficulty": "easy",
+    "old_code": "from langchain.retrievers import BM25Retriever, EnsembleRetriever\nfrom langchain.vectorstores import Chroma\n\nbm25 = BM25Retriever.from_texts([\"LangChain\", \"LangGraph\"])\nprint(bm25, EnsembleRetriever, Chroma)",
+    "why_broken": "langchain.retrievers, langchain.vectorstores가 제거됨. BM25는 langchain-community, EnsembleRetriever는 langchain-classic으로 이동",
+    "target_imports": "from langchain_community.retrievers import BM25Retriever\nfrom langchain_classic.retrievers import EnsembleRetriever\nfrom langchain_community.vectorstores import Chroma",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "medium_01",
+    "difficulty": "medium",
+    "old_code": "from langchain.chat_models import ChatOpenAI\nfrom langchain.prompts import PromptTemplate\nfrom langchain.chains import LLMChain\n\nllm = ChatOpenAI(temperature=0)\nprompt = PromptTemplate(input_variables=[\"product\"], template=\"{product}을 만드는 회사 이름을 지어줘\")\nchain = LLMChain(llm=llm, prompt=prompt)\n# result = chain.run(product=\"양말\")",
+    "why_broken": "LLMChain이 1.x langchain에서 제거됨 (langchain-classic으로 이동). 최신 방식은 LCEL prompt | llm",
+    "target_imports": "from langchain_openai import ChatOpenAI\nfrom langchain_core.prompts import PromptTemplate\nfrom langchain_core.output_parsers import StrOutputParser",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1 (langchain-classic 섹션)",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "medium_02",
+    "difficulty": "medium",
+    "old_code": "from langchain.chat_models import ChatOpenAI\nfrom langchain.chains import ConversationChain\nfrom langchain.memory import ConversationBufferMemory\n\nllm = ChatOpenAI(temperature=0)\nmemory = ConversationBufferMemory()\nconversation = ConversationChain(llm=llm, memory=memory, verbose=True)\n# conversation.predict(input=\"안녕\")",
+    "why_broken": "ConversationChain과 Memory 클래스가 1.x langchain에서 제거됨. 대화 기록은 메시지 목록이나 LangGraph 체크포인터로 관리",
+    "target_imports": "from langchain_openai import ChatOpenAI\nfrom langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder\nfrom langchain_core.chat_history import InMemoryChatMessageHistory",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1 (langchain-classic 섹션)",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "medium_03",
+    "difficulty": "medium",
+    "old_code": "from langchain.llms import OpenAI\nfrom langchain.prompts import PromptTemplate\nfrom langchain.chains import LLMChain, SimpleSequentialChain\n\nllm = OpenAI(temperature=0)\ntitle_chain = LLMChain(llm=llm, prompt=PromptTemplate.from_template(\"{topic}에 대한 블로그 제목\"))\nbody_chain = LLMChain(llm=llm, prompt=PromptTemplate.from_template(\"제목: {title}\\n본문을 써줘\"))\noverall = SimpleSequentialChain(chains=[title_chain, body_chain])\n# overall.run(\"LangChain\")",
+    "why_broken": "SimpleSequentialChain이 제거됨. 최신 방식은 LCEL로 체인을 이어 붙임",
+    "target_imports": "from langchain_openai import OpenAI\nfrom langchain_core.prompts import PromptTemplate\nfrom langchain_core.output_parsers import StrOutputParser",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1 (langchain-classic 섹션)",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "medium_04",
+    "difficulty": "medium",
+    "old_code": "from langchain.chat_models import ChatOpenAI\nfrom langchain.chains import RetrievalQA\nfrom langchain.vectorstores import FAISS\nfrom langchain.embeddings import OpenAIEmbeddings\n\nvectorstore = FAISS.from_texts([\"LangChain은 LLM 프레임워크다\"], OpenAIEmbeddings())\nqa = RetrievalQA.from_chain_type(llm=ChatOpenAI(), retriever=vectorstore.as_retriever())\n# qa.run(\"LangChain이 뭐야?\")",
+    "why_broken": "RetrievalQA가 제거됨. 최신 방식은 retriever와 prompt를 LCEL로 직접 연결",
+    "target_imports": "from langchain_openai import ChatOpenAI, OpenAIEmbeddings\nfrom langchain_community.vectorstores import FAISS\nfrom langchain_core.prompts import ChatPromptTemplate\nfrom langchain_core.runnables import RunnablePassthrough",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1 (langchain-classic 섹션)",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "medium_05",
+    "difficulty": "medium",
+    "old_code": "from langchain.chat_models import ChatOpenAI\nfrom langchain.chains import ConversationalRetrievalChain\nfrom langchain.memory import ConversationBufferMemory\nfrom langchain.vectorstores import FAISS\nfrom langchain.embeddings import OpenAIEmbeddings\n\nvectorstore = FAISS.from_texts([\"LangChain 1.0은 2025년에 출시됐다\"], OpenAIEmbeddings())\nmemory = ConversationBufferMemory(memory_key=\"chat_history\", return_messages=True)\nqa = ConversationalRetrievalChain.from_llm(ChatOpenAI(), vectorstore.as_retriever(), memory=memory)\n# qa({\"question\": \"LangChain 1.0은 언제 나왔어?\"})",
+    "why_broken": "ConversationalRetrievalChain과 Memory가 제거됨. 대화 기록을 포함한 RAG는 LCEL과 MessagesPlaceholder로 직접 구성",
+    "target_imports": "from langchain_openai import ChatOpenAI, OpenAIEmbeddings\nfrom langchain_community.vectorstores import FAISS\nfrom langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder\nfrom langchain_core.runnables import RunnablePassthrough",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "medium_06",
+    "difficulty": "medium",
+    "old_code": "from langchain.chat_models import ChatOpenAI\nfrom langchain.chains.summarize import load_summarize_chain\nfrom langchain.docstore.document import Document\n\ndocs = [Document(page_content=\"첫 번째 문단\"), Document(page_content=\"두 번째 문단\")]\nchain = load_summarize_chain(ChatOpenAI(temperature=0), chain_type=\"stuff\")\n# chain.run(docs)",
+    "why_broken": "load_summarize_chain과 langchain.docstore가 제거됨. 요약은 LCEL(prompt | llm | parser)로 구성",
+    "target_imports": "from langchain_openai import ChatOpenAI\nfrom langchain_core.documents import Document\nfrom langchain_core.prompts import ChatPromptTemplate\nfrom langchain_core.output_parsers import StrOutputParser",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "medium_07",
+    "difficulty": "medium",
+    "old_code": "from langchain.chat_models import ChatOpenAI\nfrom langchain.prompts import PromptTemplate\nfrom langchain.output_parsers import StructuredOutputParser, ResponseSchema\nfrom langchain.chains import LLMChain\n\nschemas = [ResponseSchema(name=\"name\", description=\"사람 이름\"),\n           ResponseSchema(name=\"age\", description=\"나이\")]\nparser = StructuredOutputParser.from_response_schemas(schemas)\nprompt = PromptTemplate(template=\"{text}에서 정보를 뽑아줘\\n{format}\", input_variables=[\"text\"],\n                        partial_variables={\"format\": parser.get_format_instructions()})\nchain = LLMChain(llm=ChatOpenAI(temperature=0), prompt=prompt, output_parser=parser)\n# chain.run(text=\"철수는 20살이다\")",
+    "why_broken": "langchain.output_parsers와 LLMChain이 제거됨. 구조화 출력은 Pydantic 모델 + with_structured_output 사용",
+    "target_imports": "from langchain_openai import ChatOpenAI\nfrom langchain_core.prompts import PromptTemplate\nfrom pydantic import BaseModel, Field",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "medium_08",
+    "difficulty": "medium",
+    "old_code": "from langchain.chat_models import ChatOpenAI\nfrom langchain.chains.router import MultiPromptChain\n\nprompt_infos = [\n    {\"name\": \"math\", \"description\": \"수학 질문\", \"prompt_template\": \"수학 선생님으로서 답해줘: {input}\"},\n    {\"name\": \"history\", \"description\": \"역사 질문\", \"prompt_template\": \"역사 선생님으로서 답해줘: {input}\"},\n]\nchain = MultiPromptChain.from_prompts(ChatOpenAI(temperature=0), prompt_infos, verbose=True)\n# chain.run(\"임진왜란은 언제 일어났어?\")",
+    "why_broken": "MultiPromptChain(라우터 체인)이 제거됨. 분기는 RunnableBranch나 RunnableLambda로 구성",
+    "target_imports": "from langchain_openai import ChatOpenAI\nfrom langchain_core.prompts import ChatPromptTemplate\nfrom langchain_core.runnables import RunnableBranch, RunnableLambda\nfrom langchain_core.output_parsers import StrOutputParser",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "medium_09",
+    "difficulty": "medium",
+    "old_code": "from langchain.llms import OpenAI\nfrom langchain.prompts import PromptTemplate\nfrom langchain.chains import LLMChain, SequentialChain\n\nllm = OpenAI(temperature=0)\nreview_chain = LLMChain(llm=llm, prompt=PromptTemplate.from_template(\"{product} 리뷰를 써줘\"), output_key=\"review\")\nsummary_chain = LLMChain(llm=llm, prompt=PromptTemplate.from_template(\"요약해줘: {review}\"), output_key=\"summary\")\noverall = SequentialChain(chains=[review_chain, summary_chain],\n                          input_variables=[\"product\"], output_variables=[\"review\", \"summary\"])\n# overall({\"product\": \"무선 이어폰\"})",
+    "why_broken": "SequentialChain과 output_key 방식이 제거됨. 중간 결과를 함께 넘기려면 RunnablePassthrough.assign 사용",
+    "target_imports": "from langchain_openai import OpenAI\nfrom langchain_core.prompts import PromptTemplate\nfrom langchain_core.runnables import RunnablePassthrough\nfrom langchain_core.output_parsers import StrOutputParser",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "medium_10",
+    "difficulty": "medium",
+    "old_code": "from langchain.chat_models import ChatOpenAI\nfrom langchain.chains.question_answering import load_qa_chain\nfrom langchain.schema import Document\n\ndocs = [Document(page_content=\"LangGraph는 상태 기반 에이전트 프레임워크다\")]\nchain = load_qa_chain(ChatOpenAI(temperature=0), chain_type=\"stuff\")\n# chain.run(input_documents=docs, question=\"LangGraph가 뭐야?\")",
+    "why_broken": "load_qa_chain이 제거됨. 문서 기반 질의응답은 문서를 프롬프트에 넣는 LCEL 체인으로 구성",
+    "target_imports": "from langchain_openai import ChatOpenAI\nfrom langchain_core.documents import Document\nfrom langchain_core.prompts import ChatPromptTemplate\nfrom langchain_core.output_parsers import StrOutputParser",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "hard_01",
+    "difficulty": "hard",
+    "old_code": "from langchain.chat_models import ChatOpenAI\nfrom langchain.agents import initialize_agent, AgentType, Tool\n\ndef get_word_length(word: str) -> str:\n    return str(len(word))\n\ntools = [Tool(name=\"word_length\", func=get_word_length, description=\"단어 길이를 센다\")]\nllm = ChatOpenAI(temperature=0)\nagent = initialize_agent(tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, verbose=True)\n# agent.run(\"'LangChain'은 몇 글자야?\")",
+    "why_broken": "initialize_agent, AgentType이 1.x에서 제거됨. 최신 방식은 langchain.agents.create_agent",
+    "target_imports": "from langchain_openai import ChatOpenAI\nfrom langchain.agents import create_agent\nfrom langchain.tools import tool",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1 (create_agent 섹션)",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "hard_02",
+    "difficulty": "hard",
+    "old_code": "from langchain.chat_models import ChatOpenAI\nfrom langchain.agents import AgentExecutor, create_openai_functions_agent\nfrom langchain.tools import tool\nfrom langchain import hub\n\n@tool\ndef multiply(a: int, b: int) -> int:\n    \"\"\"두 수를 곱한다\"\"\"\n    return a * b\n\nprompt = hub.pull(\"hwchase17/openai-functions-agent\")\nllm = ChatOpenAI(temperature=0)\nagent = create_openai_functions_agent(llm, [multiply], prompt)\nexecutor = AgentExecutor(agent=agent, tools=[multiply], verbose=True)\n# executor.invoke({\"input\": \"3 곱하기 7은?\"})",
+    "why_broken": "AgentExecutor, create_openai_functions_agent, langchain.hub가 1.x에서 제거됨. create_agent로 대체",
+    "target_imports": "from langchain_openai import ChatOpenAI\nfrom langchain.agents import create_agent\nfrom langchain.tools import tool",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1 (create_agent 섹션)",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "hard_03",
+    "difficulty": "hard",
+    "old_code": "from langchain.chat_models import ChatOpenAI\nfrom langchain.agents import initialize_agent, AgentType, load_tools\nfrom langchain.memory import ConversationBufferMemory\n\nllm = ChatOpenAI(temperature=0)\ntools = load_tools([\"llm-math\"], llm=llm)\nmemory = ConversationBufferMemory(memory_key=\"chat_history\", return_messages=True)\nagent = initialize_agent(tools, llm, agent=AgentType.CHAT_CONVERSATIONAL_REACT_DESCRIPTION, memory=memory, verbose=True)\n# agent.run(\"내 이름은 철수야. 12 곱하기 3은?\")",
+    "why_broken": "initialize_agent, load_tools, Memory가 모두 제거됨. create_agent + 체크포인터(InMemorySaver)로 대화 기억",
+    "target_imports": "from langchain_openai import ChatOpenAI\nfrom langchain.agents import create_agent\nfrom langgraph.checkpoint.memory import InMemorySaver",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1 (create_agent 섹션)",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "hard_04",
+    "difficulty": "hard",
+    "old_code": "from langchain.chat_models import ChatOpenAI\nfrom langchain.agents import AgentExecutor, create_react_agent\nfrom langchain.tools import tool\nfrom langchain import hub\n\n@tool\ndef get_weather(city: str) -> str:\n    \"\"\"도시의 날씨를 알려준다\"\"\"\n    return f\"{city}는 맑음\"\n\nprompt = hub.pull(\"hwchase17/react\")\nagent = create_react_agent(ChatOpenAI(temperature=0), [get_weather], prompt)\nexecutor = AgentExecutor(agent=agent, tools=[get_weather], handle_parsing_errors=True)\n# executor.invoke({\"input\": \"서울 날씨 어때?\"})",
+    "why_broken": "create_react_agent(langchain 버전), AgentExecutor, hub가 제거됨. ReAct 에이전트는 create_agent로 대체",
+    "target_imports": "from langchain_openai import ChatOpenAI\nfrom langchain.agents import create_agent\nfrom langchain.tools import tool",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "hard_05",
+    "difficulty": "hard",
+    "old_code": "from langchain.chat_models import ChatOpenAI\nfrom langchain.agents import AgentExecutor, create_tool_calling_agent\nfrom langchain.prompts import ChatPromptTemplate, MessagesPlaceholder\nfrom langchain.tools import tool\n\n@tool\ndef add(a: int, b: int) -> int:\n    \"\"\"두 수를 더한다\"\"\"\n    return a + b\n\nprompt = ChatPromptTemplate.from_messages([\n    (\"system\", \"너는 계산을 도와주는 비서다\"),\n    (\"human\", \"{input}\"),\n    MessagesPlaceholder(\"agent_scratchpad\"),\n])\nagent = create_tool_calling_agent(ChatOpenAI(temperature=0), [add], prompt)\nexecutor = AgentExecutor(agent=agent, tools=[add], verbose=True)\n# executor.invoke({\"input\": \"15 더하기 27은?\"})",
+    "why_broken": "create_tool_calling_agent와 AgentExecutor가 제거됨. agent_scratchpad 프롬프트 없이 create_agent(model, tools, system_prompt=...)로 대체",
+    "target_imports": "from langchain_openai import ChatOpenAI\nfrom langchain.agents import create_agent\nfrom langchain.tools import tool",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "hard_06",
+    "difficulty": "hard",
+    "old_code": "from langchain.chat_models import ChatOpenAI\nfrom langchain.agents import create_sql_agent\nfrom langchain.agents.agent_toolkits import SQLDatabaseToolkit\nfrom langchain.sql_database import SQLDatabase\n\ndb = SQLDatabase.from_uri(\"sqlite:///shop.db\")\nllm = ChatOpenAI(temperature=0)\ntoolkit = SQLDatabaseToolkit(db=db, llm=llm)\nagent = create_sql_agent(llm=llm, toolkit=toolkit, verbose=True)\n# agent.run(\"가장 많이 팔린 상품은?\")",
+    "why_broken": "create_sql_agent와 langchain.sql_database가 제거됨. SQL 도구는 langchain-community에서 가져와 create_agent에 연결",
+    "target_imports": "from langchain_openai import ChatOpenAI\nfrom langchain.agents import create_agent\nfrom langchain_community.agent_toolkits import SQLDatabaseToolkit\nfrom langchain_community.utilities import SQLDatabase",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "hard_07",
+    "difficulty": "hard",
+    "old_code": "from langchain.chat_models import ChatOpenAI\nfrom langchain.agents import AgentExecutor, create_tool_calling_agent\nfrom langchain.memory import ConversationBufferWindowMemory\nfrom langchain.prompts import ChatPromptTemplate, MessagesPlaceholder\nfrom langchain.tools import tool\n\n@tool\ndef remember_name(name: str) -> str:\n    \"\"\"사용자 이름을 기록한다\"\"\"\n    return f\"{name}님 반가워요\"\n\nprompt = ChatPromptTemplate.from_messages([\n    (\"system\", \"너는 친절한 비서다\"),\n    MessagesPlaceholder(\"chat_history\"),\n    (\"human\", \"{input}\"),\n    MessagesPlaceholder(\"agent_scratchpad\"),\n])\nmemory = ConversationBufferWindowMemory(k=5, memory_key=\"chat_history\", return_messages=True)\nagent = create_tool_calling_agent(ChatOpenAI(), [remember_name], prompt)\nexecutor = AgentExecutor(agent=agent, tools=[remember_name], memory=memory)\n# executor.invoke({\"input\": \"내 이름은 영희야\"})",
+    "why_broken": "AgentExecutor의 memory 방식이 제거됨. 대화 기억은 create_agent + 체크포인터(InMemorySaver)와 thread_id로 관리",
+    "target_imports": "from langchain_openai import ChatOpenAI\nfrom langchain.agents import create_agent\nfrom langchain.tools import tool\nfrom langgraph.checkpoint.memory import InMemorySaver",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "hard_08",
+    "difficulty": "hard",
+    "old_code": "from langchain.llms import OpenAI\nfrom langchain.agents import Tool, ZeroShotAgent, AgentExecutor\nfrom langchain.chains import LLMChain\n\ndef search(query: str) -> str:\n    return \"검색 결과: \" + query\n\ntools = [Tool(name=\"Search\", func=search, description=\"검색할 때 사용\")]\nprompt = ZeroShotAgent.create_prompt(tools, prefix=\"질문에 답해라.\", suffix=\"질문: {input}\\n{agent_scratchpad}\",\n                                     input_variables=[\"input\", \"agent_scratchpad\"])\nllm_chain = LLMChain(llm=OpenAI(temperature=0), prompt=prompt)\nagent = ZeroShotAgent(llm_chain=llm_chain, tools=tools)\nexecutor = AgentExecutor.from_agent_and_tools(agent=agent, tools=tools, verbose=True)\n# executor.run(\"LangChain 최신 버전은?\")",
+    "why_broken": "ZeroShotAgent, AgentExecutor, LLMChain 기반 커스텀 에이전트가 모두 제거됨. create_agent로 대체",
+    "target_imports": "from langchain_openai import ChatOpenAI\nfrom langchain.agents import create_agent\nfrom langchain.tools import tool",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "hard_09",
+    "difficulty": "hard",
+    "old_code": "from langchain.chat_models import ChatOpenAI\nfrom langchain.agents.agent_toolkits import create_retriever_tool, create_conversational_retrieval_agent\nfrom langchain.vectorstores import FAISS\nfrom langchain.embeddings import OpenAIEmbeddings\n\nvectorstore = FAISS.from_texts([\"환불은 7일 이내 가능하다\"], OpenAIEmbeddings())\nretriever_tool = create_retriever_tool(vectorstore.as_retriever(), \"policy_search\", \"회사 정책을 검색한다\")\nagent = create_conversational_retrieval_agent(ChatOpenAI(temperature=0), [retriever_tool], verbose=True)\n# agent({\"input\": \"환불 기간이 어떻게 돼?\"})",
+    "why_broken": "create_conversational_retrieval_agent가 제거됨. 검색 도구를 만들어 create_agent에 연결 (Agentic RAG)",
+    "target_imports": "from langchain_openai import ChatOpenAI, OpenAIEmbeddings\nfrom langchain_community.vectorstores import FAISS\nfrom langchain_core.tools import create_retriever_tool\nfrom langchain.agents import create_agent",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+    "verified_new_fails": true,
+    "verified_old": false
+  },
+  {
+    "id": "hard_10",
+    "difficulty": "hard",
+    "old_code": "from langchain.chat_models import ChatOpenAI\nfrom langchain.agents import AgentExecutor\nfrom langchain.agents.format_scratchpad import format_to_openai_function_messages\nfrom langchain.agents.output_parsers import OpenAIFunctionsAgentOutputParser\nfrom langchain.tools.render import format_tool_to_openai_function\nfrom langchain.prompts import ChatPromptTemplate, MessagesPlaceholder\nfrom langchain.tools import StructuredTool\n\ndef word_count(text: str) -> int:\n    return len(text.split())\n\ntools = [StructuredTool.from_function(word_count, description=\"단어 수를 센다\")]\nllm = ChatOpenAI(temperature=0).bind(functions=[format_tool_to_openai_function(t) for t in tools])\nprompt = ChatPromptTemplate.from_messages([(\"human\", \"{input}\"), MessagesPlaceholder(\"agent_scratchpad\")])\nagent = (\n    {\"input\": lambda x: x[\"input\"],\n     \"agent_scratchpad\": lambda x: format_to_openai_function_messages(x[\"intermediate_steps\"])}\n    | prompt | llm | OpenAIFunctionsAgentOutputParser()\n)\nexecutor = AgentExecutor(agent=agent, tools=tools)\n# executor.invoke({\"input\": \"'나는 오늘 공부한다'는 몇 단어야?\"})",
+    "why_broken": "LCEL로 직접 조립한 OpenAI Functions 에이전트(format_scratchpad, output_parsers, AgentExecutor)가 제거됨. create_agent 한 줄로 대체",
+    "target_imports": "from langchain_openai import ChatOpenAI\nfrom langchain.agents import create_agent\nfrom langchain_core.tools import StructuredTool",
+    "reference": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+    "verified_new_fails": true,
+    "verified_old": false
+  }
+]
