@@ -10,7 +10,7 @@
 | 과제 주제 | LLM을 연동한 내외부 문서 기반 질의응답 시스템 |
 | 팀 | [팀 이름] (SKN35) |
 | 기간 | [시작일] ~ [발표일] |
-| 발표 자료 | [발표 자료 링크] |
+| 발표 자료 (초안) | [웹으로 보기](https://skn35shimsungwook.github.io/langchain-migration-helper/presentation/발표자료.html) · [PDF](presentation/발표자료.pdf) · 원본: [presentation/slides](presentation/slides) |
 
 **처음 보는 분께**: [01 프로젝트 전체 쉽게 보기](docs/guide/01_프로젝트_전체_쉽게_보기.md)를 먼저 읽어 보세요. 프로젝트 전체를 주방 이야기로 쉽게 설명합니다.
 **안내서 모음 웹페이지**: https://skn35shimsungwook.github.io/langchain-migration-helper/
