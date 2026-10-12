@@ -21,7 +21,7 @@
 | 테스트셋 | 구버전 코드 30개, 최신 환경에서 깨지는 것 확인 ([testset.json](eval/testset.json)) | ✅ 완료 |
 | 평가 도구 | 판정기, baseline 실험, 그래프 스크립트 | ✅ 완료 (API 없이 흐름 확인) |
 | 안내서 | 프로젝트 전체 / 검증·평가 파트 (MD · PDF · 웹) | ✅ 완료 |
-| 발표 자료 | 13장 초안 | 🟡 초안 (결과 숫자 미입력) |
+| 발표 자료 | 14장 초안 (그림 중심) | 🟡 초안 (결과 숫자 미입력) |
 | 챗봇 본체 | 파이프라인, 검색, 변환, 화면 (1~3번) | ⏳ 진행 중 |
 | baseline 실험 | 일반 LLM 30문제 실행 | ⏳ 비교 모델 확정 후 |
 | 우리 시스템 실험 | 30문제 실행, 결과 비교 | ⏳ 챗봇 완성 후 |
@@ -29,6 +29,8 @@
 ---
 
 ## 1. 문제: 버전 지체 환각
+
+![LangChain 1.0에서 도구가 새 서랍으로 이사 간 모습](docs/images/01_kitchen_move.svg)
 
 LangChain은 1.0에서 패키지가 나뉘고, 옛 체인과 에이전트(`LLMChain`, `initialize_agent` 등)가 빠졌습니다.
 그런데 인터넷에 쌓인 코드는 대부분 구버전이라, LLM은 복잡한 질문일수록 구버전 코드를 답합니다.
@@ -50,6 +52,8 @@ ModuleNotFoundError: No module named 'langchain.chains'
 
 ## 2. 해결: 이중 검증
 
+![같은 옛날 레시피, 두 요리사](docs/images/02_two_cooks.svg)
+
 | 구분 | 일반 LLM | 우리 시스템 |
 |---|---|---|
 | 근거 | 학습 데이터 (구버전이 다수) | 최신 공식 문서 검색 (RAG) |
@@ -59,14 +63,7 @@ ModuleNotFoundError: No module named 'langchain.chains'
 
 ## 3. 시스템 구조
 
-```mermaid
-flowchart LR
-    A[analyzer<br/>바꿀 부분 분석] --> R[retriever<br/>공식 문서 검색]
-    R --> W[rewriter<br/>코드 재작성]
-    W --> V{verifier<br/>import 실행}
-    V -- 통과 --> P[report<br/>코드 + 근거 + 시도 횟수]
-    V -- 실패: 에러 메시지 --> R
-```
+![다섯 단계 파이프라인과 되돌아가는 길](docs/images/03_pipeline_loop.svg)
 
 | 단계 | 하는 일 | 담당 |
 |---|---|---|
@@ -83,6 +80,8 @@ flowchart LR
 - 검색 원천: [LangChain 공식 문서](https://docs.langchain.com) (`llms-full.txt`, [v1 마이그레이션 가이드](https://docs.langchain.com/oss/python/migrate/langchain-v1))
 
 ## 4. 평가 방법
+
+![요리 대회 심사위원](docs/images/05_judge_contest.svg)
 
 같은 테스트 코드 30개를 **일반 LLM(baseline)**과 **우리 시스템**에 넣고, 같은 판정기로 import 성공률을 비교합니다. 자세한 규칙은 [eval/EVAL_RULES.md](eval/EVAL_RULES.md)에 있습니다.
 
@@ -110,6 +109,8 @@ flowchart LR
 - **검증 루프 효과: +[__]%p**
 
 ## 6. 실험 중 발견한 것
+
+![성공의 질 네 가지](docs/images/07_success_quality.svg)
 
 - **`langchain-community`는 import만 해도 지원 종료 경고를 냅니다.**
   `DeprecationWarning: langchain-community is being sunset and is no longer actively maintained` (2026-10-12, langchain-community 0.4.2 기준).
@@ -201,7 +202,7 @@ langchain_migration/
 
 | 문서 | 내용 | 보기 |
 |---|---|---|
-| **발표 자료** (초안) | 13장, 웹에서는 발표자 노트 포함 | [웹](https://skn35shimsungwook.github.io/langchain-migration-helper/presentation/발표자료.html) · [PDF](presentation/발표자료.pdf) |
+| **발표 자료** (초안) | 14장, 웹에서는 그림이 움직이고 발표자 노트 포함 | [웹](https://skn35shimsungwook.github.io/langchain-migration-helper/presentation/발표자료.html) · [PDF](presentation/발표자료.pdf) |
 | **01 프로젝트 전체 쉽게 보기** (최신) | 주방 비유, 기본 설계, 역설계, 용어 사전 (팀 모두용) | [MD](docs/guide/01_프로젝트_전체_쉽게_보기.md) · [PDF](docs/guide/01_프로젝트_전체_쉽게_보기.pdf) · [웹](https://skn35shimsungwook.github.io/langchain-migration-helper/docs/guide/01_프로젝트_전체_쉽게_보기.html) |
 | **02 검증·평가 파트 상세** (최신) | 4번 임무, 따라 하기, 결과 읽기, 발표 질문, 체크리스트 | [MD](docs/guide/02_검증평가_파트_상세.md) · [PDF](docs/guide/02_검증평가_파트_상세.pdf) · [웹](https://skn35shimsungwook.github.io/langchain-migration-helper/docs/guide/02_검증평가_파트_상세.html) |
 | 검증·평가 첫걸음 (통합본) | 01 + 02를 한 파일로 | [MD](docs/guide/검증평가_첫걸음.md) · [PDF](docs/guide/검증평가_첫걸음.pdf) · [웹](https://skn35shimsungwook.github.io/langchain-migration-helper/docs/guide/검증평가_첫걸음.html) |
