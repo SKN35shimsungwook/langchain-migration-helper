@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LangChain 마이그레이션 도우미</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Sans+KR:wght@400;700&display=swap">
+<style>
+:root { --bg: #F3F5F7; --paper: #FFFFFF; --ink: #18202B; --ink-2: #4A5565; --line: #DCE1E7; --ours: #2457C5; --pass: #1B7A43; --pass-soft: #E1F3E8; --old: #8A6A55; }
+@media (prefers-color-scheme: dark) { :root { --bg: #12171E; --paper: #1A212B; --ink: #E9EDF2; --ink-2: #A9B3C1; --line: #2C3644; --ours: #7FA6EE; --pass: #5CC98A; --pass-soft: #173126; --old: #C2A894; color-scheme: dark; } }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif; line-height: 1.7; padding: 48px 16px; }
+main { max-width: 44rem; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+h1 { font-family: 'Do Hyeon', sans-serif; font-weight: 400; font-size: clamp(2rem, 6vw, 2.8rem); line-height: 1.2; margin: 0; }
+p { margin: 0; color: var(--ink-2); }
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; }
+.card h2 { font-size: 1.15rem; margin: 0; }
+.links { display: flex; flex-wrap: wrap; gap: 8px; }
+.links a { color: var(--ours); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 3px 12px; font-size: 15px; }
+.links a:hover, .links a:focus-visible { border-color: var(--ours); }
+.badge { align-self: flex-start; font-size: 13px; font-weight: 700; color: var(--pass); background: var(--pass-soft); border-radius: 999px; padding: 1px 10px; }
+.old .badge { color: var(--old); background: transparent; border: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<main>
+  <h1>LangChain 마이그레이션 도우미</h1>
+  <p>구버전 LangChain 코드를 최신 버전으로 바꾸고, 문서 근거와 실행 근거로 이중 검증하는 챗봇 프로젝트의 안내서 모음입니다.</p>
+
+  <div class="card">
+    <span class="badge">최신 버전 · 2026-10-12</span>
+    <h2>01 프로젝트 전체 쉽게 보기</h2>
+    <p>주방 비유, 기본 설계(앞 → 뒤), 역설계(뒤 → 앞), 용어 사전. 팀 모두를 위한 문서입니다.</p>
+    <div class="links">
+      <a href="docs/guide/01_프로젝트_전체_쉽게_보기.html">웹으로 보기</a>
+      <a href="docs/guide/01_프로젝트_전체_쉽게_보기.pdf">PDF</a>
+      <a href="https://github.com/SKN35shimsungwook/langchain-migration-helper/blob/main/docs/guide/01_프로젝트_전체_쉽게_보기.md">MD (GitHub)</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="badge">최신 버전 · 2026-10-12</span>
+    <h2>02 검증·평가 파트 상세</h2>
+    <p>4번 담당의 임무, 따라 하기 명령어, 결과 읽는 법, 발표 질문 대비, 체크리스트.</p>
+    <div class="links">
+      <a href="docs/guide/02_검증평가_파트_상세.html">웹으로 보기</a>
+      <a href="docs/guide/02_검증평가_파트_상세.pdf">PDF</a>
+      <a href="https://github.com/SKN35shimsungwook/langchain-migration-helper/blob/main/docs/guide/02_검증평가_파트_상세.md">MD (GitHub)</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="badge">통합본</span>
+    <h2>검증·평가 첫걸음</h2>
+    <p>01과 02를 한 파일로 합친 것입니다. 내용은 같습니다.</p>
+    <div class="links">
+      <a href="docs/guide/검증평가_첫걸음.html">웹으로 보기</a>
+      <a href="docs/guide/검증평가_첫걸음.pdf">PDF</a>
+      <a href="https://github.com/SKN35shimsungwook/langchain-migration-helper/blob/main/docs/guide/검증평가_첫걸음.md">MD (GitHub)</a>
+    </div>
+  </div>
+
+  <div class="card old">
+    <span class="badge">이전 버전</span>
+    <h2>역순 설계 쉽게 이해하기 (초판)</h2>
+    <div class="links">
+      <a href="https://github.com/SKN35shimsungwook/langchain-migration-helper/blob/main/docs/역순설계_쉽게_이해하기.md">MD (GitHub)</a>
+    </div>
+  </div>
+
+  <p><a href="https://github.com/SKN35shimsungwook/langchain-migration-helper" style="color: var(--ours);">GitHub 저장소로 가기</a></p>
+</main>
+</body>
+</html>

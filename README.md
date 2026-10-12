@@ -12,11 +12,22 @@
 | 기간 | [시작일] ~ [발표일] |
 | 발표 자료 | [발표 자료 링크] |
 
-**처음 보는 분께**: [검증·평가 첫걸음](docs/guide/검증평가_첫걸음.md)을 먼저 읽어 보세요. 프로젝트 전체를 주방 이야기로 쉽게 설명합니다. (인쇄용 [PDF](docs/guide/검증평가_첫걸음.pdf), 퀴즈가 있는 [HTML](docs/guide/검증평가_첫걸음.html))
+**처음 보는 분께**: [01 프로젝트 전체 쉽게 보기](docs/guide/01_프로젝트_전체_쉽게_보기.md)를 먼저 읽어 보세요. 프로젝트 전체를 주방 이야기로 쉽게 설명합니다.
+**안내서 모음 웹페이지**: https://skn35shimsungwook.github.io/langchain-migration-helper/
+
+### 쉬운 안내서 (최신 버전 · 2026-10-12)
+
+| 문서 | 내용 | MD | PDF | 웹(퀴즈 포함) |
+|---|---|---|---|---|
+| **01 프로젝트 전체 쉽게 보기** | 주방 비유, 기본 설계, 역설계, 용어 사전 (팀 모두용) | [MD](docs/guide/01_프로젝트_전체_쉽게_보기.md) | [PDF](docs/guide/01_프로젝트_전체_쉽게_보기.pdf) | [보기](https://skn35shimsungwook.github.io/langchain-migration-helper/docs/guide/01_프로젝트_전체_쉽게_보기.html) |
+| **02 검증·평가 파트 상세** | 4번 임무, 따라 하기, 결과 읽기, 발표 질문, 체크리스트 | [MD](docs/guide/02_검증평가_파트_상세.md) | [PDF](docs/guide/02_검증평가_파트_상세.pdf) | [보기](https://skn35shimsungwook.github.io/langchain-migration-helper/docs/guide/02_검증평가_파트_상세.html) |
+| 검증·평가 첫걸음 (통합본) | 01 + 02를 한 파일로 | [MD](docs/guide/검증평가_첫걸음.md) | [PDF](docs/guide/검증평가_첫걸음.pdf) | [보기](https://skn35shimsungwook.github.io/langchain-migration-helper/docs/guide/검증평가_첫걸음.html) |
+| 역순 설계 쉽게 이해하기 (이전 버전) | 초판 | [MD](docs/역순설계_쉽게_이해하기.md) | – | – |
+
+### 기록 문서
 
 | 문서 | 내용 |
 |---|---|
-| [docs/guide/검증평가_첫걸음.md](docs/guide/검증평가_첫걸음.md) | 기본 설계와 역설계, 4번 임무, 따라 하기, 발표 질문, 퀴즈 (MD · PDF · HTML) |
 | [docs/작업기록.md](docs/작업기록.md) | 무엇을 왜 했는지, 확인한 결과와 남은 일 |
 | [docs/데이터_출처_조사.md](docs/데이터_출처_조사.md) | RAG 문서와 테스트 코드 출처 조사 |
 | [eval/EVAL_RULES.md](eval/EVAL_RULES.md) | 평가 기준과 실험 규칙 |
