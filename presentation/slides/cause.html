@@ -1,0 +1,26 @@
+<section id="cause" data-transition="fade" style="background:#F6F5F1;color:#1B2433;font-family:'IBM Plex Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:600;color:#1F5FAE;letter-spacing:2px">원인: 버전 지체 환각</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15;color:#1B2433">인터넷에는 구버전 코드가 더 많습니다</h2>
+<p style="font-size:32px;line-height:1.5;color:#4A5363">LLM은 데이터가 많은 쪽을 따라갑니다. 라이브러리는 빠르게 바뀌지만, 학습 데이터 속 코드는 대부분 과거 버전입니다.</p>
+</div>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#FFFFFF;padding:40px;border:1px solid #E1E0D9;border-radius:16px">
+<p style="font-size:88px;font-weight:700;line-height:1.1;color:#1F5FAE">42.55%</p>
+<p style="font-size:28px;line-height:1.45;color:#1B2433">문서가 부족할 때, LLM 코드 중 목표 버전에서 실행되는 비율</p>
+<p style="font-size:24px;color:#8A8F98">When LLMs Lag Behind, 2026</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#FFFFFF;padding:40px;border:1px solid #E1E0D9;border-radius:16px">
+<p style="font-size:88px;font-weight:700;line-height:1.1;color:#1F5FAE">66.36%</p>
+<p style="font-size:28px;line-height:1.45;color:#1B2433">구조화된 문서를 줘도 실행되는 비율</p>
+<p style="font-size:24px;color:#8A8F98">When LLMs Lag Behind, 2026</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px;background:#FFFFFF;padding:40px;border:1px solid #E1E0D9;border-radius:16px">
+<p style="font-size:88px;font-weight:700;line-height:1.1;color:#1F5FAE">48~51%</p>
+<p style="font-size:28px;line-height:1.45;color:#1B2433">최신 상용 모델의 버전 지정 코드 생성 성공률</p>
+<p style="font-size:24px;color:#8A8F98">GitChameleon 2.0, 2025</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#8A8F98">LangChain 마이그레이션 도우미 · 3</p>
+<aside>이 현상을 '버전 지체 환각'이라고 부르겠습니다. 연구 결과도 같은 이야기를 합니다. 문서가 부족하면 LLM이 만든 코드 중 약 43%만 실행되고, 문서를 줘도 66% 정도에 머뭅니다. 즉 문서만 주는 것으로는 부족하고, 실제로 실행해서 확인하는 단계가 필요하다는 뜻입니다. 이게 저희 프로젝트의 출발점입니다. (출처: arXiv 2604.09515, arXiv 2507.12367)</aside>
+</section>

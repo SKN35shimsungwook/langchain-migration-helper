@@ -1,0 +1,27 @@
+<section id="problem" data-transition="fade" style="background:#F6F5F1;color:#1B2433;font-family:'IBM Plex Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:600;color:#1F5FAE;letter-spacing:2px">문제</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15;color:#1B2433">ChatGPT가 준 LangChain 코드, 실행하면 깨집니다</h2>
+</div>
+<div style="display:flex;gap:56px;align-items:start">
+<div style="flex:1.25;display:flex;flex-direction:column;gap:20px;background:#14202E;padding:48px;border-radius:16px">
+<p style="font-size:24px;color:#8FA0B3;font-family:'JetBrains Mono', 'Courier New', monospace"># LLM이 흔히 주는 코드</p>
+<p style="font-size:26px;line-height:1.6;color:#E8ECF1;font-family:'JetBrains Mono', 'Courier New', monospace">from langchain.chat_models import ChatOpenAI<br>from langchain.chains import LLMChain</p>
+<hr style="border-top:1px solid #34445A">
+<p style="font-size:24px;color:#8FA0B3;font-family:'JetBrains Mono', 'Courier New', monospace"># LangChain 1.4.4에서 실행 결과</p>
+<p style="font-size:24px;line-height:1.6;color:#F2A27E;font-family:'JetBrains Mono', 'Courier New', monospace">ImportError: cannot import name 'ChatOpenAI'<br>ModuleNotFoundError: No module named 'langchain.chains'</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:40px;font-weight:700;color:#1B2433">첫 줄부터 에러</h3>
+<p style="font-size:32px;line-height:1.5;color:#4A5363">LangChain 1.0에서 패키지가 나뉘고, 옛 체인과 에이전트가 빠졌습니다.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:40px;font-weight:700;color:#1B2433">더 큰 문제</h3>
+<p style="font-size:32px;line-height:1.5;color:#4A5363">LLM은 자기 답이 틀렸다는 것을 <b>모릅니다.</b></p>
+</div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#8A8F98">LangChain 마이그레이션 도우미 · 2</p>
+<aside>수업 중에 강사님도 말씀하셨듯이, LangChain을 LLM에게 물어보면 복잡한 질문일수록 구버전 코드를 줍니다. 왼쪽 코드는 실제로 LangChain 1.4.4 환경에서 실행한 결과입니다. 첫 줄부터 에러가 납니다. 더 큰 문제는 LLM이 이게 틀렸다는 걸 모른다는 점입니다. [가능하면 ChatGPT에게 실제로 물어본 답변 캡처로 왼쪽 코드를 교체]</aside>
+</section>

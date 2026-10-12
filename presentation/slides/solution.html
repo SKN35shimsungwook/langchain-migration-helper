@@ -1,0 +1,15 @@
+<section id="solution" data-transition="fade" style="background:#F6F5F1;color:#1B2433;font-family:'IBM Plex Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:600;color:#1F5FAE;letter-spacing:2px">해결</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15;color:#1B2433">문서로 한 번, 실행으로 한 번 더 확인합니다</h2>
+</div>
+<table style="font-size:32px;color:#1B2433;background:#FFFFFF;border:1px solid #E1E0D9;border-radius:16px">
+<tr style="background:#ECEBE5"><th style="width:22%;text-align:left">구분</th><th style="width:34%;text-align:left">일반 LLM</th><th style="width:44%;text-align:left">우리 시스템</th></tr>
+<tr><td>근거</td><td style="color:#4A5363">학습 데이터 (구버전이 다수)</td><td>최신 공식 문서 검색 (RAG)</td></tr>
+<tr><td>확인</td><td style="color:#4A5363">없음</td><td>최신 환경에서 import 실제 실행</td></tr>
+<tr><td>틀렸을 때</td><td style="color:#4A5363">모름</td><td>에러 메시지로 다시 검색 후 재작성</td></tr>
+<tr><td>답변</td><td style="color:#4A5363">코드만</td><td>코드 + 근거 링크 + 시도 횟수</td></tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#8A8F98">LangChain 마이그레이션 도우미 · 4</p>
+<aside>저희 해결책은 이중 검증입니다. 첫째, 기억에 의존하지 않고 최신 공식 문서를 검색해서 근거로 씁니다. 둘째, 바꾼 코드를 최신 LangChain 환경에서 실제로 실행해 봅니다. 실패하면 그 에러 메시지를 가지고 다시 검색해서 고칩니다. 그래서 답변에는 코드뿐 아니라 근거 링크와 몇 번 만에 통과했는지가 함께 나옵니다.</aside>
+</section>

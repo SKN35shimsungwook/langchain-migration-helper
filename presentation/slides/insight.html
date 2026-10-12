@@ -1,0 +1,25 @@
+<section id="insight" data-transition="fade" style="background:#F6F5F1;color:#1B2433;font-family:'IBM Plex Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:600;color:#1F5FAE;letter-spacing:2px">실험 중 발견</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15;color:#1B2433">통과했다고 끝이 아니었습니다</h2>
+</div>
+<div style="display:flex;gap:56px;align-items:stretch">
+<div style="flex:1;display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;flex-direction:column;gap:10px;background:#FFFFFF;border:1px solid #E1E0D9;border-radius:16px;padding:36px">
+<h3 style="font-size:34px;font-weight:700;color:#1B2433">지원 종료 중인 패키지</h3>
+<p style="font-size:28px;line-height:1.45;color:#4A5363">langchain-community는 import만 해도 "지원 종료 중" 경고를 냅니다. 지금은 통과해도 곧 깨질 수 있습니다.</p>
+<p style="font-size:24px;color:#8A8F98">2026-10-12 확인 · langchain-community 0.4.2</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;background:#FFFFFF;border:1px solid #E1E0D9;border-radius:16px;padding:36px">
+<h3 style="font-size:34px;font-weight:700;color:#1B2433">classic 우회</h3>
+<p style="font-size:28px;line-height:1.45;color:#4A5363">LLMChain을 langchain_classic에서 가져오면 import는 통과하지만, 최신 방식으로 바꾼 것은 아닙니다.</p>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#FFFFFF;border:2px dashed #C3C2B7;border-radius:16px;padding:40px">
+<p style="font-size:32px;font-weight:600;color:#8A8F98;text-align:center">[그래프 삽입]</p>
+<p style="font-size:24px;color:#8A8F98;text-align:center">charts/3_success_quality.png</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#8A8F98">LangChain 마이그레이션 도우미 · 10</p>
+<aside>실험하면서 예상하지 못한 것을 두 가지 발견했습니다. 첫째, langchain-community 패키지는 import만 해도 지원 종료 경고가 나옵니다. 버전은 지금 이 순간에도 바뀌고 있다는 뜻입니다. 둘째, 옛 체인을 langchain_classic에서 가져오면 import는 되지만 최신 방식은 아닙니다. 그래서 단순 성공률 외에 '성공의 질'을 따로 집계했습니다. 오른쪽 그래프에서 우리 시스템은 깔끔한 성공 비율이 [__]%, 일반 LLM은 [__]%였습니다.</aside>
+</section>

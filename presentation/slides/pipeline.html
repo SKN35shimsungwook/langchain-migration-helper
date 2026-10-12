@@ -1,0 +1,39 @@
+<section id="pipeline" data-transition="fade" style="background:#F6F5F1;color:#1B2433;font-family:'IBM Plex Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:600;color:#1F5FAE;letter-spacing:2px">시스템 구조</p>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15;color:#1B2433">다섯 단계 파이프라인, 실패하면 되돌아갑니다</h2>
+<div style="position:absolute;left:128px;top:400px;width:272px;height:240px;display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border:1px solid #D4D3CC;border-radius:16px;padding:28px">
+<p style="font-size:24px;color:#8A8F98">1 · 담당 3번</p>
+<h3 style="font-size:32px;font-weight:600;color:#1B2433;font-family:'JetBrains Mono', 'Courier New', monospace">analyzer</h3>
+<p style="font-size:24px;line-height:1.4;color:#4A5363">바꿀 부분과 이유 분석</p>
+</div>
+<div style="position:absolute;left:476px;top:400px;width:272px;height:240px;display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border:1px solid #D4D3CC;border-radius:16px;padding:28px">
+<p style="font-size:24px;color:#8A8F98">2 · 담당 2번</p>
+<h3 style="font-size:32px;font-weight:600;color:#1B2433;font-family:'JetBrains Mono', 'Courier New', monospace">retriever</h3>
+<p style="font-size:24px;line-height:1.4;color:#4A5363">공식 문서 검색 (RAG + 웹)</p>
+</div>
+<div style="position:absolute;left:824px;top:400px;width:272px;height:240px;display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border:1px solid #D4D3CC;border-radius:16px;padding:28px">
+<p style="font-size:24px;color:#8A8F98">3 · 담당 3번</p>
+<h3 style="font-size:32px;font-weight:600;color:#1B2433;font-family:'JetBrains Mono', 'Courier New', monospace">rewriter</h3>
+<p style="font-size:24px;line-height:1.4;color:#4A5363">문서 근거로 코드 재작성</p>
+</div>
+<div style="position:absolute;left:1172px;top:400px;width:272px;height:240px;display:flex;flex-direction:column;gap:8px;background:#1F5FAE;border:1px solid #1F5FAE;border-radius:16px;padding:28px">
+<p style="font-size:24px;color:#CFE0F7">4 · 담당 1번</p>
+<h3 style="font-size:32px;font-weight:600;color:#FFFFFF;font-family:'JetBrains Mono', 'Courier New', monospace">verifier</h3>
+<p style="font-size:24px;line-height:1.4;color:#FFFFFF">최신 환경에서 import 실행</p>
+</div>
+<div style="position:absolute;left:1520px;top:400px;width:272px;height:240px;display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border:1px solid #D4D3CC;border-radius:16px;padding:28px">
+<p style="font-size:24px;color:#8A8F98">5 · 담당 3번</p>
+<h3 style="font-size:32px;font-weight:600;color:#1B2433;font-family:'JetBrains Mono', 'Courier New', monospace">report</h3>
+<p style="font-size:24px;line-height:1.4;color:#4A5363">코드 + 근거 + 시도 횟수</p>
+</div>
+<x-connector x1="400" y1="520" x2="476" y2="520" head="end" style="color:#8A8F98;border-width:3px"></x-connector>
+<x-connector x1="748" y1="520" x2="824" y2="520" head="end" style="color:#8A8F98;border-width:3px"></x-connector>
+<x-connector x1="1096" y1="520" x2="1172" y2="520" head="end" style="color:#8A8F98;border-width:3px"></x-connector>
+<x-connector x1="1444" y1="520" x2="1520" y2="520" head="end" style="color:#8A8F98;border-width:3px"></x-connector>
+<x-connector x1="1308" y1="640" x2="612" y2="730" route="vh" head="none" style="color:#C2410C;border-width:3px;border-style:dashed"></x-connector>
+<x-connector x1="612" y1="730" x2="612" y2="640" head="end" style="color:#C2410C;border-width:3px;border-style:dashed"></x-connector>
+<p style="position:absolute;left:700px;top:744px;width:520px;font-size:24px;font-weight:600;text-align:center;color:#B4471B">검증 실패 → 에러 메시지로 재검색</p>
+<p style="position:absolute;left:128px;top:830px;width:1664px;font-size:24px;color:#4A5363">검색 원천: LangChain 공식 문서 (llms-full.txt, v1 마이그레이션 가이드) · 검증 환경: langchain 1.4.4 고정</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#8A8F98">LangChain 마이그레이션 도우미 · 5</p>
+<aside>전체 구조는 LangGraph로 만든 다섯 단계 파이프라인입니다. analyzer가 바꿀 부분을 찾고, retriever가 공식 문서를 검색하고, rewriter가 그 근거로 코드를 다시 씁니다. 핵심은 파란색 verifier입니다. 최신 LangChain 환경에서 import를 실제로 실행해 보고, 실패하면 에러 메시지를 들고 retriever로 돌아가 다시 검색합니다. 최대 [3]번까지 시도합니다.</aside>
+</section>
