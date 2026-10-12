@@ -142,6 +142,9 @@ dl.glossary dt { font-weight: 700; background: var(--bg); overflow-wrap: anywher
 dl.glossary dd { font-size: 15.5px; min-width: 0; }
 @media (max-width: 480px) { dl.glossary { grid-template-columns: 1fr; } dl.glossary dt { border-bottom: none; padding-bottom: 2px; } }
 
+figure.pic { margin: 0; display: flex; flex-direction: column; gap: 6px; }
+figure.pic img { width: 100%; height: auto; display: block; border-radius: 12px; border: 1px solid var(--line); background: #F7F8FA; }
+figure.pic figcaption { font-size: 14px; color: var(--ink-2); }
 footer { padding-block: 32px; color: var(--ink-2); font-size: 14px; border-top: 1px solid var(--line); }
 
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
@@ -195,32 +198,14 @@ from langchain.chat_models import ChatOpenAI
 <span class="dim"># 주방 말로 바꾸면</span>
 "langchain 서랍장의 chat_models 칸에서 ChatOpenAI 도구를 꺼내라"</pre>
   <p>그런데 2025년에 LangChain 1.0이 나오면서 <b>주방 정리를 새로 했습니다.</b> 도구들이 다른 서랍으로 이사를 갔고, 일부는 창고로 치워졌습니다.</p>
-  <div class="table-wrap"><table>
-    <tr><th>도구</th><th>옛날 위치</th><th>지금 위치</th></tr>
-    <tr><td>ChatOpenAI (AI 모델 연결)</td><td><code>langchain.chat_models</code></td><td><code>langchain_openai</code> 서랍으로 이사</td></tr>
-    <tr><td>PromptTemplate (질문 틀)</td><td><code>langchain.prompts</code></td><td><code>langchain_core</code> 서랍으로 이사</td></tr>
-    <tr><td>LLMChain (옛날 조립 방식)</td><td><code>langchain.chains</code></td><td>창고(<code>langchain_classic</code>)로 치워짐. 요즘은 <code>prompt | llm</code>으로 조립</td></tr>
-    <tr><td>initialize_agent (옛날 에이전트)</td><td><code>langchain.agents</code></td><td>없어짐. 요즘은 <code>create_agent</code> 사용</td></tr>
-  </table></div>
+  <figure class="pic"><img src="../images/01_kitchen_move.svg" alt="LangChain 1.0에서 도구가 새 서랍으로 이사 간 모습" loading="lazy"></figure>
   <p>옛날 레시피대로 옛날 서랍을 열면 이렇게 됩니다. 이건 실제로 최신 LangChain(1.4.4)에서 실행한 결과입니다.</p>
   <pre>from langchain.chat_models import ChatOpenAI
 <span class="err">ImportError: cannot import name 'ChatOpenAI'</span>   <span class="dim">← "그 칸에 그런 도구 없어요"</span>
 
 from langchain.chains import LLMChain
 <span class="err">ModuleNotFoundError: No module named 'langchain.chains'</span>   <span class="dim">← "그런 칸 자체가 없어요"</span></pre>
-  <h3>문제: 옛날 주방만 기억하는 요리사</h3>
-  <p>ChatGPT 같은 AI는 인터넷 글을 많이 읽고 배웠습니다. 그런데 인터넷에는 <b>옛날 주방 레시피가 훨씬 많습니다.</b> 그래서 AI는 옛날 서랍 위치를 알려 주고, <b>자기가 틀린 줄도 모릅니다.</b> 이걸 "버전 지체 환각"이라고 부릅니다.</p>
-  <h3>해결: 안내서를 보고, 서랍을 직접 열어 보는 도우미</h3>
-  <div class="compare">
-    <div class="box warn">
-      <p class="label">일반 AI</p>
-      <p>기억에 의존해서 레시피를 고칩니다. 서랍을 열어 보지 않으니 틀려도 모릅니다.</p>
-    </div>
-    <div class="box" style="background: var(--ours-soft); border-color: transparent;">
-      <p class="label">우리 프로그램</p>
-      <p><b>① 새 주방 안내서(공식 문서)</b>를 찾아보고 고칩니다. <b>② 서랍을 직접 열어 봅니다</b>(import 실행). 도구가 없으면 다시 찾아보고 고칩니다.</p>
-    </div>
-  </div>
+  <figure class="pic"><img src="../images/02_two_cooks.svg" alt="같은 옛날 레시피, 두 요리사" loading="lazy"></figure>
   <p>①을 <b>문서 근거</b>, ②를 <b>실행 근거</b>라고 부릅니다. 두 가지로 확인한다고 해서 <b>"이중 검증"</b>입니다. 이게 우리 프로젝트의 핵심입니다.</p>
   <div class="box warn">
     <p class="label">헷갈리기 쉬운 점</p>
@@ -231,14 +216,7 @@ from langchain.chains import LLMChain
   <p class="chno">2장</p>
   <h2>기본 설계: 프로그램은 어떤 순서로 일하나</h2>
   <p><b>기본 설계</b>는 앞에서부터 보는 방법입니다. 사용자가 옛날 레시피(코드)를 넣으면, 프로그램 안에서 다섯 명의 직원이 차례로 일합니다.</p>
-  <div class="flow" role="list">
-    <div class="step" role="listitem"><span class="who">① 담당 3번</span><span class="name">analyzer</span><span class="kitchen">레시피를 읽고 "이 도구들, 이사 갔을 수도 있어" 표시</span></div>
-    <div class="step" role="listitem"><span class="who">② 담당 2번</span><span class="name">retriever</span><span class="kitchen">새 주방 안내서에서 도구의 새 위치 찾기</span></div>
-    <div class="step" role="listitem"><span class="who">③ 담당 3번</span><span class="name">rewriter</span><span class="kitchen">안내서를 보고 레시피 고쳐 쓰기</span></div>
-    <div class="step key" role="listitem"><span class="who">④ 담당 1번</span><span class="name">verifier</span><span class="kitchen">새 주방에서 서랍을 직접 열어 보기</span></div>
-    <div class="step" role="listitem"><span class="who">⑤ 담당 3번</span><span class="name">report</span><span class="kitchen">고친 레시피 + 안내서 몇 쪽 + 몇 번 만에 성공</span></div>
-  </div>
-  <p class="loop-note">④에서 도구가 없으면 → 에러 메시지를 들고 ②로 돌아가 다시 찾습니다. (최대 3번)</p>
+  <figure class="pic"><img src="../images/03_pipeline_loop.svg" alt="다섯 단계 파이프라인과 되돌아가는 길" loading="lazy"><figcaption>레시피 카드가 ④에서 막히면 ②로 돌아가 다시 찾습니다.</figcaption></figure>
   <p>이 되돌아가는 길을 <b>검증 루프</b>라고 합니다. 일반 AI에는 이 길이 없습니다. 그래서 틀려도 그냥 끝납니다.</p>
   <div class="box tip">
     <p class="label">팀원 역할도 이 그림으로 이해됩니다</p>
@@ -249,21 +227,7 @@ from langchain.chains import LLMChain
   <p class="chno">3장</p>
   <h2>역설계: 발표 장면에서 거꾸로 내려가기</h2>
   <p><b>역설계</b>는 뒤에서부터 보는 방법입니다. "마지막에 무엇을 보여줄까?"를 먼저 정하고, "그걸 하려면 뭐가 필요하지?"를 계속 물으며 내려갑니다.</p>
-  <div class="stairs">
-    <div class="stair goal"><span class="n">🏆</span><span class="t"><b>발표: "같은 문제 30개에서 우리가 일반 AI보다 더 많이 맞혔습니다"</b><span>이 장면을 보여주려면?</span></span></div>
-    <p class="up">↓ 필요한 것</p>
-    <div class="stair"><span class="n">6</span><span class="t"><b>그래프</b><span>누가 몇 % 맞혔는지 한눈에 → <code>make_charts.py</code></span></span></div>
-    <p class="up">↓ 그래프를 그리려면</p>
-    <div class="stair"><span class="n">5</span><span class="t"><b>성적표</b><span>문제마다 맞았는지 틀렸는지 적은 파일 → <code>run_baseline.py</code>가 만듦</span></span></div>
-    <p class="up">↓ 성적표를 만들려면</p>
-    <div class="stair"><span class="n">4</span><span class="t"><b>채점 로봇</b><span>서랍을 직접 열어 보고 ⭕❌ 판정 → <code>verify.py</code></span></span></div>
-    <p class="up">↓ 채점하려면</p>
-    <div class="stair"><span class="n">3</span><span class="t"><b>채점 규칙</b><span>공정한 시합 규칙표 → <code>EVAL_RULES.md</code></span></span></div>
-    <p class="up">↓ 규칙대로 시험을 치려면</p>
-    <div class="stair"><span class="n">2</span><span class="t"><b>시험지 30문제</b><span>옛날 레시피 30개 → <code>testset.json</code>, 검사기 <code>check_testset.py</code></span></span></div>
-    <p class="up">↓ 시험지를 만들려면</p>
-    <div class="stair"><span class="n">1</span><span class="t"><b>자료 조사</b><span>무엇이 어디로 이사 갔는지 알기 → <code>데이터_출처_조사.md</code></span></span></div>
-  </div>
+  <figure class="pic"><img src="../images/04_reverse_stairs.svg" alt="역설계 계단" loading="lazy"></figure>
   <h3>두 설계는 무엇이 다른가요?</h3>
   <div class="table-wrap"><table>
     <tr><th></th><th>기본 설계 (2장)</th><th>역설계 (3장)</th></tr>

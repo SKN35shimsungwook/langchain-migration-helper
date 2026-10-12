@@ -142,6 +142,9 @@ dl.glossary dt { font-weight: 700; background: var(--bg); overflow-wrap: anywher
 dl.glossary dd { font-size: 15.5px; min-width: 0; }
 @media (max-width: 480px) { dl.glossary { grid-template-columns: 1fr; } dl.glossary dt { border-bottom: none; padding-bottom: 2px; } }
 
+figure.pic { margin: 0; display: flex; flex-direction: column; gap: 6px; }
+figure.pic img { width: 100%; height: auto; display: block; border-radius: 12px; border: 1px solid var(--line); background: #F7F8FA; }
+figure.pic figcaption { font-size: 14px; color: var(--ink-2); }
 footer { padding-block: 32px; color: var(--ink-2); font-size: 14px; border-top: 1px solid var(--line); }
 
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
@@ -203,32 +206,14 @@ from langchain.chat_models import ChatOpenAI
 <span class="dim"># 주방 말로 바꾸면</span>
 "langchain 서랍장의 chat_models 칸에서 ChatOpenAI 도구를 꺼내라"</pre>
   <p>그런데 2025년에 LangChain 1.0이 나오면서 <b>주방 정리를 새로 했습니다.</b> 도구들이 다른 서랍으로 이사를 갔고, 일부는 창고로 치워졌습니다.</p>
-  <div class="table-wrap"><table>
-    <tr><th>도구</th><th>옛날 위치</th><th>지금 위치</th></tr>
-    <tr><td>ChatOpenAI (AI 모델 연결)</td><td><code>langchain.chat_models</code></td><td><code>langchain_openai</code> 서랍으로 이사</td></tr>
-    <tr><td>PromptTemplate (질문 틀)</td><td><code>langchain.prompts</code></td><td><code>langchain_core</code> 서랍으로 이사</td></tr>
-    <tr><td>LLMChain (옛날 조립 방식)</td><td><code>langchain.chains</code></td><td>창고(<code>langchain_classic</code>)로 치워짐. 요즘은 <code>prompt | llm</code>으로 조립</td></tr>
-    <tr><td>initialize_agent (옛날 에이전트)</td><td><code>langchain.agents</code></td><td>없어짐. 요즘은 <code>create_agent</code> 사용</td></tr>
-  </table></div>
+  <figure class="pic"><img src="../images/01_kitchen_move.svg" alt="LangChain 1.0에서 도구가 새 서랍으로 이사 간 모습" loading="lazy"></figure>
   <p>옛날 레시피대로 옛날 서랍을 열면 이렇게 됩니다. 이건 실제로 최신 LangChain(1.4.4)에서 실행한 결과입니다.</p>
   <pre>from langchain.chat_models import ChatOpenAI
 <span class="err">ImportError: cannot import name 'ChatOpenAI'</span>   <span class="dim">← "그 칸에 그런 도구 없어요"</span>
 
 from langchain.chains import LLMChain
 <span class="err">ModuleNotFoundError: No module named 'langchain.chains'</span>   <span class="dim">← "그런 칸 자체가 없어요"</span></pre>
-  <h3>문제: 옛날 주방만 기억하는 요리사</h3>
-  <p>ChatGPT 같은 AI는 인터넷 글을 많이 읽고 배웠습니다. 그런데 인터넷에는 <b>옛날 주방 레시피가 훨씬 많습니다.</b> 그래서 AI는 옛날 서랍 위치를 알려 주고, <b>자기가 틀린 줄도 모릅니다.</b> 이걸 "버전 지체 환각"이라고 부릅니다.</p>
-  <h3>해결: 안내서를 보고, 서랍을 직접 열어 보는 도우미</h3>
-  <div class="compare">
-    <div class="box warn">
-      <p class="label">일반 AI</p>
-      <p>기억에 의존해서 레시피를 고칩니다. 서랍을 열어 보지 않으니 틀려도 모릅니다.</p>
-    </div>
-    <div class="box" style="background: var(--ours-soft); border-color: transparent;">
-      <p class="label">우리 프로그램</p>
-      <p><b>① 새 주방 안내서(공식 문서)</b>를 찾아보고 고칩니다. <b>② 서랍을 직접 열어 봅니다</b>(import 실행). 도구가 없으면 다시 찾아보고 고칩니다.</p>
-    </div>
-  </div>
+  <figure class="pic"><img src="../images/02_two_cooks.svg" alt="같은 옛날 레시피, 두 요리사" loading="lazy"></figure>
   <p>①을 <b>문서 근거</b>, ②를 <b>실행 근거</b>라고 부릅니다. 두 가지로 확인한다고 해서 <b>"이중 검증"</b>입니다. 이게 우리 프로젝트의 핵심입니다.</p>
   <div class="box warn">
     <p class="label">헷갈리기 쉬운 점</p>
@@ -241,14 +226,7 @@ from langchain.chains import LLMChain
   <p class="chno">2장</p>
   <h2>기본 설계: 프로그램은 어떤 순서로 일하나</h2>
   <p><b>기본 설계</b>는 앞에서부터 보는 방법입니다. 사용자가 옛날 레시피(코드)를 넣으면, 프로그램 안에서 다섯 명의 직원이 차례로 일합니다.</p>
-  <div class="flow" role="list">
-    <div class="step" role="listitem"><span class="who">① 담당 3번</span><span class="name">analyzer</span><span class="kitchen">레시피를 읽고 "이 도구들, 이사 갔을 수도 있어" 표시</span></div>
-    <div class="step" role="listitem"><span class="who">② 담당 2번</span><span class="name">retriever</span><span class="kitchen">새 주방 안내서에서 도구의 새 위치 찾기</span></div>
-    <div class="step" role="listitem"><span class="who">③ 담당 3번</span><span class="name">rewriter</span><span class="kitchen">안내서를 보고 레시피 고쳐 쓰기</span></div>
-    <div class="step key" role="listitem"><span class="who">④ 담당 1번</span><span class="name">verifier</span><span class="kitchen">새 주방에서 서랍을 직접 열어 보기</span></div>
-    <div class="step" role="listitem"><span class="who">⑤ 담당 3번</span><span class="name">report</span><span class="kitchen">고친 레시피 + 안내서 몇 쪽 + 몇 번 만에 성공</span></div>
-  </div>
-  <p class="loop-note">④에서 도구가 없으면 → 에러 메시지를 들고 ②로 돌아가 다시 찾습니다. (최대 3번)</p>
+  <figure class="pic"><img src="../images/03_pipeline_loop.svg" alt="다섯 단계 파이프라인과 되돌아가는 길" loading="lazy"><figcaption>레시피 카드가 ④에서 막히면 ②로 돌아가 다시 찾습니다.</figcaption></figure>
   <p>이 되돌아가는 길을 <b>검증 루프</b>라고 합니다. 일반 AI에는 이 길이 없습니다. 그래서 틀려도 그냥 끝납니다.</p>
   <div class="box tip">
     <p class="label">팀원 역할도 이 그림으로 이해됩니다</p>
@@ -261,21 +239,7 @@ from langchain.chains import LLMChain
   <p class="chno">3장</p>
   <h2>역설계: 발표 장면에서 거꾸로 내려가기</h2>
   <p><b>역설계</b>는 뒤에서부터 보는 방법입니다. "마지막에 무엇을 보여줄까?"를 먼저 정하고, "그걸 하려면 뭐가 필요하지?"를 계속 물으며 내려갑니다.</p>
-  <div class="stairs">
-    <div class="stair goal"><span class="n">🏆</span><span class="t"><b>발표: "같은 문제 30개에서 우리가 일반 AI보다 더 많이 맞혔습니다"</b><span>이 장면을 보여주려면?</span></span></div>
-    <p class="up">↓ 필요한 것</p>
-    <div class="stair"><span class="n">6</span><span class="t"><b>그래프</b><span>누가 몇 % 맞혔는지 한눈에 → <code>make_charts.py</code></span></span></div>
-    <p class="up">↓ 그래프를 그리려면</p>
-    <div class="stair"><span class="n">5</span><span class="t"><b>성적표</b><span>문제마다 맞았는지 틀렸는지 적은 파일 → <code>run_baseline.py</code>가 만듦</span></span></div>
-    <p class="up">↓ 성적표를 만들려면</p>
-    <div class="stair"><span class="n">4</span><span class="t"><b>채점 로봇</b><span>서랍을 직접 열어 보고 ⭕❌ 판정 → <code>verify.py</code></span></span></div>
-    <p class="up">↓ 채점하려면</p>
-    <div class="stair"><span class="n">3</span><span class="t"><b>채점 규칙</b><span>공정한 시합 규칙표 → <code>EVAL_RULES.md</code></span></span></div>
-    <p class="up">↓ 규칙대로 시험을 치려면</p>
-    <div class="stair"><span class="n">2</span><span class="t"><b>시험지 30문제</b><span>옛날 레시피 30개 → <code>testset.json</code>, 검사기 <code>check_testset.py</code></span></span></div>
-    <p class="up">↓ 시험지를 만들려면</p>
-    <div class="stair"><span class="n">1</span><span class="t"><b>자료 조사</b><span>무엇이 어디로 이사 갔는지 알기 → <code>데이터_출처_조사.md</code></span></span></div>
-  </div>
+  <figure class="pic"><img src="../images/04_reverse_stairs.svg" alt="역설계 계단" loading="lazy"></figure>
   <h3>두 설계는 무엇이 다른가요?</h3>
   <div class="table-wrap"><table>
     <tr><th></th><th>기본 설계 (2장)</th><th>역설계 (3장)</th></tr>
@@ -292,6 +256,7 @@ from langchain.chains import LLMChain
   <p class="chno">4장</p>
   <h2>내 임무: 요리 대회 심사위원</h2>
   <p>요리사 두 명에게 <b>똑같은 옛날 레시피 30개</b>를 주고 "새 주방에 맞게 고쳐 오세요"라고 합니다. 한 명은 <b>일반 AI</b>, 한 명은 <b>우리 프로그램</b>입니다. 나는 고쳐 온 레시피대로 서랍을 실제로 열어 보고, 도구가 다 있으면 합격을 줍니다.</p>
+  <figure class="pic"><img src="../images/05_judge_contest.svg" alt="요리 대회 심사위원" loading="lazy"></figure>
   <h3>내 도구 상자 (모두 만들어져 있습니다)</h3>
   <div class="table-wrap"><table>
     <tr><th>파일</th><th>주방 비유</th><th>내가 할 일</th></tr>
@@ -304,14 +269,6 @@ from langchain.chains import LLMChain
   </table></div>
   <h3>왜 AI에게 "이거 맞아?"라고 묻지 않나요?</h3>
   <p>심사위원도 옛날 주방만 기억하면, 틀린 레시피에 합격을 줄 수 있습니다. 그래서 우리는 <b>말이 아니라 서랍을 직접 열어 보는 것</b>으로 채점합니다. 이게 일반 AI와 우리의 가장 큰 차이입니다.</p>
-  <h3>공정한 시합 규칙 (달리기와 같습니다)</h3>
-  <div class="table-wrap"><table>
-    <tr><th>규칙</th><th>달리기로 말하면</th></tr>
-    <tr><td>두 요리사는 같은 AI 두뇌(모델)를 쓴다</td><td>같은 운동화를 신는다</td></tr>
-    <tr><td>같은 문제 30개를 같은 순서로 푼다</td><td>같은 코스를 뛴다</td></tr>
-    <tr><td>같은 채점 로봇(<code>verify.py</code>)으로 채점한다</td><td>같은 시계로 잰다</td></tr>
-    <tr><td>꼼수는 실패로 친다 (어려운 부분을 지워서 에러를 없애기 등)</td><td>코스를 가로지르면 실격</td></tr>
-  </table></div>
   <div class="compare">
     <div class="box tip">
       <p class="label">꼭 알아야 하는 것</p>
@@ -386,32 +343,9 @@ $env:OPENAI_API_KEY="sk-...내 키..."</pre>
   <p class="chno">6장</p>
   <h2>결과 읽는 법</h2>
   <p>아래 숫자는 <b>읽는 연습용 예시</b>입니다. 진짜 결과가 아닙니다.</p>
-  <div class="box">
-    <p class="label">예시: 난이도별 성공률</p>
-    <div class="bars">
-      <div class="bar-row"><span>쉬움 · 우리</span><div class="bar-track"><div class="bar ours" style="width:100%"></div></div><span class="v">100%</span></div>
-      <div class="bar-row"><span>쉬움 · 일반 AI</span><div class="bar-track"><div class="bar old" style="width:60%"></div></div><span class="v">60%</span></div>
-      <div class="bar-row"><span>어려움 · 우리</span><div class="bar-track"><div class="bar ours" style="width:80%"></div></div><span class="v">80%</span></div>
-      <div class="bar-row"><span>어려움 · 일반 AI</span><div class="bar-track"><div class="bar old" style="width:10%"></div></div><span class="v">10%</span></div>
-    </div>
-    <p><b>읽는 법</b>: 쉬운 문제는 차이가 40%p, 어려운 문제는 70%p입니다. → "어려운 레시피일수록 옛날 기억만으로는 못 고친다"고 말할 수 있습니다.</p>
-  </div>
-  <h3>꼭 알아야 할 숫자 3개</h3>
-  <div class="table-wrap"><table>
-    <tr><th>숫자</th><th>뜻</th><th>예시로 계산하면</th></tr>
-    <tr><td><b>1회차 성공률</b></td><td>우리 프로그램이 처음 한 번에 맞힌 비율</td><td>30개 중 6개 → 20%</td></tr>
-    <tr><td><b>최종 성공률</b></td><td>다시 찾고 고치기를 최대 3번까지 해서 맞힌 비율</td><td>30개 중 27개 → 90%</td></tr>
-    <tr><td><b>검증 루프 효과</b></td><td>최종 − 1회차. "서랍을 열어 보고 다시 고치기"가 만든 차이</td><td>90 − 20 = <b>+70%p</b></td></tr>
-  </table></div>
-  <p><b>%p(퍼센트 포인트)</b>는 퍼센트끼리 뺀 값입니다. 20%에서 90%가 되면 "70%p 올랐다"고 말합니다.</p>
+  <figure class="pic"><img src="../images/06_loop_effect.svg" alt="검증 루프 효과 읽는 법" loading="lazy"></figure>
   <h3>성공에도 품질이 있습니다</h3>
-  <div class="table-wrap"><table>
-    <tr><th>종류</th><th>주방 비유</th></tr>
-    <tr><td>깔끔한 성공</td><td>새 서랍에서 새 도구를 꺼냄</td></tr>
-    <tr><td>성공 (community 경고)</td><td>"이번 달까지만 영업" 가게에서 도구를 사 옴. 지금은 되지만 곧 못 씀</td></tr>
-    <tr><td>성공 (classic 의존)</td><td>창고에 치워 둔 낡은 도구를 꺼내 씀. 되긴 하지만 요즘 방식은 아님</td></tr>
-    <tr><td>실패</td><td>서랍을 열었는데 도구가 없음</td></tr>
-  </table></div>
+  <figure class="pic"><img src="../images/07_success_quality.svg" alt="성공의 질 네 가지" loading="lazy"></figure>
   <p>"community 가게가 곧 문 닫는다"는 사실은 <b>우리가 실험하다가 직접 발견한 것</b>입니다(2026-10-12). 발표에서 좋은 이야깃거리가 됩니다.</p>
 </section>
 
