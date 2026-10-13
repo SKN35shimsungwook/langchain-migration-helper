@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>검증·평가 파트 상세</title>
+<title>평가·화면 파트 상세</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
 /* layout: one reading column (~46rem) of numbered chapters, a sticky chapter strip on top, kitchen analogy carried through every chapter */
@@ -175,10 +175,10 @@ footer { padding-block: 32px; color: var(--ink-2); font-size: 14px; border-top: 
 </nav>
 <div class="wrap">
 <header class="hero">
-  <p class="eyebrow">LANGCHAIN 마이그레이션 도우미 · 4번(검증·평가) 담당 안내서</p>
-  <h1>검증·평가 파트 상세</h1>
-  <span class="badge">최신 버전 · 2026-10-12</span>
-  <p class="lead">4번 담당이 맡은 <b>요리 대회 심사위원</b> 임무를 자세히 설명합니다. 도구, 명령어, 결과 읽는 법, 발표 질문까지 담았습니다.</p>
+  <p class="eyebrow">LANGCHAIN 마이그레이션 도우미 · 4번(화면·평가) 담당 안내서</p>
+  <h1>평가·화면 파트 상세</h1>
+  <span class="badge" style="color:#8A4B12;background:#FBEBD8">이전 버전 v1 · 최신은 docs/guide_v2</span>
+  <p class="lead">4번 담당이 맡은 <b>요리 대회 심사위원</b>과 <b>손님 테이블(화면)</b> 임무를 설명합니다. 도구, 명령어, 결과 읽는 법, 발표 질문까지 담았습니다.</p>
   <p class="meta">먼저 읽을 문서: <a href="01_프로젝트_전체_쉽게_보기.html">01 프로젝트 전체 쉽게 보기</a></p>
   <div class="box remember">
     <p class="label">이것 세 줄만 기억해도 됩니다</p>
@@ -200,10 +200,14 @@ footer { padding-block: 32px; color: var(--ink-2); font-size: 14px; border-top: 
     <tr><td><code>EVAL_RULES.md</code></td><td>시합 규칙표</td><td>팀과 빈칸 2개 채우기 (비교 모델, verifier 담당)</td></tr>
     <tr><td><code>testset.json</code></td><td>문제지 30장</td><td>읽어 보고 왜 깨지는지 몇 개 설명할 수 있게 하기</td></tr>
     <tr><td><code>check_testset.py</code></td><td>문제지 검사기</td><td>한 번 실행해서 "통과 30/30" 눈으로 보기</td></tr>
-    <tr><td><code>verify.py</code></td><td>채점 로봇</td><td>1번 팀원에게 "우리 시스템도 이걸로 채점해 주세요" 전달</td></tr>
+    <tr><td><code>verify.py</code></td><td>채점 로봇</td><td>3번에게 넘겨 verifier의 출발점으로 쓰게 하기 (파이프라인 검증과 평가 채점을 같은 기준으로)</td></tr>
     <tr><td><code>run_baseline.py</code></td><td>상대 선수 시험 기계</td><td>일반 AI 시험 실행</td></tr>
     <tr><td><code>make_charts.py</code></td><td>점수판 그리기 기계</td><td>결과가 나오면 실행해서 그래프 받기</td></tr>
   </table></div>
+  <div class="box tip">
+    <p class="label">내 임무 하나 더: 손님 테이블(화면)</p>
+    <p>4번은 평가와 함께 <b>화면</b>도 맡습니다. [변환하기] 탭에서는 코드 입력 → 진행 단계 → 변환 결과, 바뀐 줄, 근거 링크, ✅ 검증 배지를 보여 주고, [성능 비교] 탭에서는 평가 그래프를 보여 줍니다.</p>
+  </div>
   <h3>왜 AI에게 "이거 맞아?"라고 묻지 않나요?</h3>
   <p>심사위원도 옛날 주방만 기억하면, 틀린 레시피에 합격을 줄 수 있습니다. 그래서 우리는 <b>말이 아니라 서랍을 직접 열어 보는 것</b>으로 채점합니다. 이게 일반 AI와 우리의 가장 큰 차이입니다.</p>
   <div class="compare">
@@ -261,7 +265,7 @@ $env:OPENAI_API_KEY="sk-...내 키..."</pre>
   <p>문제없으면 <code>--limit 3</code>을 빼고 30문제 전체를 실행합니다. 중간에 멈춰도 다시 실행하면 이어서 합니다.</p>
 
   <h3>4단계. 우리 프로그램 시험 보기</h3>
-  <p>이건 1번 팀원이 만든 프로그램으로 실행합니다. 나는 <b>"채점은 verify.py로, 성적표는 EVAL_RULES 7장 모양으로 저장해 주세요"</b>라고 부탁만 하면 됩니다.</p>
+  <p>우리 프로그램은 1번이 만든 API로 30문제를 실행합니다. verifier를 만드는 3번과는 <b>"verify.py 기준으로 채점하고, 결과는 EVAL_RULES 7장 모양으로"</b>를 미리 합의해 둡니다.</p>
 
   <h3>5단계. 점수판 그리기</h3>
   <pre>python make_charts.py --a results/A_[모델명]_[날짜].json --b results/B_[모델명]_[날짜].json</pre>
@@ -306,7 +310,7 @@ $env:OPENAI_API_KEY="sk-...내 키..."</pre>
   <p>체크한 내용은 이 브라우저에만 저장됩니다. <span class="progress" id="progress"></span></p>
   <div class="checks" id="checks"></div>
 </section>
-<footer>최신 버전 · 2026-10-12 · 같은 내용의 MD와 PDF는 저장소 <code>docs/guide</code> 폴더에 있습니다. 이전 버전: <code>docs/역순설계_쉽게_이해하기.md</code></footer>
+<footer>이전 버전 v1 · 최신: docs/guide_v2 · 같은 내용의 MD와 PDF는 저장소 <code>docs/guide</code> 폴더에 있습니다. 이전 버전: <code>docs/역순설계_쉽게_이해하기.md</code></footer>
 </div>
 <script>
 let QUIZ = [
@@ -338,7 +342,9 @@ let QUIZ = [
 const CHECKS = [
   ["이 안내서를 끝까지 읽고 퀴즈 8개 중 6개 이상 맞히기", "틀린 문제는 해설을 다시 읽기"],
   ["팀과 비교 모델 하나 정하기", "EVAL_RULES.md 9장 빈칸 채우기"],
-  ["1번 팀원에게 verifier 구현과 결과 형식 부탁하기", "\"채점은 verify.py로, 성적표는 EVAL_RULES 7장 모양으로\""],
+  ["3번에게 verify.py 넘기고 verifier 결과 모양 합의하기", "\"verify.py 기준으로 채점, 결과는 EVAL_RULES 7장 모양으로\""],
+  ["3번과 report 출력 모양 합의하기", "화면에 보여 줄 내용: 변환 코드, 변경표, 근거 링크, 시도 횟수"],
+  ["화면 만들기: [변환하기] 탭, [성능 비교] 탭", "백엔드 완성 전에는 가짜 응답으로 먼저"],
   ["새 주방(verify-env) 만들고 requirements-verify.txt 저장하기", "2장 1단계"],
   ["check_testset.py 실행해서 통과 30/30 눈으로 보기", "2장 2단계"],
   ["testset.json에서 쉬움·중간·어려움 하나씩 골라 왜 깨지는지 말로 설명해 보기", "발표 질문 대비"],

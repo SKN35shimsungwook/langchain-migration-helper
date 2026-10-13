@@ -176,9 +176,9 @@ footer { padding-block: 32px; color: var(--ink-2); font-size: 14px; border-top: 
 <header class="hero">
   <p class="eyebrow">LANGCHAIN 마이그레이션 도우미 · 팀 모두를 위한 안내서</p>
   <h1>프로젝트 전체 쉽게 보기</h1>
-  <span class="badge">최신 버전 · 2026-10-12</span>
+  <span class="badge" style="color:#8A4B12;background:#FBEBD8">이전 버전 v1 · 최신은 docs/guide_v2</span>
   <p class="lead">우리 팀이 무엇을, 왜, 어떤 순서로 만드는지 <b>주방 이야기</b>로 설명합니다. 1~3번 팀원도, 처음 보는 사람도 읽을 수 있습니다.</p>
-  <p class="meta">다음 문서: <a href="02_검증평가_파트_상세.html">02 검증·평가 파트 상세</a> (4번 담당의 할 일)</p>
+  <p class="meta">다음 문서: <a href="02_검증평가_파트_상세.html">02 평가·화면 파트 상세</a> (4번 담당의 할 일)</p>
   <div class="box remember">
     <p class="label">이것 세 줄만 기억해도 됩니다</p>
     <ol>
@@ -220,7 +220,7 @@ from langchain.chains import LLMChain
   <p>이 되돌아가는 길을 <b>검증 루프</b>라고 합니다. 일반 AI에는 이 길이 없습니다. 그래서 틀려도 그냥 끝납니다.</p>
   <div class="box tip">
     <p class="label">팀원 역할도 이 그림으로 이해됩니다</p>
-    <p>1번은 직원들을 줄 세우고 연결합니다(그래프·백엔드, verifier). 2번은 안내서를 준비하고 찾아 줍니다(데이터·검색). 3번은 읽고, 고쳐 쓰고, 답을 씁니다(변환·화면). <b>4번(나)은 이 직원들이 일을 잘하는지 시험하고 점수를 매깁니다.</b></p>
+    <p>1번은 직원들을 줄 세우고 연결합니다(그래프·백엔드). 2번은 안내서를 준비하고 찾아 줍니다(데이터·검색). 3번은 읽고, 고쳐 쓰고, 서랍을 열어 확인하고, 답을 씁니다(변환·검증). <b>4번(나)은 손님 테이블(화면)을 차리고, 직원들이 일을 잘하는지 시험해 점수를 매깁니다(화면·평가).</b></p>
   </div>
 </section>
 <section class="ch" id="s3">
@@ -270,7 +270,7 @@ from langchain.chains import LLMChain
   <p>답을 누르면 바로 맞았는지 알려 줍니다. <span class="score" id="score">0 / 3</span></p>
   <div class="quiz" id="quiz"></div>
 </section>
-<footer>최신 버전 · 2026-10-12 · 같은 내용의 MD와 PDF는 저장소 <code>docs/guide</code> 폴더에 있습니다. 이전 버전: <code>docs/역순설계_쉽게_이해하기.md</code></footer>
+<footer>이전 버전 v1 · 최신: docs/guide_v2 · 같은 내용의 MD와 PDF는 저장소 <code>docs/guide</code> 폴더에 있습니다. 이전 버전: <code>docs/역순설계_쉽게_이해하기.md</code></footer>
 </div>
 <script>
 let QUIZ = [
@@ -302,7 +302,9 @@ let QUIZ = [
 const CHECKS = [
   ["이 안내서를 끝까지 읽고 퀴즈 8개 중 6개 이상 맞히기", "틀린 문제는 해설을 다시 읽기"],
   ["팀과 비교 모델 하나 정하기", "EVAL_RULES.md 9장 빈칸 채우기"],
-  ["1번 팀원에게 verifier 구현과 결과 형식 부탁하기", "\"채점은 verify.py로, 성적표는 EVAL_RULES 7장 모양으로\""],
+  ["3번에게 verify.py 넘기고 verifier 결과 모양 합의하기", "\"verify.py 기준으로 채점, 결과는 EVAL_RULES 7장 모양으로\""],
+  ["3번과 report 출력 모양 합의하기", "화면에 보여 줄 내용: 변환 코드, 변경표, 근거 링크, 시도 횟수"],
+  ["화면 만들기: [변환하기] 탭, [성능 비교] 탭", "백엔드 완성 전에는 가짜 응답으로 먼저"],
   ["새 주방(verify-env) 만들고 requirements-verify.txt 저장하기", "5장 1단계"],
   ["check_testset.py 실행해서 통과 30/30 눈으로 보기", "5장 2단계"],
   ["testset.json에서 쉬움·중간·어려움 하나씩 골라 왜 깨지는지 말로 설명해 보기", "발표 질문 대비"],
