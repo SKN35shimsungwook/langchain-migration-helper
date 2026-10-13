@@ -112,7 +112,7 @@ from langchain.chains import LLMChain          → ModuleNotFoundError: No modul
 
 - **`langchain-community`는 import만 해도 지원 종료 경고를 냅니다.** (2026-10-12, langchain-community 0.4.2) 지금은 통과해도 곧 깨질 수 있어 `uses_community`로 따로 집계합니다.
 - **`langchain_classic`으로 우회하면 옛 체인도 import가 됩니다.** 최신 방식은 아니므로 `uses_classic`으로 따로 집계합니다.
-- `langchain_classic.agents`의 `initialize_agent`, `load_tools`는 의존성 문제로 import에 실패했습니다. 어려움 문제는 우회도 잘 되지 않습니다.
+- `langchain_classic.agents`에서 `initialize_agent`, `AgentType`, `AgentExecutor`는 classic 우회로 import되지만, `load_tools`는 `langchain-community` 의존성 문제로 실패합니다. (2026-10-13 하나씩 다시 확인해서 바로잡음: 처음에는 여러 이름을 한 줄로 가져와 전부 실패하는 것처럼 보였음)
 
 ## 7. 한계와 다음 단계
 
@@ -176,6 +176,7 @@ langchain_migration/
 │   ├── run_baseline.py        # baseline(일반 LLM) 실험
 │   ├── run_system.py          # 우리 시스템 실험 (report → 평가 결과)
 │   ├── check_contract.py      # report가 합의한 모양인지 검사
+│   ├── check_symbol_map.py    # symbol_map이 맞는지 실행으로 확인, 테스트셋 대조
 │   └── make_charts.py         # 결과 그래프와 요약표
 ├── presentation/              # 발표 자료 (원본, 웹 버전, PDF)
 └── docs/
@@ -184,6 +185,7 @@ langchain_migration/
     ├── 역할분담표.md
     ├── 출력모양_합의안.md      # 3번 report 모양 (contracts/ 에 예시 JSON)
     ├── API_합의안.md           # 1번 API 규칙 (contracts/api_stub.py 연습용 서버)
+    ├── symbol_map_합의안.md    # 2번 이사 목록 · 근거 ID 규칙
     ├── 작업기록.md
     ├── 데이터_출처_조사.md
     ├── guide/                 # 안내서 이전 버전 v1
@@ -200,6 +202,7 @@ langchain_migration/
 | **역할 분담표** | 네 역할, 1번과 3번의 경계, 서로 맞춰야 하는 것 | [MD](docs/역할분담표.md) |
 | **출력 모양 합의안** | 3번 report 모양 (화면과 평가가 함께 씀), 예시 JSON, 검사 방법 | [MD](docs/출력모양_합의안.md) |
 | **API 합의안** | 1번 API 주소 3개, 요청·응답, 에러 규칙, 연습용 서버 | [MD](docs/API_합의안.md) |
+| **symbol_map 합의안** | 2번 이사 목록 모양, 근거 ID 규칙, Qdrant payload, 테스트셋 대조 | [MD](docs/symbol_map_합의안.md) |
 | 평가 기준과 실험 규칙 | 성공 기준, 지표, 실험 조건, 결과 형식 | [MD](eval/EVAL_RULES.md) |
 | 작업 기록 | 무엇을 왜 했는지, 확인한 결과와 남은 일 | [MD](docs/작업기록.md) |
 | 데이터 출처 조사 | RAG 문서와 테스트 코드 출처 | [MD](docs/데이터_출처_조사.md) |
