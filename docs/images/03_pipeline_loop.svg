@@ -35,7 +35,7 @@ text { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans
 </g>
 <g>
   <rect x="490" y="70" width="130" height="96" rx="10" fill="#2457C5"/>
-  <text x="555" y="92" class="o w" text-anchor="middle" style="fill:#DCE6FA">④ 담당 1번</text>
+  <text x="555" y="92" class="o w" text-anchor="middle" style="fill:#DCE6FA">④ 담당 3번</text>
   <text x="555" y="116" class="n mono w" text-anchor="middle">verifier</text>
   <text x="555" y="140" class="k w" text-anchor="middle">서랍 직접</text>
   <text x="555" y="156" class="k w" text-anchor="middle">열어 보기</text>

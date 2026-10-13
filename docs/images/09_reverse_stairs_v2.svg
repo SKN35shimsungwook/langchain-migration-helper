@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" width="800" height="460" role="img" aria-label="4번 화면·평가의 역설계 계단">
+<style>
+text { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; fill: #18202B; }
+.mono { font-family: Consolas, 'Courier New', monospace; }
+.t { font-size: 22px; font-weight: 700; }
+.n { font-size: 14.5px; font-weight: 700; }
+.f { font-size: 11.5px; fill: #4A5565; }
+.st { font-size: 12px; font-weight: 700; }
+.note { font-size: 14px; }
+@keyframes walk { 0% { transform: translate(0,0); } 45% { transform: translate(420px,300px); } 55% { transform: translate(420px,300px); } 100% { transform: translate(0,0); } }
+.hl { animation: walk 8s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .hl { animation: none; } }
+</style>
+<rect width="800" height="460" rx="16" fill="#F7F8FA"/>
+<text x="28" y="40" class="t">역설계: 발표 장면부터 거꾸로 (4번 화면 · 평가)</text>
+
+<g>
+  <rect x="40" y="64" width="300" height="42" rx="8" fill="#2457C5"/>
+  <text x="56" y="90" class="n" style="fill:#fff">발표: 더 잘 고치고, 직접 보여 준다</text>
+</g>
+<g>
+  <rect x="110" y="114" width="300" height="42" rx="8" fill="#FFFFFF" stroke="#C9D2DD"/>
+  <text x="126" y="140" class="n">데모 화면 + 그래프</text>
+  <text x="400" y="140" class="st" text-anchor="end" style="fill:#8A4B12">화면 뼈대 ✓</text>
+</g>
+<g>
+  <rect x="180" y="164" width="300" height="42" rx="8" fill="#FFFFFF" stroke="#C9D2DD"/>
+  <text x="196" y="190" class="n">성적표 A · B</text><text x="290" y="190" class="f mono">run_baseline · API</text>
+  <text x="470" y="190" class="st" text-anchor="end" style="fill:#8A94A3">실행 대기</text>
+</g>
+<g>
+  <rect x="250" y="214" width="300" height="42" rx="8" fill="#FFFFFF" stroke="#C9D2DD"/>
+  <text x="266" y="240" class="n">채점 로봇</text><text x="342" y="240" class="f mono">verify.py = verifier (b)</text>
+  <text x="540" y="240" class="st" text-anchor="end" style="fill:#1B7A43">✓</text>
+</g>
+<g>
+  <rect x="320" y="264" width="300" height="42" rx="8" fill="#FFFFFF" stroke="#C9D2DD"/>
+  <text x="336" y="290" class="n">채점 규칙</text><text x="416" y="290" class="f mono">EVAL_RULES.md</text>
+  <text x="610" y="290" class="st" text-anchor="end" style="fill:#1B7A43">✓ 완료</text>
+</g>
+<g>
+  <rect x="390" y="314" width="300" height="42" rx="8" fill="#FFFFFF" stroke="#C9D2DD"/>
+  <text x="406" y="340" class="n">시험지 30문제</text><text x="516" y="340" class="f mono">testset.json</text>
+  <text x="680" y="340" class="st" text-anchor="end" style="fill:#1B7A43">✓ 완료</text>
+</g>
+<g>
+  <rect x="460" y="364" width="300" height="42" rx="8" fill="#FFFFFF" stroke="#C9D2DD"/>
+  <text x="476" y="390" class="n">자료 조사</text><text x="556" y="390" class="f">데이터_출처_조사.md</text>
+  <text x="750" y="390" class="st" text-anchor="end" style="fill:#1B7A43">✓ 완료</text>
+</g>
+
+<rect class="hl" x="36" y="60" width="308" height="50" rx="10" fill="none" stroke="#E0A100" stroke-width="4"/>
+
+<path d="M60 250 V420" stroke="#B8501F" stroke-width="4"/>
+<path d="M50 414 L60 432 L70 414 z" fill="#B8501F"/>
+<text x="78" y="300" class="note" style="fill:#B8501F;font-weight:700">① 거꾸로 생각</text>
+<text x="78" y="322" class="note">"이걸 보여주려면</text>
+<text x="78" y="342" class="note">뭐가 필요하지?"</text>
+
+<path d="M560 200 V70" stroke="#1B7A43" stroke-width="4"/>
+<path d="M550 76 L560 58 L570 76 z" fill="#1B7A43"/>
+<text x="578" y="104" class="note" style="fill:#1B7A43;font-weight:700">② 아래부터 만들기</text>
+<text x="578" y="126" class="note">아래 4칸은 완성</text>
+<text x="578" y="148" class="note">화면 뼈대도 완성</text>
+<text x="578" y="170" class="note">남은 것: 실험 실행</text>
+</svg>

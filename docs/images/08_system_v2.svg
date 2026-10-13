@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" width="800" height="560" role="img" aria-label="새 설계 전체 구조: 오프라인 준비, 온라인 다섯 단계, 바깥의 화면과 평가">
+<style>
+text { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; fill: #18202B; }
+.mono { font-family: Consolas, 'Courier New', monospace; }
+.t { font-size: 22px; font-weight: 700; }
+.band { font-size: 14px; font-weight: 700; }
+.chip { font-size: 12px; }
+.n { font-size: 14px; font-weight: 700; }
+.k { font-size: 12px; }
+.o { font-size: 11px; fill: #4A5565; }
+.s { font-size: 12.5px; fill: #4A5565; }
+.w { fill: #FFFFFF; }
+</style>
+<rect width="800" height="560" rx="16" fill="#F7F8FA"/>
+<text x="28" y="38" class="t">새 설계 한눈에 보기</text>
+
+<!-- 오프라인 -->
+<rect x="24" y="54" width="752" height="94" rx="12" fill="#FFF4DB"/>
+<text x="40" y="76" class="band" style="fill:#8A4B12">오프라인 · 한 번만 (2번) — 새 주방 안내서 만들기</text>
+<g>
+  <rect x="40" y="90" width="150" height="40" rx="8" fill="#FFFFFF" stroke="#E8C98A"/><text x="115" y="115" class="chip" text-anchor="middle">가이드 · 릴리스 노트</text>
+  <rect x="206" y="90" width="150" height="40" rx="8" fill="#FFFFFF" stroke="#E8C98A"/><text x="281" y="108" class="chip" text-anchor="middle">청킹</text><text x="281" y="123" class="o" text-anchor="middle">섹션 · before/after</text>
+  <rect x="372" y="90" width="80" height="40" rx="8" fill="#FFFFFF" stroke="#E8C98A"/><text x="412" y="115" class="chip" text-anchor="middle">임베딩</text>
+  <rect x="468" y="90" width="106" height="40" rx="8" fill="#8A4B12"/><text x="521" y="115" class="chip w" text-anchor="middle" style="font-weight:700">Qdrant</text>
+  <rect x="590" y="90" width="174" height="40" rx="8" fill="#8A4B12"/><text x="677" y="108" class="chip w mono" text-anchor="middle">symbol_map.json</text><text x="677" y="123" class="o" text-anchor="middle" style="fill:#F3E2C6">구 → 신 심볼, 근거 ID</text>
+</g>
+<g fill="#C9A86A"><path d="M193 104 l10 6 l-10 6 z"/><path d="M359 104 l10 6 l-10 6 z"/><path d="M455 104 l10 6 l-10 6 z"/></g>
+
+
+<!-- 온라인 -->
+<rect x="24" y="162" width="752" height="248" rx="12" fill="#FFFFFF" stroke="#C9D2DD"/>
+<text x="40" y="184" class="band" style="fill:#2457C5">온라인 · 요청마다</text>
+<path d="M260 150 V206" stroke="#8A4B12" stroke-width="2" stroke-dasharray="5 4"/>
+<path d="M254 200 L260 210 L266 200 z" fill="#8A4B12"/>
+<text x="268" y="200" class="o" style="fill:#8A4B12">근거 자료</text>
+<text x="760" y="184" class="s" text-anchor="end">연결 · 다시 갈지 판단 · API: 1번</text>
+
+<g>
+  <rect x="40" y="212" width="128" height="96" rx="10" fill="#F7F8FA" stroke="#C9D2DD"/>
+  <text x="104" y="232" class="o" text-anchor="middle">① 3번</text>
+  <text x="104" y="254" class="n mono" text-anchor="middle">analyzer</text>
+  <text x="104" y="276" class="k" text-anchor="middle">심볼 추출</text>
+  <text x="104" y="292" class="o" text-anchor="middle">(ast)</text>
+</g>
+<g>
+  <rect x="196" y="212" width="128" height="96" rx="10" fill="#F7F8FA" stroke="#C9D2DD"/>
+  <text x="260" y="232" class="o" text-anchor="middle">② 2번</text>
+  <text x="260" y="254" class="n mono" text-anchor="middle">retriever</text>
+  <text x="260" y="276" class="k" text-anchor="middle">symbol_map 조회</text>
+  <text x="260" y="292" class="k" text-anchor="middle">+ Qdrant 검색</text>
+</g>
+<g>
+  <rect x="352" y="212" width="128" height="96" rx="10" fill="#F7F8FA" stroke="#C9D2DD"/>
+  <text x="416" y="232" class="o" text-anchor="middle">③ 3번</text>
+  <text x="416" y="254" class="n mono" text-anchor="middle">rewriter</text>
+  <text x="416" y="276" class="k" text-anchor="middle">근거 ID를 붙여</text>
+  <text x="416" y="292" class="k" text-anchor="middle">고쳐 쓰기</text>
+</g>
+<g>
+  <rect x="508" y="212" width="128" height="96" rx="10" fill="#2457C5"/>
+  <text x="572" y="232" class="o w" text-anchor="middle" style="fill:#DCE6FA">④ 3번</text>
+  <text x="572" y="254" class="n mono w" text-anchor="middle">verifier</text>
+  <text x="572" y="276" class="k w" text-anchor="middle">(a) 근거 ID 확인</text>
+  <text x="572" y="292" class="k w" text-anchor="middle">(b) import · 속성</text>
+</g>
+<g>
+  <rect x="664" y="212" width="100" height="96" rx="10" fill="#F7F8FA" stroke="#C9D2DD"/>
+  <text x="714" y="232" class="o" text-anchor="middle">⑤ 3번</text>
+  <text x="714" y="254" class="n mono" text-anchor="middle">report</text>
+  <text x="714" y="276" class="k" text-anchor="middle">코드 + 변경표</text>
+  <text x="714" y="292" class="k" text-anchor="middle">+ 시도 횟수</text>
+</g>
+<g stroke="#8A94A3" stroke-width="2.5"><path d="M168 260 H190"/><path d="M324 260 H346"/><path d="M480 260 H502"/><path d="M636 260 H658"/></g>
+<g fill="#8A94A3"><path d="M188 254 L196 260 L188 266 z"/><path d="M344 254 L352 260 L344 266 z"/><path d="M500 254 L508 260 L500 266 z"/><path d="M656 254 L664 260 L656 266 z"/></g>
+
+<!-- 되돌아가는 길 -->
+<path d="M572 308 V356 H260 V316" stroke="#B8501F" stroke-width="2.5" stroke-dasharray="7 6" fill="none"/>
+<path d="M254 318 L260 308 L266 318 z" fill="#B8501F"/>
+<text x="416" y="378" class="s" text-anchor="middle" style="fill:#B8501F;font-weight:700">실패하면 에러 종류 · 대상을 피드백으로 ②에 돌려보냄 (최대 2~3번)</text>
+
+<!-- 판정 표시 -->
+<g opacity="0">
+  <circle cx="626" cy="208" r="13" fill="#B42F2A"/><text x="626" y="213" text-anchor="middle" style="fill:#fff;font-size:15px;font-weight:700">✗</text>
+  <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.25;0.27;0.40;0.42;1" dur="9s" repeatCount="indefinite"/>
+</g>
+<g opacity="0">
+  <circle cx="626" cy="208" r="13" fill="#1B7A43"/><text x="626" y="213" text-anchor="middle" style="fill:#fff;font-size:15px;font-weight:700">✓</text>
+  <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.74;0.76;0.97;1" dur="9s" repeatCount="indefinite"/>
+</g>
+<g>
+  <rect x="-20" y="-12" width="40" height="24" rx="5" fill="#FFFFFF" stroke="#18202B" stroke-width="2"/>
+  <path d="M-12 -4 H12 M-12 2 H12 M-12 8 H4" stroke="#18202B" stroke-width="1.5"/>
+  <animateMotion dur="9s" repeatCount="indefinite" path="M104 330 H572 V356 H260 V330 H572 H714" keyPoints="0;1;1" keyTimes="0;0.85;1" calcMode="linear"/>
+</g>
+
+<!-- 바깥: 화면과 평가 -->
+<rect x="24" y="430" width="368" height="110" rx="12" fill="#E4ECFB"/>
+<text x="44" y="458" class="band" style="fill:#2457C5">화면 · 4번 (손님 테이블)</text>
+<text x="44" y="484" class="s">한 건씩: 코드를 넣으면</text>
+<text x="44" y="504" class="s">결과 · 바뀐 줄 · 근거 링크 · 검증 배지를 보여 줌</text>
+<text x="44" y="526" class="o mono">app/streamlit_app.py</text>
+<rect x="408" y="430" width="368" height="110" rx="12" fill="#E1F3E8"/>
+<text x="428" y="458" class="band" style="fill:#1B7A43">평가 · 4번 (요리 대회 심사위원)</text>
+<text x="428" y="484" class="s">30문제를 한꺼번에 돌려</text>
+<text x="428" y="504" class="s">일반 AI와 성공률 · 근거 일치율 비교</text>
+<text x="428" y="526" class="o mono">eval/</text>
+<g stroke="#4A5565" stroke-width="2"><path d="M208 428 V414"/><path d="M592 428 V414"/></g>
+<g fill="#4A5565"><path d="M202 418 L208 410 L214 418 z"/><path d="M586 418 L592 410 L598 418 z"/></g>
+<text x="218" y="424" class="o">API로 부르기</text><text x="602" y="424" class="o">API로 부르기</text>
+</svg>

@@ -43,5 +43,5 @@
 <path d="M462 290 l12 12 l24 -26" stroke="#1B7A43" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="stroke-dasharray: 60"/>
 <text x="512" y="285" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 18px;font-weight: 700;fill:#1B7A43">도구 있음 → 통과</text>
 <text x="512" y="308" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 14px;fill: #4A5565">없으면 에러를 힌트로</text>
-<text x="512" y="326" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 14px;fill: #4A5565">다시 찾아서 고침 (최대 3번)</text>
+<text x="512" y="326" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 14px;fill: #4A5565">다시 찾아서 고침 (최대 2~3번)</text>
 </svg>

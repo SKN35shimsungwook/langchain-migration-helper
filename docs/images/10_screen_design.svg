@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="800" height="520" role="img" aria-label="화면 설계도: 변환하기 탭과 성능 비교 탭">
+<style>
+text { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; fill: #18202B; }
+.mono { font-family: Consolas, 'Courier New', monospace; }
+.t { font-size: 22px; font-weight: 700; }
+.h { font-size: 14px; font-weight: 700; }
+.s { font-size: 12px; fill: #4A5565; }
+.c { font-size: 11px; }
+.num { font-size: 13px; font-weight: 700; fill: #FFFFFF; }
+@keyframes pop { 0%,60%,100% { transform: scale(1); } 70% { transform: scale(1.12); } }
+@keyframes dots { 0%,100% { opacity: .25; } 50% { opacity: 1; } }
+.pop { transform-box: fill-box; transform-origin: center; animation: pop 3s ease-in-out infinite; }
+.d1 { animation: dots 1.5s ease-in-out infinite; }
+.d2 { animation: dots 1.5s ease-in-out .3s infinite; }
+.d3 { animation: dots 1.5s ease-in-out .6s infinite; }
+@media (prefers-reduced-motion: reduce) { .pop,.d1,.d2,.d3 { animation: none; } }
+</style>
+<rect width="800" height="520" rx="16" fill="#F7F8FA"/>
+<text x="28" y="38" class="t">화면 설계도 (4번)</text>
+
+<!-- 브라우저 틀 -->
+<rect x="24" y="54" width="520" height="446" rx="10" fill="#FFFFFF" stroke="#C9D2DD"/>
+<rect x="24" y="54" width="520" height="26" rx="10" fill="#ECEFF3"/>
+<circle cx="40" cy="67" r="4" fill="#C9D2DD"/><circle cx="54" cy="67" r="4" fill="#C9D2DD"/><circle cx="68" cy="67" r="4" fill="#C9D2DD"/>
+<text x="40" y="104" class="h">LangChain 마이그레이션 도우미</text>
+<text x="40" y="128" class="c" style="fill:#2457C5;font-weight:700">변환하기</text><path d="M40 133 H92" stroke="#2457C5" stroke-width="2"/>
+<text x="108" y="128" class="c" style="fill:#8A94A3">성능 비교</text>
+
+<!-- ① 입력 -->
+<rect x="40" y="144" width="488" height="22" rx="4" fill="#F7F8FA" stroke="#DCE1E7"/><text x="48" y="159" class="c">예제 불러오기 ▾  hard_01 · 어려움</text>
+<rect x="40" y="172" width="488" height="58" rx="4" fill="#17202C"/>
+<text x="50" y="190" class="c mono" style="fill:#E6EBF1">from langchain.chat_models import ChatOpenAI</text>
+<text x="50" y="206" class="c mono" style="fill:#E6EBF1">from langchain.agents import initialize_agent</text>
+<rect x="40" y="236" width="74" height="22" rx="4" fill="#E0524A"/><text x="77" y="251" class="c" text-anchor="middle" style="fill:#fff;font-weight:700">변환하기</text>
+
+<!-- ② 진행 기록 -->
+<rect x="40" y="266" width="488" height="40" rx="4" fill="#F7F8FA" stroke="#DCE1E7"/>
+<text x="48" y="282" class="c">① 심볼 → ② 검색 → ③ 고쳐 쓰기 → ④ 1회차 ✗ → ②로 → ④ 2회차 ✓ → ⑤</text>
+<circle class="d1" cx="480" cy="296" r="3" fill="#2457C5"/><circle class="d2" cx="492" cy="296" r="3" fill="#2457C5"/><circle class="d3" cx="504" cy="296" r="3" fill="#2457C5"/>
+
+<!-- ③ 배지 -->
+<g class="pop"><rect x="40" y="314" width="148" height="22" rx="11" fill="#E1F3E8"/><text x="114" y="329" class="c" text-anchor="middle" style="fill:#1B7A43;font-weight:700">✓ 검증 통과 · 2회 시도</text></g>
+<rect x="196" y="314" width="110" height="22" rx="11" fill="#E4ECFB"/><text x="251" y="329" class="c" text-anchor="middle" style="fill:#2457C5;font-weight:700">근거 확인 2/2</text>
+
+<!-- ④ 전후 비교 -->
+<rect x="40" y="344" width="240" height="60" rx="4" fill="#FBEADF"/><text x="48" y="360" class="c" style="font-weight:700">변경 전</text>
+<text x="48" y="378" class="c mono">- langchain.chat_models</text><text x="48" y="394" class="c mono">- initialize_agent</text>
+<rect x="288" y="344" width="240" height="60" rx="4" fill="#E4ECFB"/><text x="296" y="360" class="c" style="font-weight:700">변경 후</text>
+<text x="296" y="378" class="c mono">+ langchain_openai</text><text x="296" y="394" class="c mono">+ create_agent</text>
+
+<!-- ⑤ 변경표 -->
+<rect x="40" y="412" width="488" height="74" rx="4" fill="#FFFFFF" stroke="#DCE1E7"/>
+<text x="48" y="428" class="c" style="font-weight:700">구 → 신 · 이유 · 근거 문서 · 근거 확인</text>
+<path d="M40 434 H528" stroke="#DCE1E7"/>
+<text x="48" y="452" class="c mono">chat_models → langchain_openai</text><text x="400" y="452" class="c" style="fill:#2457C5;text-decoration:underline">문서 열기</text><text x="490" y="452" class="c">☑</text>
+<text x="48" y="474" class="c mono">initialize_agent → create_agent</text><text x="400" y="474" class="c" style="fill:#2457C5;text-decoration:underline">문서 열기</text><text x="490" y="474" class="c">☑</text>
+
+<!-- 번호 표시 -->
+<g><circle cx="536" cy="200" r="11" fill="#E0A100"/><text x="536" y="205" class="num" text-anchor="middle">1</text></g>
+<g><circle cx="536" cy="286" r="11" fill="#E0A100"/><text x="536" y="291" class="num" text-anchor="middle">2</text></g>
+<g><circle cx="320" cy="325" r="11" fill="#E0A100"/><text x="320" y="330" class="num" text-anchor="middle">3</text></g>
+<g><circle cx="536" cy="374" r="11" fill="#E0A100"/><text x="536" y="379" class="num" text-anchor="middle">4</text></g>
+<g><circle cx="536" cy="449" r="11" fill="#E0A100"/><text x="536" y="454" class="num" text-anchor="middle">5</text></g>
+
+<!-- 설명 -->
+<text x="566" y="104" class="h">변환하기 탭</text>
+<g class="s">
+  <text x="566" y="132">① 예제를 고르거나 코드 붙여넣기</text>
+  <text x="566" y="156">② 파이프라인 진행 기록</text>
+  <text x="580" y="174">(되돌아간 과정까지 보임)</text>
+  <text x="566" y="198">③ 검증 배지 · 근거 확인 배지</text>
+  <text x="566" y="222">④ 변경 전 · 후와 바뀐 줄</text>
+  <text x="566" y="246">⑤ 변경표와 근거 문서 링크</text>
+</g>
+<text x="566" y="292" class="h">성능 비교 탭</text>
+<rect x="566" y="304" width="210" height="120" rx="8" fill="#FFFFFF" stroke="#C9D2DD"/>
+<rect x="590" y="378" width="26" height="34" fill="#B8501F"/><rect x="622" y="338" width="26" height="74" fill="#2457C5"/>
+<rect x="666" y="390" width="26" height="22" fill="#B8501F"/><rect x="698" y="350" width="26" height="62" fill="#2457C5"/>
+<text x="576" y="326" class="c">일반 AI vs 우리 (예시)</text>
+<text x="566" y="446" class="s">eval/charts 의 그래프 3장과</text>
+<text x="566" y="464" class="s">요약표를 그대로 보여 줌</text>
+<text x="566" y="490" class="s mono">app/streamlit_app.py</text>
+</svg>

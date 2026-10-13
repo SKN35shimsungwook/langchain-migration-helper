@@ -34,7 +34,7 @@ text { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans
 <rect x="200" y="226" width="160" height="100" rx="12" fill="#E4ECFB"/>
 <text x="280" y="264" class="h" text-anchor="middle" style="fill:#2457C5">우리 프로그램</text>
 <text x="280" y="288" class="s" text-anchor="middle">안내서 + 확인 + 재시도</text>
-<text x="280" y="306" class="s" text-anchor="middle">1번 팀원이 실행</text>
+<text x="280" y="306" class="s" text-anchor="middle">파이프라인으로 실행</text>
 
 <!-- 채점 로봇 -->
 <rect x="420" y="146" width="150" height="112" rx="12" fill="#FFFFFF" stroke="#18202B" stroke-width="2"/>
