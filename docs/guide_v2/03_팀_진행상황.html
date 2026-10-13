@@ -16,7 +16,7 @@
     <li><a href="#s3">3 팀 대화 정리</a></li>
     <li><a href="#s4">4 내 역할</a></li>
     <li><a href="#s5">5 오늘 물어본 것 정리</a></li>
-    <li><a href="#s6">6 13:40 회의 안건</a></li>
+    <li><a href="#s6">6 13:40 회의에서 말할 것</a></li>
     <li><a href="#s7">7 할 일 순서</a></li>
     <li><a href="#s8">8 퀴즈</a></li>
     <li><a href="#s9">9 체크리스트</a></li>
@@ -33,7 +33,7 @@
   <div class="box remember">
     <p class="label">이것 세 줄만 기억해도 됩니다</p>
     <ol>
-<li>팀 저장소는 아직 <strong>뼈대만 있는 단계</strong>이고, 4번 쪽(평가 도구, 화면, 합의안)은 개인 저장소에 <strong>대부분 만들어져 있습니다.</strong></li>
+<li>팀 저장소는 아직 <strong>뼈대만 있는 단계</strong>입니다. 이 개인 저장소의 4번 코드 · 합의안은 <strong>프로젝트를 이해하려고 혼자 연습한 초안</strong>이고, 팀 저장소에서는 1 · 2번 다음에 <strong>처음부터 새로</strong> 만듭니다 (<a href="05_처음부터_다시_보기.md">05 처음부터 다시 보기</a>).</li>
 <li>팀 대화에서 정한 <strong>"버전을 골라서 돌리는 챗봇"</strong>과 팀 코드(<code>MigrateState</code>, 함수 호출)에 맞춰 <strong>화면과 합의안 3종을 1.1로 고쳤습니다.</strong></li>
 <li>팀 저장소에는 <strong>4번이 직접, 회의에서 확인받은 뒤에</strong> 올립니다. 이 저장소의 작업은 팀 저장소를 건드리지 않습니다.</li>
 </ol>
@@ -413,15 +413,13 @@ git branch          # * &lt;4번 브랜치&gt; 가 보이면 됨
 </section>
 <section class="ch" id="s6">
   <p class="chno">6장</p>
-  <h2>13:40 회의 안건 (말할 순서)</h2>
+  <h2>13:40 회의에서 말할 것</h2>
+<div class="box tip"><p><strong>바뀜 (2026-10-13)</strong>: 처음에는 "평가 도구랑 화면 뼈대는 거의 만들어 뒀어요"로 시작하려 했지만, 팀 순서(1 · 2번 다음 4번)를 무시하는 것처럼 들려서 <strong>쓰지 않습니다.</strong> 대본과 질문은 <a href="05_처음부터_다시_보기.md">05 처음부터 다시 보기</a> 5장을 봅니다.</p></div>
 <ol>
-<li>"평가 도구랑 화면 뼈대는 거의 만들어 뒀어요." → 바로 쓸 수 있는 것부터</li>
-<li><strong>3번에게</strong>: "verifier의 import · 속성 검사는 <code>verify.py</code>를 그대로 쓰시면 돼요. 테스트도 끝났어요."</li>
-<li><strong>report 노드</strong>: "화면에 보여 줄 모양을 제가 정했으니 제가 맡아도 될까요?"</li>
-<li><strong>1번에게</strong>: "화면에서 그래프를 <code>run_migration(code, target_version)</code> 함수 하나로 부르면 될까요?" / "제 파일은 <code>app.py</code>, <code>src/ui/</code>, <code>eval/</code>, <code>docs/</code>에 넣어도 될까요?"</li>
-<li><strong>목표 버전</strong>: "일단 1.x 하나로 시작해도 될까요?"</li>
-<li><strong>2번에게</strong>: "symbol_map은 <code>MigrateState</code>(old, new, evidence_id, kind)와 이어지게 해 뒀어요. 근거 ID 규칙만 같이 정해요." / 벡터 DB 용량</li>
-<li><strong>다 같이</strong>: 비교 모델, 최대 시도(2 또는 3회), 병합 담당</li>
+<li>"1 · 2번 작업 끝나면 이어서 화면 연결이랑 비교 실험 하겠습니다."</li>
+<li>"그동안은 챗봇 없이 되는 것부터: 평가 규칙, 시험용 옛날 코드 30개, 일반 AI 실험."</li>
+<li><strong>같이 정할 것</strong>: 비교 모델, 다시 시도 횟수(2 또는 3회)</li>
+<li><strong>질문으로</strong>: 화면이 챗봇을 부르는 방식(1번), 근거 링크 저장 여부(2번), 검증 범위와 report 담당(3번)</li>
 </ol>
 </section>
 <section class="ch" id="s7">
@@ -448,18 +446,18 @@ git branch          # * &lt;4번 브랜치&gt; 가 보이면 됨
 </tr>
 <tr>
 <td>3</td>
-<td>답을 받으면 합의안 3종을 "확정"으로</td>
+<td>팀이 정한 내용에 맞춰 4번 1단계(평가 규칙 · 시험지 · 일반 AI 실험) 시작</td>
 <td>회의 후</td>
 </tr>
 <tr>
 <td>4</td>
-<td><code>for_team_repo/</code>를 4번 브랜치에 덮어 복사하고 <strong>직접</strong> dev로 PR</td>
-<td>1번 확인 후</td>
+<td>1 · 2번 결과가 나오면 팀 저장소에서 화면 · 평가를 <strong>새로</strong> 만들기 (개인 초안은 참고만)</td>
+<td>1 · 2번 다음</td>
 </tr>
 <tr>
 <td>5</td>
-<td>3번에게 <code>verify.py</code> 사용법 설명</td>
-<td>회의 후</td>
+<td>3번과 검증 범위 · 채점 기준 맞추기 (질문으로)</td>
+<td>3번 작업 중</td>
 </tr>
 <tr>
 <td>6</td>
@@ -506,13 +504,13 @@ window.GUIDE = {
   checks: [
     ["팀 저장소 폴더를 바탕화면으로 옮기기", "Move-Item .\\eq-test\\SKN35-3rd-4Team ."],
     ["uv sync 실행하고 git branch로 내 브랜치 확인", "한 줄씩 실행"],
-    ["13:40 회의에서 안건 7개 말하기", "6장"],
+    ["13:40 회의에서 05 문서 대본으로 말하기", "6장"],
     ["report 노드 담당 정하기", "3번 또는 4번"],
-    ["화면 호출 방식(함수) · 목표 버전(1.x) 확인받기", "1번"],
-    ["3번에게 verify.py 넘기기", "출력 모양 합의안 함께"],
+    ["화면이 챗봇을 부르는 방식 물어보기", "1번에게 질문으로"],
+    ["3번과 검증 범위 맞추기", "질문으로"],
     ["2번과 근거 ID 규칙 · 벡터 DB 공유 방법 정하기", "symbol_map 합의안"],
     ["비교 모델, 최대 시도 횟수 정하기", "EVAL_RULES 9장"],
-    ["1번 확인 후 for_team_repo/ 를 내 브랜치에 복사하고 직접 PR", "바뀌는 기존 파일은 app.py 하나"]
+    ["1·2번 결과가 나오면 팀 저장소에서 화면·평가 새로 만들기", "개인 초안은 참고만"]
   ]
 };
 </script>
