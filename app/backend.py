@@ -3,8 +3,9 @@
 백엔드(1번 API)가 준비되기 전에는 테스트셋으로 만든 가짜 응답(mock)을 돌려준다.
 API 주소를 환경 변수 MIGRATION_API_URL 에 넣으면 실제 백엔드를 부른다.
 
-report 출력 모양 (3번 report 노드와 합의할 형식) — docs/역할분담표.md 4장
+report 출력 모양 (3번 report 노드와 합의한 형식) — docs/출력모양_합의안.md
 {
+  "contract_version": "1.0",
   "original_code": "...",
   "migrated_code": "...",
   "changes": [
@@ -14,11 +15,11 @@ report 출력 모양 (3번 report 노드와 합의할 형식) — docs/역할분
   "verification": {"success": true, "fail_stage": null, "error": null, "checked_attributes": []},
   "attempts": 2,
   "attempt_log": [
-    {"attempt": 1, "fail_stage": "import", "error_type": "ModuleNotFoundError", "target": "langchain.chains"},
-    {"attempt": 2, "fail_stage": null, "error_type": null, "target": null}
-  ],
-  "mock": true
+    {"attempt": 1, "fail_stage": "import", "error_type": "ModuleNotFoundError", "target": "langchain.chains", "message": "..."},
+    {"attempt": 2, "fail_stage": null, "error_type": null, "target": null, "message": null}
+  ]
 }
+가짜 응답에는 "mock": true 가 추가로 붙는다.
 """
 
 import ast
@@ -58,7 +59,7 @@ def _mock(code: str, testset: list[dict]) -> dict:
     """테스트셋에 있는 코드면 정답 방향 import 로 바꾼 가짜 결과를 만든다."""
     item = next((t for t in testset if t["old_code"].strip() == code.strip()), None)
     if item is None:
-        return {"original_code": code, "migrated_code": code, "changes": [],
+        return {"contract_version": "1.0", "original_code": code, "migrated_code": code, "changes": [],
                 "verification": {"success": False, "fail_stage": "mock",
                                  "error": "가짜 응답은 테스트셋 예제만 변환합니다. 실제 백엔드가 연결되면 모든 코드를 변환합니다.",
                                  "checked_attributes": []},
@@ -77,11 +78,12 @@ def _mock(code: str, testset: list[dict]) -> dict:
 
     # 난이도가 높을수록 한 번 더 고친 것처럼 보여 준다 (화면 확인용)
     if item["difficulty"] == "easy":
-        log = [{"attempt": 1, "fail_stage": None, "error_type": None, "target": None}]
+        log = [{"attempt": 1, "fail_stage": None, "error_type": None, "target": None, "message": None}]
     else:
         first = old_imports[-1] if old_imports else ""
-        log = [{"attempt": 1, "fail_stage": "import", "error_type": "ModuleNotFoundError", "target": first},
-               {"attempt": 2, "fail_stage": None, "error_type": None, "target": None}]
-    return {"original_code": item["old_code"], "migrated_code": migrated, "changes": changes,
+        log = [{"attempt": 1, "fail_stage": "import", "error_type": "ModuleNotFoundError", "target": first,
+                "message": f"{first} 에서 가져올 수 없음"},
+               {"attempt": 2, "fail_stage": None, "error_type": None, "target": None, "message": None}]
+    return {"contract_version": "1.0", "original_code": item["old_code"], "migrated_code": migrated, "changes": changes,
             "verification": {"success": True, "fail_stage": None, "error": None, "checked_attributes": []},
             "attempts": len(log), "attempt_log": log, "mock": True, "example_id": item["id"]}
