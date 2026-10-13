@@ -4,7 +4,7 @@
 판정은 baseline(A)과 같은 verify.py 로 다시 한다 (EVAL_RULES 5장 '같은 판정기').
 
 실행:
-    set MIGRATION_API_URL=http://localhost:8000/migrate     (1번 API 주소)
+    $env:MIGRATION_API_URL="http://localhost:8000"     (1번 API 주소, 규칙은 docs/API_합의안.md)
     python run_system.py --py verify-env/Scripts/python.exe --model [모델명]
     python run_system.py --py verify-env/Scripts/python.exe --mock      # API 없이 흐름만 확인 (화면용 가짜 응답 사용)
 """
@@ -20,7 +20,7 @@ from verify import judge
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / "app"))
-from backend import _mock, migrate  # noqa: E402
+from backend import ApiError, _mock, api_info, migrate  # noqa: E402
 
 
 def to_result(item: dict, report: dict, py: str, model: str) -> dict:
@@ -60,12 +60,29 @@ def main():
     results = json.loads(out.read_text(encoding="utf-8")) if out.exists() else []
     done = {r["id"] for r in results}
 
+    if not a.mock:
+        try:
+            info = api_info()
+        except ApiError as e:
+            sys.exit(f"API에 연결할 수 없습니다. 1번 API가 켜져 있는지, 주소가 맞는지 확인하세요.\n  ({e})")
+        if info is None:
+            sys.exit("MIGRATION_API_URL 이 없습니다. API 주소를 넣거나 --mock 으로 실행하세요.")
+        print(f"API 정보: 모델 {info.get('model')} · 최대 {info.get('max_attempts')}회 · 샌드박스 {info.get('sandbox')}")
+        if info.get("model") != a.model:
+            print(f"[주의] --model({a.model})과 API 모델({info.get('model')})이 다릅니다. A와 같은 모델인지 확인하세요 (EVAL_RULES 5장).")
+
     for i, item in enumerate(items, 1):
         if item["id"] in done:
             continue
         print(f"[{i}/{len(items)}] {item['id']} ...", end=" ", flush=True)
-        report = _mock(item["old_code"], items) if a.mock else migrate(item["old_code"], items)
-        r = to_result(item, report, a.py, tag)
+        try:
+            report = _mock(item["old_code"], items) if a.mock else migrate(item["old_code"], items)
+            r = to_result(item, report, a.py, tag)
+        except ApiError as e:
+            r = {"id": item["id"], "difficulty": item["difficulty"], "system": "B", "model": tag,
+                 "success": False, "fail_stage": "api", "error": str(e), "attempts": 0,
+                 "first_try_success": False, "evidence": {"total": 0, "valid": 0}, "attempt_log": [],
+                 "contract_problems": [], "migrated_code": ""}
         results.append(r)
         out.write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
         note = f" · 형식 문제 {len(r['contract_problems'])}개" if r["contract_problems"] else ""

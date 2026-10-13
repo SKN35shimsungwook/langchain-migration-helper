@@ -1,7 +1,8 @@
 """화면이 파이프라인을 부르는 곳.
 
 백엔드(1번 API)가 준비되기 전에는 테스트셋으로 만든 가짜 응답(mock)을 돌려준다.
-API 주소를 환경 변수 MIGRATION_API_URL 에 넣으면 실제 백엔드를 부른다.
+API 주소(예: http://localhost:8000)를 환경 변수 MIGRATION_API_URL 에 넣으면
+POST {주소}/migrate 로 실제 백엔드를 부른다. 호출 규칙은 docs/API_합의안.md.
 
 report 출력 모양 (3번 report 노드와 합의한 형식) — docs/출력모양_합의안.md
 {
@@ -25,6 +26,7 @@ report 출력 모양 (3번 report 노드와 합의한 형식) — docs/출력모
 import ast
 import json
 import os
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -37,13 +39,43 @@ def load_testset() -> list[dict]:
     return json.loads(TESTSET.read_text(encoding="utf-8"))
 
 
-def migrate(code: str, testset: list[dict]) -> dict:
-    url = os.environ.get("MIGRATION_API_URL")
-    if url:
-        req = urllib.request.Request(url, data=json.dumps({"code": code}).encode("utf-8"),
-                                     headers={"Content-Type": "application/json"})
-        with urllib.request.urlopen(req, timeout=120) as resp:
+class ApiError(Exception):
+    """API가 에러를 돌려주거나 연결이 안 될 때 (docs/API_합의안.md 4장)."""
+
+
+def api_base() -> str | None:
+    """1번 API 주소 (예: http://localhost:8000). 없으면 가짜 응답을 쓴다."""
+    url = os.environ.get("MIGRATION_API_URL", "").strip().rstrip("/")
+    return url or None
+
+
+def _call(method: str, path: str, body: dict | None = None, timeout: float = 10) -> dict:
+    data = json.dumps(body, ensure_ascii=False).encode("utf-8") if body is not None else None
+    req = urllib.request.Request(api_base() + path, data=data, method=method,
+                                 headers={"Content-Type": "application/json"})
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
             return json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        try:
+            err = json.loads(e.read().decode("utf-8"))["error"]
+            raise ApiError(f"{e.code} {err['code']}: {err['message']}") from None
+        except (ValueError, KeyError, TypeError):
+            raise ApiError(f"{e.code} 에러 (응답 모양이 합의안과 다름)") from None
+    except (urllib.error.URLError, TimeoutError) as e:
+        raise ApiError(f"API에 연결할 수 없음: {getattr(e, 'reason', e)}") from None
+
+
+def api_info() -> dict | None:
+    """GET /info — 모델, 최대 시도, 샌드박스 버전. 가짜 응답 모드면 None."""
+    return _call("GET", "/info") if api_base() else None
+
+
+def migrate(code: str, testset: list[dict]) -> dict:
+    """POST /migrate — 응답은 docs/출력모양_합의안.md 의 report."""
+    if api_base():
+        timeout = float(os.environ.get("MIGRATION_API_TIMEOUT", "180"))
+        return _call("POST", "/migrate", {"code": code}, timeout=timeout)
     return _mock(code, testset)
 
 

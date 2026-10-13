@@ -14,7 +14,7 @@ from pathlib import Path
 
 import streamlit as st
 
-from backend import load_testset, migrate
+from backend import ApiError, api_base, api_info, load_testset, migrate
 
 ROOT = Path(__file__).resolve().parent.parent
 CHARTS = ROOT / "eval" / "charts"
@@ -33,6 +33,22 @@ examples = testset()
 st.title("LangChain 마이그레이션 도우미")
 st.caption("구버전 LangChain 코드를 최신 버전으로 바꾸고, 문서 근거와 실행 근거로 확인합니다.")
 
+
+@st.cache_data(ttl=60)
+def backend_status() -> tuple[str, str]:
+    """(배지 글자, 색) — GET /info 로 연결 상태 확인."""
+    if not api_base():
+        return "가짜 응답 모드", "gray"
+    try:
+        info = api_info()
+        return f"API 연결됨 · {info.get('model', '?')} · 최대 {info.get('max_attempts', '?')}회", "green"
+    except ApiError as e:
+        return f"API 연결 안 됨 ({e})", "red"
+
+
+label, color = backend_status()
+st.badge(label, icon=":material/lan:", color=color)
+
 convert_tab, compare_tab = st.tabs([":material/sync_alt: 변환하기", ":material/bar_chart: 성능 비교"])
 
 with convert_tab:
@@ -44,8 +60,12 @@ with convert_tab:
         submitted = st.form_submit_button("변환하기", icon=":material/play_arrow:", type="primary")
 
     if submitted and code.strip():
-        report = migrate(code, examples)
-        st.session_state["report"] = report
+        try:
+            with st.spinner("파이프라인 실행 중..."):
+                st.session_state["report"] = migrate(code, examples)
+        except ApiError as e:
+            st.session_state.pop("report", None)
+            st.error(f"변환 요청에 실패했습니다. {e}", icon=":material/cloud_off:")
 
     report = st.session_state.get("report")
     if report:
