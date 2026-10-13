@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" width="800" height="460" role="img" aria-label="4번이 팀원에게 건네는 것: 1번에게 화면 연결 규칙, 2번에게 symbol_map 검사기, 3번에게 채점 로봇과 report 모양, 모두에게 시험지와 발표">
+<rect width="800" height="460" rx="16" fill="#F7F8FA"/>
+<text x="28" y="40" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 22px;font-weight: 700">4번이 팀에 건네는 것</text>
+<text x="262" y="40" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 12px;fill: #4A5565">"받아서 바로 쓰는 것"부터 알린다</text>
+
+<!-- 가운데 4번 -->
+<g>
+  <rect x="300" y="178" width="200" height="104" rx="14" fill="#E4ECFB" stroke="#2457C5" stroke-width="2"/>
+</g>
+<circle cx="326" cy="206" r="15" fill="#2457C5"/><text x="326" y="211" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 15px;font-weight: 700;fill: #FFFFFF">4</text>
+<text x="350" y="211" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 16px;font-weight: 700;fill:#2457C5">화면 · 평가</text>
+<text x="318" y="238" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 12.5px">심사위원 도구 + 손님 테이블</text>
+<text x="318" y="260" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-family: Consolas, 'Courier New', monospace;font-size: 12.5px">for_team_repo/</text>
+
+<!-- 화살표 -->
+<path d="M300 200 L216 120" stroke="#2457C5" stroke-width="2" fill="none" style="stroke-dasharray: 6 6"/>
+<path d="M500 200 L584 120" stroke="#2457C5" stroke-width="2" fill="none" style="stroke-dasharray: 6 6"/>
+<path d="M300 262 L216 340" stroke="#2457C5" stroke-width="2" fill="none" style="stroke-dasharray: 6 6"/>
+<path d="M500 262 L584 340" stroke="#2457C5" stroke-width="2" fill="none" style="stroke-dasharray: 6 6"/>
+
+<!-- 1번 -->
+<rect x="24" y="62" width="250" height="118" rx="12" fill="#FFFFFF" stroke="#DCE1E7"/>
+<circle cx="50" cy="90" r="15" fill="#5B6B80"/><text x="50" y="95" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 15px;font-weight: 700;fill: #FFFFFF">1</text>
+<text x="74" y="95" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 16px;font-weight: 700">그래프 · 백엔드에게</text>
+<text x="40" y="122" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 12.5px">화면이 부를 함수 모양 하나</text>
+<text x="40" y="142" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-family: Consolas, 'Courier New', monospace;font-size: 12.5px;fill:#2457C5">run_migration(code, version)</text>
+<text x="40" y="164" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 12px;fill: #4A5565">→ 서버 없이 함수 하나만 만들면 됨</text>
+
+<!-- 3번 -->
+<rect x="526" y="62" width="250" height="118" rx="12" fill="#FFFFFF" stroke="#DCE1E7"/>
+<circle cx="552" cy="90" r="15" fill="#5B6B80"/><text x="552" y="95" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 15px;font-weight: 700;fill: #FFFFFF">3</text>
+<text x="576" y="95" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 16px;font-weight: 700">변환 · 검증에게</text>
+<text x="542" y="122" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 12.5px">채점 로봇 <tspan style="font-family: Consolas, 'Courier New', monospace;fill:#2457C5">verify.py</tspan></text>
+<text x="542" y="142" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 12.5px">report 모양 + 검사기</text>
+<text x="542" y="164" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 12px;fill: #4A5565">→ verifier (b) 핵심이 이미 완성</text>
+
+<!-- 2번 -->
+<rect x="24" y="300" width="250" height="118" rx="12" fill="#FFFFFF" stroke="#DCE1E7"/>
+<circle cx="50" cy="328" r="15" fill="#5B6B80"/><text x="50" y="333" text-anchor="middle" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 15px;font-weight: 700;fill: #FFFFFF">2</text>
+<text x="74" y="333" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 16px;font-weight: 700">데이터 · 검색에게</text>
+<text x="40" y="360" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 12.5px">symbol_map 모양 + 예시 10개</text>
+<text x="40" y="380" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 12.5px">검사기 <tspan style="font-family: Consolas, 'Courier New', monospace;fill:#2457C5">check_symbol_map.py</tspan></text>
+<text x="40" y="402" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 12px;fill: #4A5565">→ 시험지 심볼을 얼마나 덮는지 숫자로</text>
+
+<!-- 모두 -->
+<rect x="526" y="300" width="250" height="118" rx="12" fill="#FFFFFF" stroke="#DCE1E7"/>
+<text x="542" y="333" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 16px;font-weight: 700">팀 모두에게</text>
+<text x="542" y="360" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 12.5px">시험지 30장 · 평가 규칙</text>
+<text x="542" y="380" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 12.5px">발표 데모 화면 · 발표 자료</text>
+<text x="542" y="402" style="font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;fill: #18202B;font-size: 12px;fill: #4A5565">→ "됐다"를 숫자로 보여 줄 준비</text>
+</svg>

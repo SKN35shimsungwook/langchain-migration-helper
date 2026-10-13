@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" width="800" height="460" role="img" aria-label="4번이 팀원에게 건네는 것: 1번에게 화면 연결 규칙, 2번에게 symbol_map 검사기, 3번에게 채점 로봇과 report 모양, 모두에게 시험지와 발표">
+<style>
+text { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; fill: #18202B; }
+.mono { font-family: Consolas, 'Courier New', monospace; }
+.t { font-size: 22px; font-weight: 700; }
+.h { font-size: 16px; font-weight: 700; }
+.c { font-size: 12.5px; }
+.s { font-size: 12px; fill: #4A5565; }
+.num { font-size: 15px; font-weight: 700; fill: #FFFFFF; }
+@keyframes flow { from { stroke-dashoffset: 24; } to { stroke-dashoffset: 0; } }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .55; } }
+.flow { stroke-dasharray: 6 6; animation: flow 1.2s linear infinite; }
+.pulse { animation: pulse 2.6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .flow,.pulse { animation: none; } }
+</style>
+<rect width="800" height="460" rx="16" fill="#F7F8FA"/>
+<text x="28" y="40" class="t">4번이 팀에 건네는 것</text>
+<text x="262" y="40" class="s">"받아서 바로 쓰는 것"부터 알린다</text>
+
+<!-- 가운데 4번 -->
+<g class="pulse">
+  <rect x="300" y="178" width="200" height="104" rx="14" fill="#E4ECFB" stroke="#2457C5" stroke-width="2"/>
+</g>
+<circle cx="326" cy="206" r="15" fill="#2457C5"/><text x="326" y="211" class="num" text-anchor="middle">4</text>
+<text x="350" y="211" class="h" style="fill:#2457C5">화면 · 평가</text>
+<text x="318" y="238" class="c">심사위원 도구 + 손님 테이블</text>
+<text x="318" y="260" class="c mono">for_team_repo/</text>
+
+<!-- 화살표 -->
+<path class="flow" d="M300 200 L216 120" stroke="#2457C5" stroke-width="2" fill="none"/>
+<path class="flow" d="M500 200 L584 120" stroke="#2457C5" stroke-width="2" fill="none"/>
+<path class="flow" d="M300 262 L216 340" stroke="#2457C5" stroke-width="2" fill="none"/>
+<path class="flow" d="M500 262 L584 340" stroke="#2457C5" stroke-width="2" fill="none"/>
+
+<!-- 1번 -->
+<rect x="24" y="62" width="250" height="118" rx="12" fill="#FFFFFF" stroke="#DCE1E7"/>
+<circle cx="50" cy="90" r="15" fill="#5B6B80"/><text x="50" y="95" class="num" text-anchor="middle">1</text>
+<text x="74" y="95" class="h">그래프 · 백엔드에게</text>
+<text x="40" y="122" class="c">화면이 부를 함수 모양 하나</text>
+<text x="40" y="142" class="c mono" style="fill:#2457C5">run_migration(code, version)</text>
+<text x="40" y="164" class="s">→ 서버 없이 함수 하나만 만들면 됨</text>
+
+<!-- 3번 -->
+<rect x="526" y="62" width="250" height="118" rx="12" fill="#FFFFFF" stroke="#DCE1E7"/>
+<circle cx="552" cy="90" r="15" fill="#5B6B80"/><text x="552" y="95" class="num" text-anchor="middle">3</text>
+<text x="576" y="95" class="h">변환 · 검증에게</text>
+<text x="542" y="122" class="c">채점 로봇 <tspan class="mono" style="fill:#2457C5">verify.py</tspan></text>
+<text x="542" y="142" class="c">report 모양 + 검사기</text>
+<text x="542" y="164" class="s">→ verifier (b) 핵심이 이미 완성</text>
+
+<!-- 2번 -->
+<rect x="24" y="300" width="250" height="118" rx="12" fill="#FFFFFF" stroke="#DCE1E7"/>
+<circle cx="50" cy="328" r="15" fill="#5B6B80"/><text x="50" y="333" class="num" text-anchor="middle">2</text>
+<text x="74" y="333" class="h">데이터 · 검색에게</text>
+<text x="40" y="360" class="c">symbol_map 모양 + 예시 10개</text>
+<text x="40" y="380" class="c">검사기 <tspan class="mono" style="fill:#2457C5">check_symbol_map.py</tspan></text>
+<text x="40" y="402" class="s">→ 시험지 심볼을 얼마나 덮는지 숫자로</text>
+
+<!-- 모두 -->
+<rect x="526" y="300" width="250" height="118" rx="12" fill="#FFFFFF" stroke="#DCE1E7"/>
+<text x="542" y="333" class="h">팀 모두에게</text>
+<text x="542" y="360" class="c">시험지 30장 · 평가 규칙</text>
+<text x="542" y="380" class="c">발표 데모 화면 · 발표 자료</text>
+<text x="542" y="402" class="s">→ "됐다"를 숫자로 보여 줄 준비</text>
+</svg>
