@@ -1,15 +1,15 @@
 <section id="limits" data-transition="fade" style="background:#F6F5F1;color:#1B2433;font-family:'IBM Plex Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:56px">
 <div style="display:flex;flex-direction:column;gap:16px">
 <p style="font-size:24px;font-weight:600;color:#1F5FAE;letter-spacing:2px">한계와 다음 단계</p>
-<h2 style="font-size:64px;font-weight:700;line-height:1.15;color:#1B2433">import 성공이 곧 정답은 아닙니다</h2>
+<h2 style="font-size:64px;font-weight:700;line-height:1.15;color:#1B2433">통과가 곧 정답은 아닙니다</h2>
 </div>
 <table style="font-size:30px;color:#1B2433;background:#FFFFFF;border:1px solid #E1E0D9">
 <tr style="background:#ECEBE5"><th style="width:50%;text-align:left">한계</th><th style="width:50%;text-align:left">다음 단계</th></tr>
-<tr><td>import는 되지만 메서드나 인자가 틀릴 수 있음</td><td>가짜 LLM으로 실제 실행까지 테스트</td></tr>
+<tr><td>import와 속성 이름까지 확인하지만, 인자나 실행 결과는 확인 못 함</td><td>가짜 LLM으로 실제 실행까지 테스트</td></tr>
 <tr><td>테스트 30개, 팀이 직접 구축</td><td>공개 저장소의 실사용 코드로 확장</td></tr>
 <tr><td>구버전 환경 동작 확인은 생략</td><td>구버전 환경을 따로 만들어 교차 확인</td></tr>
 <tr><td>LangChain만 대상</td><td>pydantic, OpenAI SDK 등으로 확장</td></tr>
 </table>
 <p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#8A8F98">LangChain 마이그레이션 도우미 · 12</p>
-<aside>한계도 분명히 말씀드리겠습니다. 가장 큰 한계는 import 성공이 곧 정답은 아니라는 점입니다. import는 되지만 메서드 이름이나 인자가 틀린 경우는 지금 기준으로 잡지 못합니다. 다음 단계로는 실제 API 대신 가짜 LLM을 넣어서 코드 전체를 실행해 보는 테스트를 추가할 수 있습니다. 또 테스트셋을 실사용 코드로 늘리고, 다른 라이브러리로도 확장할 계획입니다.</aside>
+<aside>한계도 분명히 말씀드리겠습니다. 가장 큰 한계는 통과가 곧 정답은 아니라는 점입니다. 저희는 import와 함께 기능 이름이 진짜 있는지까지 확인하지만, 함수에 넣는 값이 틀리거나 실행 결과가 맞는지는 잡지 못합니다. 다음 단계로는 실제 API 대신 가짜 LLM을 넣어서 코드 전체를 실행해 보는 테스트를 추가할 수 있습니다. 또 테스트셋을 실사용 코드로 늘리고, 다른 라이브러리로도 확장할 계획입니다.</aside>
 </section>
