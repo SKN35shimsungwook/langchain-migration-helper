@@ -132,7 +132,9 @@ pip install -r app/requirements.txt
 streamlit run app/streamlit_app.py
 ```
 
-백엔드가 연결되기 전에는 테스트셋 예제로 만든 **가짜 응답**으로 동작합니다. 1번의 API 주소를 환경 변수 `MIGRATION_API_URL`에 넣으면 실제 파이프라인을 부릅니다. report 출력 모양은 [`app/backend.py`](app/backend.py) 맨 위에 있습니다.
+백엔드가 연결되기 전에는 테스트셋 예제로 만든 **가짜 응답**으로 동작합니다. 1번 API의 기본 주소(예: `http://localhost:8000`)를 환경 변수 `MIGRATION_API_URL`에 넣으면 `POST /migrate`로 실제 파이프라인을 부르고, 화면 위쪽에 연결 상태가 표시됩니다. 호출 규칙은 [API 합의안](docs/API_합의안.md), 응답 모양은 [출력 모양 합의안](docs/출력모양_합의안.md)에 있습니다.
+
+실제 API가 나오기 전에는 연습용 서버로 연결을 시험할 수 있습니다: `python docs/contracts/api_stub.py`
 
 ### 8-2. 챗봇 본체
 
@@ -181,6 +183,7 @@ langchain_migration/
     ├── images/                # 설명 그림 (움직이는 SVG, static/은 슬라이드용 정지 그림)
     ├── 역할분담표.md
     ├── 출력모양_합의안.md      # 3번 report 모양 (contracts/ 에 예시 JSON)
+    ├── API_합의안.md           # 1번 API 규칙 (contracts/api_stub.py 연습용 서버)
     ├── 작업기록.md
     ├── 데이터_출처_조사.md
     ├── guide/                 # 안내서 이전 버전 v1
@@ -196,6 +199,7 @@ langchain_migration/
 | **02 화면·평가 파트** (최신 v2) | 역설계, 평가, 화면, 따라 하기, 결과 읽기, 맞출 것, 발표 질문, 체크리스트 | [MD](docs/guide_v2/02_화면평가_파트.md) · [PDF](docs/guide_v2/02_화면평가_파트.pdf) · [웹](https://skn35shimsungwook.github.io/langchain-migration-helper/docs/guide_v2/02_화면평가_파트.html) |
 | **역할 분담표** | 네 역할, 1번과 3번의 경계, 서로 맞춰야 하는 것 | [MD](docs/역할분담표.md) |
 | **출력 모양 합의안** | 3번 report 모양 (화면과 평가가 함께 씀), 예시 JSON, 검사 방법 | [MD](docs/출력모양_합의안.md) |
+| **API 합의안** | 1번 API 주소 3개, 요청·응답, 에러 규칙, 연습용 서버 | [MD](docs/API_합의안.md) |
 | 평가 기준과 실험 규칙 | 성공 기준, 지표, 실험 조건, 결과 형식 | [MD](eval/EVAL_RULES.md) |
 | 작업 기록 | 무엇을 왜 했는지, 확인한 결과와 남은 일 | [MD](docs/작업기록.md) |
 | 데이터 출처 조사 | RAG 문서와 테스트 코드 출처 | [MD](docs/데이터_출처_조사.md) |

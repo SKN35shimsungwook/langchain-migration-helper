@@ -168,7 +168,7 @@ LangChain 1.x 최신 버전에서 동작하도록 코드를 변환해 주세요.
 }
 ```
 
-- `fail_stage`: 실패한 단계 (`syntax` / `import` / `attribute` / `invalid` / `timeout`)
+- `fail_stage`: 실패한 단계 (`syntax` / `import` / `attribute` / `invalid` / `timeout`, B에서 서버 문제로 응답을 못 받으면 `api`)
 - `error`: 마지막 에러 메시지 한 줄
 - `checked_attributes`: 2-b에서 확인한 속성 목록
 - `evidence` (B만): verifier (a) 결과. 변경 목록의 근거 ID 중 실제 검색 결과에 있던 개수
