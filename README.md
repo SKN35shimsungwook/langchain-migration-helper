@@ -5,7 +5,7 @@
 **문서 근거**(공식 마이그레이션 가이드 · 릴리스 노트 검색)와 **실행 근거**(최신 환경에서 import · 속성 검증)로 이중 검증합니다.
 검증에 실패하면 에러 종류와 대상을 피드백으로 다시 검색해서 고칩니다.
 
-**바로 가기**: [발표 자료](https://skn35shimsungwook.github.io/langchain-migration-helper/presentation/발표자료.html) · [쉬운 안내서](docs/guide_v2/01_프로젝트_한눈에.md) · [**팀 진행 상황**](docs/guide_v2/03_팀_진행상황.md) · [**처음부터 다시 보기**](docs/guide_v2/05_처음부터_다시_보기.md) · [**2번 데이터 분석**](docs/guide_v2/06_데이터_분석.md) · [역할 분담표](docs/역할분담표.md) · 팀 합의안([출력 모양](docs/출력모양_합의안.md) · [API](docs/API_합의안.md) · [symbol_map](docs/symbol_map_합의안.md)) · [평가 규칙](eval/EVAL_RULES.md) · [작업 기록](docs/작업기록.md) · [안내서 모음 웹페이지](https://skn35shimsungwook.github.io/langchain-migration-helper/)
+**바로 가기**: [**프로젝트 설명서 (가장 먼저)**](docs/guide_v2/07_프로젝트_설명서.md) · [발표 자료](https://skn35shimsungwook.github.io/langchain-migration-helper/presentation/발표자료.html) · [쉬운 안내서](docs/guide_v2/01_프로젝트_한눈에.md) · [**팀 진행 상황**](docs/guide_v2/03_팀_진행상황.md) · [**처음부터 다시 보기**](docs/guide_v2/05_처음부터_다시_보기.md) · [**2번 데이터 분석**](docs/guide_v2/06_데이터_분석.md) · [역할 분담표](docs/역할분담표.md) · 팀 합의안([출력 모양](docs/출력모양_합의안.md) · [API](docs/API_합의안.md) · [symbol_map](docs/symbol_map_합의안.md)) · [평가 규칙](eval/EVAL_RULES.md) · [작업 기록](docs/작업기록.md) · [안내서 모음 웹페이지](https://skn35shimsungwook.github.io/langchain-migration-helper/)
 
 | | |
 |---|---|
@@ -228,7 +228,7 @@ langchain_migration/
 │   └── make_charts.py         # 결과 그래프와 요약표
 ├── presentation/              # 발표 자료 (원본, 웹 버전, PDF)
 └── docs/
-    ├── guide_v2/              # 쉬운 안내서 최신: 01 한눈에, 02 화면·평가, 03 팀 진행 상황, 05 처음부터 다시 보기, 06 데이터 분석, 04(이전 버전) (MD · PDF · HTML)
+    ├── guide_v2/              # 쉬운 안내서 최신: 01 한눈에, 02 화면·평가, 03 팀 진행 상황, 05 처음부터 다시 보기, 06 데이터 분석, 07 프로젝트 설명서, 04(이전 버전) (MD · PDF · HTML)
     ├── images/                # 설명 그림 (움직이는 SVG, static/은 슬라이드용 정지 그림)
     ├── 역할분담표.md
     ├── 출력모양_합의안.md      # 3번 report 모양 (contracts/ 에 예시 JSON)
@@ -249,6 +249,7 @@ langchain_migration/
 | **01 프로젝트 한눈에** (최신 v2.1) | 주방 비유, 새 설계(기본 설계), 역할, 용어 사전 (팀 모두용) | [MD](docs/guide_v2/01_프로젝트_한눈에.md) · [PDF](docs/guide_v2/01_프로젝트_한눈에.pdf) · [웹](https://skn35shimsungwook.github.io/langchain-migration-helper/docs/guide_v2/01_프로젝트_한눈에.html) |
 | **02 화면·평가 파트** (최신 v2.1) | 역설계, 평가, 화면, 따라 하기, 결과 읽기, 맞출 것, 발표 질문, 체크리스트 | [MD](docs/guide_v2/02_화면평가_파트.md) · [PDF](docs/guide_v2/02_화면평가_파트.pdf) · [웹](https://skn35shimsungwook.github.io/langchain-migration-helper/docs/guide_v2/02_화면평가_파트.html) |
 | **03 팀 진행 상황** (최신) | 팀 저장소 상태, 팀 대화 정리(역할 번호), 내 역할, 오늘 질문, 회의 안건 | [MD](docs/guide_v2/03_팀_진행상황.md) · [PDF](docs/guide_v2/03_팀_진행상황.pdf) · [웹](https://skn35shimsungwook.github.io/langchain-migration-helper/docs/guide_v2/03_팀_진행상황.html) |
+| **07 프로젝트 설명서** (최신, 가장 먼저) | 팀 저장소(1번 폴더 구조 + 2번 데이터 · 검색기) 기준: 큰 그림, 예시로 따라가는 흐름, 실물 지도, 지금 평가, 3 · 4번 역할, 4번 역량, 당장 할 일, 용어 | [MD](docs/guide_v2/07_프로젝트_설명서.md) · [PDF](docs/guide_v2/07_프로젝트_설명서.pdf) · [웹](https://skn35shimsungwook.github.io/langchain-migration-helper/docs/guide_v2/07_프로젝트_설명서.html) |
 | **06 2번 데이터 분석** (최신) | 2번 브랜치 데이터(문서 297개, 대응표 9,155줄, 조각 11,903개, Chroma 벡터 DB)를 숫자로 분석, 4번 시험지와 대조, 질문 목록 | [MD](docs/guide_v2/06_데이터_분석.md) · [PDF](docs/guide_v2/06_데이터_분석.pdf) · [웹](https://skn35shimsungwook.github.io/langchain-migration-helper/docs/guide_v2/06_데이터_분석.html) |
 | **05 처음부터 다시 보기** (최신) | 프로젝트가 무엇인지, 챗봇 · 팀의 일 순서(이어달리기), 4번이 언제 무엇을 하는지, 팀에게 말하는 법 | [MD](docs/guide_v2/05_처음부터_다시_보기.md) · [PDF](docs/guide_v2/05_처음부터_다시_보기.pdf) · [웹](https://skn35shimsungwook.github.io/langchain-migration-helper/docs/guide_v2/05_처음부터_다시_보기.html) |
 | 04 팀 보고 준비 (이전 버전) | 4번이 만든 것(팀이 바로 쓸 수 있는 순서), 팀 저장소에서 할 일 순서, 회의 1분 대본, 공지 · 1:1 메시지 · PR 설명 | [MD](docs/guide_v2/04_팀_보고_준비.md) · [PDF](docs/guide_v2/04_팀_보고_준비.pdf) · [웹](https://skn35shimsungwook.github.io/langchain-migration-helper/docs/guide_v2/04_팀_보고_준비.html) |

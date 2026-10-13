@@ -34,7 +34,7 @@
     <ol>
 <li>2번이 <strong>문서 297개 → import 대응표 9,155줄 → 검색 조각 11,903개 → 벡터 DB → 검색기</strong>까지 한 번에 만들었습니다. 양도 많고 구조도 탄탄합니다.</li>
 <li>우리 시험지(옛 코드 30개)의 옛 import 57종 중 <strong>55종이 대응표에 있고</strong>, 안내하는 새 위치 55개 중 <strong>53개가 실제로 import</strong>됩니다. 나머지 2개는 시험 환경에 패키지가 없어서입니다.</li>
-<li>확인해 볼 점은 <strong>없어진 옛 체인 · 에이전트 24종을 대응표가 "classic 우회"로 안내</strong>한다는 것입니다. 최신 방식(LCEL, create_agent) 설명은 가이드 문서 조각에 있습니다.</li>
+<li>없어진 옛 체인 · 에이전트는 대응표가 <strong>classic 우회</strong>로 안내하지만, 상당수에 <strong>대안(예: <code>prompt | llm</code>, <code>create_agent</code>)</strong>이 함께 적혀 있어 최신 방식으로 바꿀 실마리가 있습니다.</li>
 </ol>
   </div>
 </header>
@@ -250,9 +250,9 @@
 <tbody>
 <tr>
 <td>1</td>
-<td>시험지의 옛 체인 · 에이전트 24종을 대응표가 <strong>classic 우회</strong>로 안내</td>
-<td>챗봇이 대응표만 따르면 "통과는 하지만 옛 방식"이 됨. 평가의 <strong>classic 의존 비율</strong>이 올라갈 수 있음</td>
-<td>"LLMChain처럼 없어진 것은 rewriter가 가이드 문서를 같이 보고 LCEL로 바꾸는 흐름일까요?" (3번과 함께)</td>
+<td>시험지의 옛 체인 · 에이전트 24종을 대응표가 <strong>classic 우회</strong>로 안내 (이 중 8종은 <strong>대안</strong>이 함께 있음)</td>
+<td>대안이 없는 것은 챗봇이 대응표만 따르면 "통과는 하지만 옛 방식"이 될 수 있음</td>
+<td>"대안이 없는 classic 항목은 rewriter가 가이드 문서를 같이 보는 흐름일까요?" (3번과 함께)</td>
 </tr>
 <tr>
 <td>2</td>
