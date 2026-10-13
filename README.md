@@ -5,7 +5,7 @@
 **문서 근거**(공식 마이그레이션 가이드 · 릴리스 노트 검색)와 **실행 근거**(최신 환경에서 import · 속성 검증)로 이중 검증합니다.
 검증에 실패하면 에러 종류와 대상을 피드백으로 다시 검색해서 고칩니다.
 
-**바로 가기**: [**프로젝트 설명서 (가장 먼저)**](docs/guide_v2/07_프로젝트_설명서.md) · [**이번 주 세부 계획**](docs/guide_v2/08_이번주_세부계획.md) · [**화면 저장소**](https://github.com/SKN35shimsungwook/migration-chatbot-ui) · [회의록](docs/meetings/) · [발표 자료](https://skn35shimsungwook.github.io/langchain-migration-helper/presentation/발표자료.html) · [쉬운 안내서](docs/guide_v2/01_프로젝트_한눈에.md) · [**팀 진행 상황**](docs/guide_v2/03_팀_진행상황.md) · [**처음부터 다시 보기**](docs/guide_v2/05_처음부터_다시_보기.md) · [**2번 데이터 분석**](docs/guide_v2/06_데이터_분석.md) · [역할 분담표](docs/역할분담표.md) · 팀 합의안([출력 모양](docs/출력모양_합의안.md) · [API](docs/API_합의안.md) · [symbol_map](docs/symbol_map_합의안.md)) · [평가 규칙](eval/EVAL_RULES.md) · [작업 기록](docs/작업기록.md) · [안내서 모음 웹페이지](https://skn35shimsungwook.github.io/langchain-migration-helper/)
+**바로 가기**: [**프로젝트 설명서 (가장 먼저)**](docs/guide_v2/07_프로젝트_설명서.md) · [**이번 주 세부 계획**](docs/guide_v2/08_이번주_세부계획.md) · [**화면 저장소**](https://github.com/SKN35shimsungwook/migration-chatbot-ui) · [**화면 배포**](https://migration-chatbot-ui-47wunvzaww7qc27nmwufvh.streamlit.app/) · [회의록](docs/meetings/) · [발표 자료](https://skn35shimsungwook.github.io/langchain-migration-helper/presentation/발표자료.html) · [쉬운 안내서](docs/guide_v2/01_프로젝트_한눈에.md) · [**팀 진행 상황**](docs/guide_v2/03_팀_진행상황.md) · [**처음부터 다시 보기**](docs/guide_v2/05_처음부터_다시_보기.md) · [**2번 데이터 분석**](docs/guide_v2/06_데이터_분석.md) · [역할 분담표](docs/역할분담표.md) · 팀 합의안([출력 모양](docs/출력모양_합의안.md) · [API](docs/API_합의안.md) · [symbol_map](docs/symbol_map_합의안.md)) · [평가 규칙](eval/EVAL_RULES.md) · [작업 기록](docs/작업기록.md) · [안내서 모음 웹페이지](https://skn35shimsungwook.github.io/langchain-migration-helper/)
 
 | | |
 |---|---|
