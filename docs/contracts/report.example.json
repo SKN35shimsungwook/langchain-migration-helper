@@ -1,0 +1,54 @@
+{
+  "contract_version": "1.0",
+  "original_code": "from langchain.chat_models import ChatOpenAI\nfrom langchain.chains import LLMChain\nfrom langchain.prompts import PromptTemplate\n\nllm = ChatOpenAI(temperature=0)\nprompt = PromptTemplate.from_template(\"{product}을 만드는 회사 이름을 지어줘\")\nchain = LLMChain(llm=llm, prompt=prompt)",
+  "migrated_code": "from langchain_openai import ChatOpenAI\nfrom langchain_core.prompts import PromptTemplate\nfrom langchain_core.output_parsers import StrOutputParser\n\nllm = ChatOpenAI(temperature=0)\nprompt = PromptTemplate.from_template(\"{product}을 만드는 회사 이름을 지어줘\")\nchain = prompt | llm | StrOutputParser()",
+  "changes": [
+    {
+      "old": "from langchain.chat_models import ChatOpenAI",
+      "new": "from langchain_openai import ChatOpenAI",
+      "reason": "OpenAI 채팅 모델이 langchain-openai 패키지로 분리됨",
+      "evidence_id": "v1-migration#chat-models-01",
+      "evidence_url": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+      "evidence_ok": true
+    },
+    {
+      "old": "from langchain.prompts import PromptTemplate",
+      "new": "from langchain_core.prompts import PromptTemplate",
+      "reason": "프롬프트 템플릿이 langchain-core로 이동",
+      "evidence_id": "v1-migration#prompts-02",
+      "evidence_url": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+      "evidence_ok": true
+    },
+    {
+      "old": "chain = LLMChain(llm=llm, prompt=prompt)",
+      "new": "chain = prompt | llm | StrOutputParser()",
+      "reason": "LLMChain이 제거되어 LCEL로 연결",
+      "evidence_id": "v1-migration#llmchain-03",
+      "evidence_url": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+      "evidence_ok": true
+    }
+  ],
+  "verification": {
+    "success": true,
+    "fail_stage": null,
+    "error": null,
+    "checked_attributes": ["PromptTemplate.from_template"]
+  },
+  "attempts": 2,
+  "attempt_log": [
+    {
+      "attempt": 1,
+      "fail_stage": "import",
+      "error_type": "ModuleNotFoundError",
+      "target": "langchain.chains",
+      "message": "No module named 'langchain.chains'"
+    },
+    {
+      "attempt": 2,
+      "fail_stage": null,
+      "error_type": null,
+      "target": null,
+      "message": null
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "contract_version": "1.0",
+  "original_code": "from langchain.agents import initialize_agent, AgentType, load_tools\nfrom langchain.chat_models import ChatOpenAI\n\nllm = ChatOpenAI(temperature=0)\ntools = load_tools([\"llm-math\"], llm=llm)\nagent = initialize_agent(tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION)",
+  "migrated_code": "from langchain.agents import create_agent\nfrom langchain_openai import ChatOpenAI\nfrom langchain.tools import load_tools\n\nllm = ChatOpenAI(temperature=0)\ntools = load_tools([\"llm-math\"], llm=llm)\nagent = create_agent(llm, tools)",
+  "changes": [
+    {
+      "old": "from langchain.agents import initialize_agent, AgentType, load_tools",
+      "new": "from langchain.agents import create_agent",
+      "reason": "initialize_agent가 제거되어 create_agent로 대체",
+      "evidence_id": "v1-migration#create-agent-01",
+      "evidence_url": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+      "evidence_ok": true
+    },
+    {
+      "old": "(없음)",
+      "new": "from langchain.tools import load_tools",
+      "reason": "load_tools 위치를 추정함",
+      "evidence_id": "guess-tools-99",
+      "evidence_url": null,
+      "evidence_ok": false
+    }
+  ],
+  "verification": {
+    "success": false,
+    "fail_stage": "import",
+    "error": "ImportError: cannot import name 'load_tools' from 'langchain.tools'",
+    "checked_attributes": []
+  },
+  "attempts": 3,
+  "attempt_log": [
+    {"attempt": 1, "fail_stage": "import", "error_type": "ImportError", "target": "langchain.agents.initialize_agent", "message": "cannot import name 'initialize_agent'"},
+    {"attempt": 2, "fail_stage": "evidence", "error_type": "EvidenceNotFound", "target": "guess-tools-99", "message": "근거 ID가 검색 결과에 없음"},
+    {"attempt": 3, "fail_stage": "import", "error_type": "ImportError", "target": "langchain.tools.load_tools", "message": "cannot import name 'load_tools'"}
+  ]
+}
