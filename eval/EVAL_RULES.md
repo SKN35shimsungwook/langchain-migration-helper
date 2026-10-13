@@ -196,7 +196,7 @@ LangChain 1.x 최신 버전에서 동작하도록 코드를 변환해 주세요.
 - [ ] 비교에 쓸 LLM 모델: `______`
 - [ ] 최대 시도 횟수: 팀 설계 2~3회 중 하나로 확정 (기본 3)
 - [ ] 3번과 report 출력 모양 합의 ([docs/출력모양_합의안.md](../docs/출력모양_합의안.md)). B 결과(7장 형식)는 `run_system.py`가 report에서 계산
-- [ ] 2번의 `symbol_map.json`과 `testset.json`의 `target_imports`가 서로 맞는지 대조
+- [ ] 2번의 `symbol_map.json`과 `testset.json`의 `target_imports`가 서로 맞는지 대조 (`check_symbol_map.py --testset`, 규칙은 [docs/symbol_map_합의안.md](../docs/symbol_map_합의안.md))
 - [x] verifier 구현 담당: 3번 (변환 · 검증). `verify.py` 판정 기준을 그대로 쓰기로 합의할 것
 - [ ] `requirements-verify.txt` 버전 고정 완료
 - [ ] `testset.json` 30개 완성 및 팀 공유
