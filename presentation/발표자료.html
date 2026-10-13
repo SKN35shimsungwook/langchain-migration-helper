@@ -171,7 +171,7 @@ details.notes p { margin: 6px 0 0; }
 </div>
 </div>
 <p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#8A8F98">LangChain 마이그레이션 도우미 · 7</p>
-</section></div><figcaption>7 / 14</figcaption><details class="notes"><summary>발표자 노트</summary><p>공정한 비교를 위해 실험 규칙을 먼저 정했습니다. 저는 요리 대회 심사위원 역할입니다. 시험지는 난이도별로 10개씩 30개이고, 30개 모두 최신 LangChain에서 실제로 깨지는 것을 확인했습니다. 일반 AI와 우리 프로그램은 같은 모델 [모델명], temperature 0, 같은 입력을 쓰고, 똑같은 채점 로봇으로 판정합니다. 일반 AI에게는 &quot;LangChain 1.x로 변환해 주세요&quot;라는 고정된 문구만 줍니다. 성공 기준은 문법 통과, 모든 import 성공, 무효 변환 아님 세 가지입니다. LangChain import를 지워서 통과하는 식의 꼼수는 실격으로 처리했습니다.</p></details></figure>
+</section></div><figcaption>7 / 14</figcaption><details class="notes"><summary>발표자 노트</summary><p>공정한 비교를 위해 실험 규칙을 먼저 정했습니다. 저는 요리 대회 심사위원 역할입니다. 시험지는 난이도별로 10개씩 30개이고, 30개 모두 최신 LangChain에서 실제로 깨지는 것을 확인했습니다. 일반 AI와 우리 프로그램은 같은 모델 [모델명], temperature 0, 같은 입력을 쓰고, 똑같은 채점 로봇으로 판정합니다. 일반 AI에게는 &quot;LangChain 1.x로 변환해 주세요&quot;라는 고정된 문구만 줍니다. 성공 기준은 문법 통과, import 성공, 가져온 도구의 기능 이름이 실제로 있음(속성), 무효 변환 아님 네 가지입니다. 이 채점 기준은 팀 verifier와 똑같이 맞췄습니다. 우리 프로그램은 최대 [2~3]번까지 다시 고칠 수 있습니다. LangChain import를 지워서 통과하는 식의 꼼수는 실격으로 처리했습니다.</p></details></figure>
 <figure class="slide" id="slide-8" aria-label="8번 슬라이드"><div class="frame"><section id="demo" data-transition="fade" style="background:#14202E;color:#F2F1EC;font-family:'IBM Plex Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
 <div style="display:flex;flex-direction:column;gap:16px">
 <p style="font-size:24px;font-weight:600;color:#7FB2F0;letter-spacing:2px">데모</p>
@@ -211,7 +211,8 @@ details.notes p { margin: 6px 0 0; }
 <p style="font-size:28px;font-weight:600;color:#B4471B">일반 LLM (baseline)</p>
 <p style="font-size:120px;font-weight:700;line-height:1.05;color:#1B2433">[__]%</p>
 </div>
-<p style="font-size:28px;line-height:1.45;color:#4A5363">전체 import 성공률, 테스트 코드 30개 기준</p>
+<p style="font-size:28px;line-height:1.45;color:#4A5363">전체 성공률 (import · 속성 검증), 테스트 코드 30개 기준</p>
+<p style="font-size:28px;line-height:1.45;color:#1F5FAE">근거 일치율 [__]%</p>
 </div>
 <div style="flex:1.25;display:flex;flex-direction:column;justify-content:center;align-items:center;height:600px;background:#FFFFFF;border:2px dashed #C3C2B7;border-radius:16px;padding:40px">
 <p style="font-size:32px;font-weight:600;color:#8A8F98;text-align:center">[그래프 삽입]</p>
@@ -219,7 +220,7 @@ details.notes p { margin: 6px 0 0; }
 </div>
 </div>
 <p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#8A8F98">LangChain 마이그레이션 도우미 · 9</p>
-</section></div><figcaption>9 / 14</figcaption><details class="notes"><summary>발표자 노트</summary><p>결과입니다. 전체 성공률은 일반 LLM이 [__]%, 우리 시스템이 [__]%였습니다. 특히 어려움 단계에서 차이가 가장 컸습니다. 일반 LLM은 [__]%, 우리 시스템은 [__]%입니다. 에이전트처럼 구조 자체가 바뀐 코드일수록 기억에만 의존하는 LLM이 구버전 방식을 그대로 쓰는 경향이 컸습니다. [실제 결과를 보고 제목과 설명을 수정]</p></details></figure>
+</section></div><figcaption>9 / 14</figcaption><details class="notes"><summary>발표자 노트</summary><p>결과입니다. 전체 성공률은 일반 LLM이 [__]%, 우리 시스템이 [__]%였습니다. 특히 어려움 단계에서 차이가 가장 컸습니다. 일반 LLM은 [__]%, 우리 시스템은 [__]%입니다. 에이전트처럼 구조 자체가 바뀐 코드일수록 기억에만 의존하는 LLM이 구버전 방식을 그대로 쓰는 경향이 컸습니다. 그리고 우리 시스템이 고친 부분의 근거 중 [__]%는 실제 검색 결과에 있는 근거였습니다. 지어낸 근거가 아니라는 뜻입니다. [실제 결과를 보고 제목과 설명을 수정]</p></details></figure>
 <figure class="slide" id="slide-10" aria-label="10번 슬라이드"><div class="frame"><section id="loop" data-transition="fade" style="background:#F6F5F1;color:#1B2433;font-family:'IBM Plex Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
 <div style="display:flex;flex-direction:column;gap:16px">
 <p style="font-size:24px;font-weight:600;color:#1F5FAE;letter-spacing:2px">검증 루프 효과</p>
@@ -236,7 +237,7 @@ details.notes p { margin: 6px 0 0; }
 <p style="font-size:72px;font-weight:700;line-height:1.1;color:#1B2433">[__]%</p>
 </div>
 <div style="display:flex;flex-direction:column;gap:4px;border-top:2px solid #D4D3CC;padding:20px 0px 0px 0px">
-<p style="font-size:28px;color:#4A5363">최종 성공률 (최대 3회)</p>
+<p style="font-size:28px;color:#4A5363">최종 성공률 (최대 [2~3]회)</p>
 <p style="font-size:72px;font-weight:700;line-height:1.1;color:#1F5FAE">[__]%</p>
 </div>
 <div style="display:flex;flex-direction:column;gap:4px;border-top:2px solid #D4D3CC;padding:20px 0px 0px 0px">
@@ -246,7 +247,7 @@ details.notes p { margin: 6px 0 0; }
 </div>
 </div>
 <p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#8A8F98">LangChain 마이그레이션 도우미 · 10</p>
-</section></div><figcaption>10 / 14</figcaption><details class="notes"><summary>발표자 노트</summary><p>이 그래프가 저희 프로젝트의 핵심 근거입니다. 첫 시도만 보면 성공률이 [__]%인데, 실패한 코드를 에러 메시지로 다시 검색해서 고치면 최종 [__]%까지 올라갑니다. 즉 &#x27;실행해서 확인하고 다시 고치는&#x27; 루프가 [__]%p를 만들어 냈습니다. 일반 LLM은 이 루프가 없기 때문에 틀려도 그대로 끝납니다.</p></details></figure>
+</section></div><figcaption>10 / 14</figcaption><details class="notes"><summary>발표자 노트</summary><p>이 그래프가 저희 프로젝트의 핵심 근거입니다. 첫 시도만 보면 성공률이 [__]%인데, 실패한 코드를 에러 종류와 대상을 피드백으로 다시 검색해서 고치면 최종 [__]%까지 올라갑니다. 즉 &#x27;실행해서 확인하고 다시 고치는&#x27; 루프가 [__]%p를 만들어 냈습니다. 일반 LLM은 이 루프가 없기 때문에 틀려도 그대로 끝납니다.</p></details></figure>
 <figure class="slide" id="slide-11" aria-label="11번 슬라이드"><div class="frame"><section id="insight" data-transition="fade" style="background:#F6F5F1;color:#1B2433;font-family:'IBM Plex Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
 <div style="display:flex;flex-direction:column;gap:16px">
 <p style="font-size:24px;font-weight:600;color:#1F5FAE;letter-spacing:2px">실험 중 발견</p>
@@ -261,7 +262,7 @@ details.notes p { margin: 6px 0 0; }
 </div>
 <div style="display:flex;flex-direction:column;gap:10px;background:#FFFFFF;border:1px solid #E1E0D9;border-radius:16px;padding:36px">
 <h3 style="font-size:34px;font-weight:700;color:#1B2433">classic 우회</h3>
-<p style="font-size:28px;line-height:1.45;color:#4A5363">LLMChain을 langchain_classic에서 가져오면 import는 통과하지만, 최신 방식으로 바꾼 것은 아닙니다.</p>
+<p style="font-size:28px;line-height:1.45;color:#4A5363">LLMChain은 물론 initialize_agent 같은 에이전트도 langchain_classic에서 가져오면 import는 통과합니다. 하지만 최신 방식은 아닙니다.</p>
 </div>
 </div>
 <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#FFFFFF;border:2px dashed #C3C2B7;border-radius:16px;padding:40px">
@@ -270,7 +271,7 @@ details.notes p { margin: 6px 0 0; }
 </div>
 </div>
 <p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#8A8F98">LangChain 마이그레이션 도우미 · 11</p>
-</section></div><figcaption>11 / 14</figcaption><details class="notes"><summary>발표자 노트</summary><p>실험하면서 예상하지 못한 것을 두 가지 발견했습니다. 첫째, langchain-community 패키지는 import만 해도 지원 종료 경고가 나옵니다. 버전은 지금 이 순간에도 바뀌고 있다는 뜻입니다. 둘째, 옛 체인을 langchain_classic에서 가져오면 import는 되지만 최신 방식은 아닙니다. 그래서 단순 성공률 외에 &#x27;성공의 질&#x27;을 따로 집계했습니다. 오른쪽 그래프에서 우리 시스템은 깔끔한 성공 비율이 [__]%, 일반 LLM은 [__]%였습니다.</p></details></figure>
+</section></div><figcaption>11 / 14</figcaption><details class="notes"><summary>발표자 노트</summary><p>실험하면서 예상하지 못한 것을 두 가지 발견했습니다. 첫째, langchain-community 패키지는 import만 해도 지원 종료 경고가 나옵니다. 버전은 지금 이 순간에도 바뀌고 있다는 뜻입니다. 둘째, 옛 체인은 물론 initialize_agent 같은 에이전트도 langchain_classic에서 가져오면 import는 되지만, 최신 방식은 아닙니다. 처음에는 에이전트는 우회가 안 된다고 생각했는데, 하나씩 다시 확인해 보니 load_tools 하나만 안 되는 것이었습니다. 어려운 문제도 우회로 통과할 수 있기 때문에 단순 성공률 외에 &#x27;성공의 질&#x27;을 따로 집계했습니다. 오른쪽 그래프에서 우리 시스템은 깔끔한 성공 비율이 [__]%, 일반 LLM은 [__]%였습니다.</p></details></figure>
 <figure class="slide" id="slide-12" aria-label="12번 슬라이드"><div class="frame"><section id="limits" data-transition="fade" style="background:#F6F5F1;color:#1B2433;font-family:'IBM Plex Sans KR', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:56px">
 <div style="display:flex;flex-direction:column;gap:16px">
 <p style="font-size:24px;font-weight:600;color:#1F5FAE;letter-spacing:2px">한계와 다음 단계</p>
@@ -334,9 +335,9 @@ details.notes p { margin: 6px 0 0; }
 </div>
 <div style="display:flex;flex-direction:column;gap:16px">
 <h1 style="font-size:104px;font-weight:700;line-height:1.1;color:#F2F1EC">감사합니다</h1>
-<p style="font-size:36px;color:#B9C3CF">질문 받겠습니다 · [GitHub 저장소 주소]</p>
+<p style="font-size:36px;color:#B9C3CF">질문 받겠습니다 · github.com/SKN35shimsungwook/langchain-migration-helper</p>
 </div>
-</section></div><figcaption>14 / 14</figcaption><details class="notes"><summary>발표자 노트</summary><p>저희 팀은 이렇게 역할을 나눠 진행했습니다. 감사합니다. 질문 받겠습니다. [예상 질문 대비: import만 검증하면 충분한가 → 한계 슬라이드 / 30개로 충분한가 → 난이도별 경향 확인이 목적 / 왜 LLM에게 검증을 맡기지 않았나 → 검증 LLM도 같은 구버전 지식을 가짐]</p></details></figure>
+</section></div><figcaption>14 / 14</figcaption><details class="notes"><summary>발표자 노트</summary><p>저희 팀은 이렇게 역할을 나눠 진행했습니다. 감사합니다. 질문 받겠습니다. [예상 질문 대비: import만 검증하나 → import와 기능 이름(속성)까지, 인자와 실행 결과는 한계 슬라이드 / 30개로 충분한가 → 난이도별 경향 확인이 목적 / 왜 LLM에게 검증을 맡기지 않았나 → 검증 LLM도 같은 구버전 지식을 가짐 / 근거를 지어낼 수 있지 않나 → verifier가 근거 ID를 확인하고 근거 일치율로 보고]</p></details></figure>
 </main>
 <script>
 function fit() { document.querySelectorAll('.frame').forEach(f => f.style.setProperty('--s', f.clientWidth / 1920)); }
