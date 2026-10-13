@@ -193,6 +193,20 @@ def summary_table(data, out):
         lines += ["", f"- 우리 시스템 1회차 성공률: {first:.1f}%",
                   f"- 우리 시스템 최종 성공률: {rate(b):.1f}%",
                   f"- **검증 루프 효과: +{rate(b) - first:.1f}%p**"]
+        ev = [r["evidence"] for r in b if r.get("evidence")]
+        if ev:
+            total, valid = sum(e.get("total", 0) for e in ev), sum(e.get("valid", 0) for e in ev)
+            if total:
+                lines.append(f"- 근거 일치율 (verifier (a)): {valid}/{total} = {100 * valid / total:.1f}%")
+    # 실패 원인 분포 (EVAL_RULES 3장)
+    lines += ["", "| 시스템 | 실패 단계별 개수 |", "|---|---|"]
+    for s in [s for s in ORDER if s in data]:
+        stages = {}
+        for r in data[s]:
+            if not r["success"]:
+                stages[r.get("fail_stage") or "기타"] = stages.get(r.get("fail_stage") or "기타", 0) + 1
+        text = ", ".join(f"{k} {v}" for k, v in sorted(stages.items())) or "실패 없음"
+        lines.append(f"| {SYSTEM[s][0]} | {text} |")
     out.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return "\n".join(lines)
 
