@@ -27,7 +27,7 @@ text { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans
 <text x="108" y="128" class="c" style="fill:#8A94A3">성능 비교</text>
 
 <!-- ① 입력 -->
-<rect x="40" y="144" width="488" height="22" rx="4" fill="#F7F8FA" stroke="#DCE1E7"/><text x="48" y="159" class="c">예제 불러오기 ▾  hard_01 · 어려움</text>
+<rect x="40" y="144" width="130" height="22" rx="4" fill="#E4ECFB" stroke="#2457C5"/><text x="48" y="159" class="c">목표 버전 ▾  1.x</text><rect x="178" y="144" width="350" height="22" rx="4" fill="#F7F8FA" stroke="#DCE1E7"/><text x="186" y="159" class="c">예제 불러오기 ▾  hard_01 · 어려움</text>
 <rect x="40" y="172" width="488" height="58" rx="4" fill="#17202C"/>
 <text x="50" y="190" class="c mono" style="fill:#E6EBF1">from langchain.chat_models import ChatOpenAI</text>
 <text x="50" y="206" class="c mono" style="fill:#E6EBF1">from langchain.agents import initialize_agent</text>
@@ -65,7 +65,7 @@ text { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans
 <!-- 설명 -->
 <text x="566" y="104" class="h">변환하기 탭</text>
 <g class="s">
-  <text x="566" y="132">① 예제를 고르거나 코드 붙여넣기</text>
+  <text x="566" y="132">① 목표 버전 고르고 코드 넣기</text>
   <text x="566" y="156">② 파이프라인 진행 기록</text>
   <text x="580" y="174">(되돌아간 과정까지 보임)</text>
   <text x="566" y="198">③ 검증 배지 · 근거 확인 배지</text>

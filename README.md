@@ -5,15 +5,16 @@
 **문서 근거**(공식 마이그레이션 가이드 · 릴리스 노트 검색)와 **실행 근거**(최신 환경에서 import · 속성 검증)로 이중 검증합니다.
 검증에 실패하면 에러 종류와 대상을 피드백으로 다시 검색해서 고칩니다.
 
-**바로 가기**: [발표 자료](https://skn35shimsungwook.github.io/langchain-migration-helper/presentation/발표자료.html) · [쉬운 안내서](docs/guide_v2/01_프로젝트_한눈에.md) · [역할 분담표](docs/역할분담표.md) · 팀 합의안([출력 모양](docs/출력모양_합의안.md) · [API](docs/API_합의안.md) · [symbol_map](docs/symbol_map_합의안.md)) · [평가 규칙](eval/EVAL_RULES.md) · [작업 기록](docs/작업기록.md) · [안내서 모음 웹페이지](https://skn35shimsungwook.github.io/langchain-migration-helper/)
+**바로 가기**: [발표 자료](https://skn35shimsungwook.github.io/langchain-migration-helper/presentation/발표자료.html) · [쉬운 안내서](docs/guide_v2/01_프로젝트_한눈에.md) · [**팀 진행 상황**](docs/guide_v2/03_팀_진행상황.md) · [역할 분담표](docs/역할분담표.md) · 팀 합의안([출력 모양](docs/출력모양_합의안.md) · [API](docs/API_합의안.md) · [symbol_map](docs/symbol_map_합의안.md)) · [평가 규칙](eval/EVAL_RULES.md) · [작업 기록](docs/작업기록.md) · [안내서 모음 웹페이지](https://skn35shimsungwook.github.io/langchain-migration-helper/)
 
 | | |
 |---|---|
 | 과제 주제 | LLM을 연동한 내외부 문서 기반 질의응답 시스템 |
 | 팀 | [팀 이름] (SKN35) |
 | 기간 | [시작일] ~ [발표일] |
+| 팀 저장소 | [SKN35-3rd-4Team](https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN35-3rd-4Team) (제출용 코드) · 이 저장소는 4번 작업장 · 기록 · 문서 |
 
-## 진행 상황 (2026-10-13 기준)
+## 진행 상황 (2026-10-13 오후 기준)
 
 | 구분 | 내용 | 상태 |
 |---|---|---|
@@ -21,12 +22,22 @@
 | 평가 설계 | 평가 기준과 실험 규칙 ([EVAL_RULES.md](eval/EVAL_RULES.md)), 팀 verifier와 같은 판정 기준 | ✅ 완료 |
 | 테스트셋 | 구버전 코드 30개, 최신 환경에서 깨지는 것 확인 ([testset.json](eval/testset.json)) | ✅ 완료 |
 | 평가 도구 | 판정기(import · 속성), 일반 AI 실험(A), 우리 시스템 실험(B), 그래프, 검사기 2종(report · symbol_map) | ✅ 완료 (API 없이 흐름 확인) |
-| 화면 | 변환하기 탭, 성능 비교 탭 ([app/](app/)) | 🟡 뼈대 완성, API 연결 준비 완료 (연습용 서버로 확인) |
-| 팀 합의안 | [출력 모양](docs/출력모양_합의안.md)(3번) · [API](docs/API_합의안.md)(1번) · [symbol_map](docs/symbol_map_합의안.md)(2번) | 🟡 작성 완료, 팀 답변 대기 |
-| 안내서 v2 | 프로젝트 한눈에 / 화면·평가 파트 (MD · PDF · 웹) | ✅ 완료 |
+| 화면 | 목표 버전 선택, 변환하기 탭, 성능 비교 탭 ([app/](app/)) | 🟡 뼈대 완성, 팀 그래프 함수 · API 연결 준비 완료 |
+| 팀 합의안 | [출력 모양](docs/출력모양_합의안.md)(3번) · [API](docs/API_합의안.md)(1번) · [symbol_map](docs/symbol_map_합의안.md)(2번) | 🟡 1.1 (팀 저장소 코드에 맞춤), 회의에서 공유 |
+| 안내서 v2 | 프로젝트 한눈에 / 화면·평가 파트 / **팀 진행 상황** (MD · PDF · 웹) | ✅ 완료 |
 | 발표 자료 | 14장 초안 (그림 중심) | 🟡 초안 (결과 숫자 미입력) |
-| 챗봇 본체 | 오프라인 준비, 파이프라인, 검색, 변환·검증 (1~3번) | ⏳ 진행 중 |
+| 챗봇 본체 | 팀 저장소 dev: 폴더 구조와 `MigrateState`까지 (1~3번) | ⏳ 뼈대 단계 |
 | 실험 | 일반 AI vs 우리 시스템 30문제 비교 | ⏳ 챗봇 완성 후 |
+
+### 팀 진행 상황 한눈에 (역할 번호로)
+
+![팀 진행 상황판](docs/images/11_team_board.svg)
+
+- **서비스 정의 (팀 합의)**: 구버전 코드를 넣고 **목표 버전을 골라** 실행하면, 새 코드와 검증 과정이 리포트로 나오는 챗봇
+- **팀 저장소**: 1번이 폴더 구조와 `MigrateState(old, new, evidence_id, kind)`를 올린 뼈대 단계. 각자 브랜치 → dev로 PR, 매일 13:40 모임
+- **오늘 4번이 맞춘 것**: 화면에 목표 버전 선택, 화면이 팀 그래프를 `run_migration(code, target_version)` 함수로 바로 부르는 방식(기본안), symbol_map ↔ `MigrateState` 연결표
+- **확인할 것**: report 노드 담당(3번 또는 4번), 병합 담당, 비교 모델
+- 자세한 내용과 오늘 질문(report 노드 vs 보고서, 브랜치, PowerShell `&&` 에러): [03 팀 진행 상황](docs/guide_v2/03_팀_진행상황.md)
 
 ---
 
@@ -71,22 +82,22 @@ from langchain.chains import LLMChain          → ModuleNotFoundError: No modul
 | ② retriever | `symbol_map` 정확 조회 + Qdrant 검색 (에러 피드백 반영) | 2번 |
 | ③ rewriter | LLM이 {새 코드, 변경 목록(근거 ID 포함)} 구조화 출력 | 3번 |
 | ④ verifier | (a) 근거 ID가 실제 검색 결과에 있는지 (b) 샌드박스에서 import · 속성 검증. 실패하면 에러 종류 · 대상을 피드백으로 ②로 (최대 2~3회) | 3번 |
-| ⑤ report | 변환 코드 + 변경표(구 → 신, 근거 링크, 검증 결과) + 시도 횟수 | 3번 |
+| ⑤ report | 변환 코드 + 변경표(구 → 신, 근거 링크, 검증 결과) + 시도 횟수 | 3번 (4번 가능, 확인 중) |
 
-단계 연결, 다시 갈지 판단, API는 1번이 맡습니다. **화면과 평가는 파이프라인 바깥**에서 API로 파이프라인을 불러 쓰며, 4번이 맡습니다.
+단계 연결, 다시 갈지 판단, `run_migration()` 함수는 1번이 맡습니다. **화면과 평가는 파이프라인 바깥**에서 그 함수(또는 선택적으로 HTTP API)로 파이프라인을 불러 쓰며, 4번이 맡습니다.
 
 ### 팀 사이 약속
 
 ```text
-2번 symbol_map · Qdrant ──같은 근거 ID──▶ 3번 report ──▶ 1번 API ──┬──▶ 4번 화면
-   (symbol_map 합의안)                    (출력 모양 합의안)  (API 합의안) └──▶ 4번 평가
+2번 symbol_map · Qdrant ──같은 근거 ID──▶ 3번 report ──▶ 1번 run_migration() ──┬──▶ 4번 화면
+   (symbol_map 합의안)                    (출력 모양 합의안)  (API 합의안 1.1)      └──▶ 4번 평가
 ```
 
 | 합의안 | 누구와 | 핵심 |
 |---|---|---|
-| [출력 모양](docs/출력모양_합의안.md) | 3번 ↔ 4번 | report 모양 하나로 화면과 평가가 함께 씀. 평가 결과는 4번이 report에서 계산 |
-| [API](docs/API_합의안.md) | 1번 ↔ 4번 | `POST /migrate`, `GET /info`, `GET /health`. 검증 실패도 HTTP 200 |
-| [symbol_map](docs/symbol_map_합의안.md) | 2번 ↔ 3번 · 4번 | 이사 목록 모양, 근거 ID `문서#섹션-번호` |
+| [출력 모양](docs/출력모양_합의안.md) | 3번 ↔ 4번 | report 모양 하나로 화면과 평가가 함께 씀. 평가 결과는 4번이 report에서 계산. 1.1에서 `target_version` 추가 |
+| [API](docs/API_합의안.md) | 1번 ↔ 4번 | 기본안 `run_migration(code, target_version) → report` 함수. 선택: `POST /migrate` 등 HTTP, 검증 실패도 200 |
+| [symbol_map](docs/symbol_map_합의안.md) | 2번 ↔ 3번 · 4번 | 이사 목록 모양, 근거 ID `문서#섹션-번호`, `MigrateState`(`kind: native / classic_fallback`) 연결표 |
 
 - 파이프라인: LangGraph · LLM: [모델명] · 벡터 DB: Qdrant · 화면: Streamlit
 - 근거 자료: [LangChain v1 마이그레이션 가이드](https://docs.langchain.com/oss/python/migrate/langchain-v1), 릴리스 노트
@@ -147,17 +158,27 @@ pip install -r app/requirements.txt
 streamlit run app/streamlit_app.py
 ```
 
-백엔드가 연결되기 전에는 테스트셋 예제로 만든 **가짜 응답**으로 동작합니다. 1번 API의 기본 주소(예: `http://localhost:8000`)를 환경 변수 `MIGRATION_API_URL`에 넣으면 `POST /migrate`로 실제 파이프라인을 부르고, 화면 위쪽에 연결 상태가 표시됩니다. 호출 규칙은 [API 합의안](docs/API_합의안.md), 응답 모양은 [출력 모양 합의안](docs/출력모양_합의안.md)에 있습니다.
+화면 맨 위에서 **목표 버전**(지금은 LangChain 1.x)을 고르고 코드를 넣습니다. 파이프라인을 부르는 방법은 세 가지이고, 위에 있는 것이 먼저입니다. 호출 규칙은 [API 합의안](docs/API_합의안.md), 응답 모양은 [출력 모양 합의안](docs/출력모양_합의안.md)에 있습니다.
 
-실제 API가 나오기 전에는 연습용 서버로 연결을 시험할 수 있습니다: `python docs/contracts/api_stub.py`
+| 방법 | 설정 (PowerShell) | 배지 |
+|---|---|---|
+| 팀 그래프 함수 (기본안) | `$env:MIGRATION_FUNC="src.graph.supervisor:run_migration"` | 초록 "팀 그래프 직접 호출" |
+| HTTP API (선택) | `$env:MIGRATION_API_URL="http://localhost:8000"` | 초록 "API 연결됨" / 빨강 "API 연결 안 됨" |
+| 가짜 응답 | 아무것도 넣지 않음 (테스트셋 예제만 변환) | 회색 "가짜 응답 모드" |
 
-화면 위쪽 배지로 연결 상태를 알 수 있습니다: 회색 "가짜 응답 모드" · 초록 "API 연결됨 · 모델 · 최대 시도" · 빨강 "API 연결 안 됨"
+실제 API가 나오기 전에는 연습용 서버로 HTTP 연결을 시험할 수 있습니다: `python docs/contracts/api_stub.py"
 
 ### 8-2. 챗봇 본체
 
-```bash
-[1번 팀원 확인 후 작성: 오프라인 준비와 API 실행 명령]
+챗봇 본체는 [팀 저장소](https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN35-3rd-4Team)에 있습니다 (uv, Python 3.12). Windows PowerShell 5.1은 `&&`를 지원하지 않으므로 **한 줄씩** 실행합니다.
+
+```powershell
+git clone -b dev https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN35-3rd-4Team.git
+cd SKN35-3rd-4Team
+uv sync
 ```
+
+오프라인 준비(벡터 DB 만들기)와 그래프 실행 명령은 1번 · 2번이 정하면 채웁니다.
 
 ### 8-3. 평가 재현
 
@@ -169,7 +190,7 @@ uv pip install --python verify-env/Scripts/python.exe langchain langchain-core l
 verify-env/Scripts/python.exe -m pip freeze > requirements-verify.txt
 python check_testset.py testset.json --py verify-env/Scripts/python.exe
 python run_baseline.py --py verify-env/Scripts/python.exe --model [모델명]
-python run_system.py --py verify-env/Scripts/python.exe --model [모델명]   # MIGRATION_API_URL 필요
+python run_system.py --py verify-env/Scripts/python.exe --model [모델명]   # MIGRATION_FUNC 또는 MIGRATION_API_URL 필요
 python make_charts.py --a results/A_[모델명]_[날짜].json --b results/B_[모델명]_[날짜].json
 
 # 팀원 결과물 검사
@@ -177,7 +198,7 @@ python check_contract.py report.json --py verify-env/Scripts/python.exe         
 python check_symbol_map.py symbol_map.json --py verify-env/Scripts/python.exe --testset testset.json   # 2번 symbol_map
 ```
 
-OpenAI API 키는 환경 변수 `OPENAI_API_KEY`로 설정합니다. `run_baseline.py`와 `run_system.py`는 `--limit 3`(3문제 먼저), `--mock`(API 없이 흐름만 확인)을 지원하고, 중간에 멈춰도 이어서 실행됩니다. `run_system.py`는 API의 모델이 `--model`과 다르면 경고합니다.
+OpenAI API 키는 환경 변수 `OPENAI_API_KEY`로 설정합니다. `run_baseline.py`와 `run_system.py`는 `--limit 3`(3문제 먼저), `--mock`(API 없이 흐름만 확인)을 지원하고, 중간에 멈춰도 이어서 실행됩니다. `run_system.py`는 HTTP API의 모델이 `--model`과 다르면 경고하고, 함수 호출일 때는 모델을 직접 확인하라고 알려 줍니다.
 
 ## 9. 폴더 구조
 
@@ -185,10 +206,10 @@ OpenAI API 키는 환경 변수 `OPENAI_API_KEY`로 설정합니다. `run_baseli
 langchain_migration/
 ├── README.md
 ├── index.html                 # GitHub Pages 목차 페이지
-├── [graph/ data/]             # 오프라인 준비, 파이프라인 (1~3번, 예정)
+│                              # 챗봇 본체(src/, data/)는 팀 저장소에 있음
 ├── app/                       # 화면 (4번)
 │   ├── streamlit_app.py       # 변환하기 · 성능 비교 탭
-│   └── backend.py             # API 호출 / 가짜 응답, report 출력 모양
+│   └── backend.py             # 팀 그래프 함수 · API 호출 / 가짜 응답, 목표 버전
 ├── eval/                      # 평가 (4번)
 │   ├── EVAL_RULES.md          # 평가 기준과 실험 규칙
 │   ├── testset.json           # 테스트 코드 30개
@@ -201,7 +222,7 @@ langchain_migration/
 │   └── make_charts.py         # 결과 그래프와 요약표
 ├── presentation/              # 발표 자료 (원본, 웹 버전, PDF)
 └── docs/
-    ├── guide_v2/              # 쉬운 안내서 최신 (MD · PDF · HTML)
+    ├── guide_v2/              # 쉬운 안내서 최신: 01 한눈에, 02 화면·평가, 03 팀 진행 상황 (MD · PDF · HTML)
     ├── images/                # 설명 그림 (움직이는 SVG, static/은 슬라이드용 정지 그림)
     ├── 역할분담표.md
     ├── 출력모양_합의안.md      # 3번 report 모양 (contracts/ 에 예시 JSON)
@@ -219,11 +240,12 @@ langchain_migration/
 | 문서 | 내용 | 보기 |
 |---|---|---|
 | **발표 자료** (초안) | 14장, 웹에서는 그림이 움직이고 발표자 노트 포함 | [웹](https://skn35shimsungwook.github.io/langchain-migration-helper/presentation/발표자료.html) · [PDF](presentation/발표자료.pdf) |
-| **01 프로젝트 한눈에** (최신 v2) | 주방 비유, 새 설계(기본 설계), 역할, 용어 사전 (팀 모두용) | [MD](docs/guide_v2/01_프로젝트_한눈에.md) · [PDF](docs/guide_v2/01_프로젝트_한눈에.pdf) · [웹](https://skn35shimsungwook.github.io/langchain-migration-helper/docs/guide_v2/01_프로젝트_한눈에.html) |
-| **02 화면·평가 파트** (최신 v2) | 역설계, 평가, 화면, 따라 하기, 결과 읽기, 맞출 것, 발표 질문, 체크리스트 | [MD](docs/guide_v2/02_화면평가_파트.md) · [PDF](docs/guide_v2/02_화면평가_파트.pdf) · [웹](https://skn35shimsungwook.github.io/langchain-migration-helper/docs/guide_v2/02_화면평가_파트.html) |
-| **역할 분담표** | 네 역할, 1번과 3번의 경계, 서로 맞춰야 하는 것 | [MD](docs/역할분담표.md) |
+| **01 프로젝트 한눈에** (최신 v2.1) | 주방 비유, 새 설계(기본 설계), 역할, 용어 사전 (팀 모두용) | [MD](docs/guide_v2/01_프로젝트_한눈에.md) · [PDF](docs/guide_v2/01_프로젝트_한눈에.pdf) · [웹](https://skn35shimsungwook.github.io/langchain-migration-helper/docs/guide_v2/01_프로젝트_한눈에.html) |
+| **02 화면·평가 파트** (최신 v2.1) | 역설계, 평가, 화면, 따라 하기, 결과 읽기, 맞출 것, 발표 질문, 체크리스트 | [MD](docs/guide_v2/02_화면평가_파트.md) · [PDF](docs/guide_v2/02_화면평가_파트.pdf) · [웹](https://skn35shimsungwook.github.io/langchain-migration-helper/docs/guide_v2/02_화면평가_파트.html) |
+| **03 팀 진행 상황** (최신) | 팀 저장소 상태, 팀 대화 정리(역할 번호), 내 역할, 오늘 질문, 회의 안건 | [MD](docs/guide_v2/03_팀_진행상황.md) · [PDF](docs/guide_v2/03_팀_진행상황.pdf) · [웹](https://skn35shimsungwook.github.io/langchain-migration-helper/docs/guide_v2/03_팀_진행상황.html) |
+| **역할 분담표** | 네 역할, 1번과 3번의 경계, 서로 맞춰야 하는 것, 팀 저장소에 넣을 자리 | [MD](docs/역할분담표.md) |
 | **출력 모양 합의안** | 3번 report 모양 (화면과 평가가 함께 씀), 예시 JSON, 검사 방법 | [MD](docs/출력모양_합의안.md) |
-| **API 합의안** | 1번 API 주소 3개, 요청·응답, 에러 규칙, 연습용 서버 | [MD](docs/API_합의안.md) |
+| **API 합의안** | 1번 그래프 호출: 기본 함수 `run_migration()`, 선택 HTTP 주소 3개, 에러 규칙, 연습용 서버 | [MD](docs/API_합의안.md) |
 | **symbol_map 합의안** | 2번 이사 목록 모양, 근거 ID 규칙, Qdrant payload, 테스트셋 대조 | [MD](docs/symbol_map_합의안.md) |
 | 평가 기준과 실험 규칙 | 성공 기준, 지표, 실험 조건, 결과 형식 | [MD](eval/EVAL_RULES.md) |
 | 작업 기록 | 지금 기준(역할 · 약속 · 주요 결정 · 정정), 날짜별 기록, 남은 일 | [MD](docs/작업기록.md) |
@@ -232,12 +254,14 @@ langchain_migration/
 
 ## 11. 팀
 
-| 역할 | 담당 | 이름 |
-|---|---|---|
-| 1번 | 그래프 · 백엔드 (State, LangGraph 연결, 재시도 조건, API, 샌드박스 환경) | [이름] |
-| 2번 | 데이터 · 검색 (문서 수집, 청킹, Qdrant, symbol_map, retriever) | [이름] |
-| 3번 | 변환 · 검증 (analyzer, rewriter, verifier, report) | [이름] |
-| 4번 | 화면 · 평가 (Streamlit 화면, 실험 설계, 테스트셋, 비교 실험) + 보고서, README, 발표 | [이름] |
+공개 저장소라서 팀원은 **역할 번호로만** 적습니다.
+
+| 역할 | 담당 |
+|---|---|
+| 1번 | 그래프 · 백엔드 (State, LangGraph 연결, 재시도 조건, `run_migration()`, 샌드박스 환경) |
+| 2번 | 데이터 · 검색 (문서 수집, 청킹, Qdrant, symbol_map, retriever) |
+| 3번 | 변환 · 검증 (analyzer, rewriter, verifier, report 노드는 확인 중) |
+| 4번 | 화면 · 평가 (Streamlit 화면, 실험 설계, 테스트셋, 비교 실험) + 보고서, README, 발표 · 이 저장소 |
 
 ## 12. 참고 자료
 

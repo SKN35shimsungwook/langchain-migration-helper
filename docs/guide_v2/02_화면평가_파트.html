@@ -26,9 +26,9 @@
 <header class="hero">
   <p class="eyebrow">LANGCHAIN 마이그레이션 도우미 · 4번(화면 · 평가) 담당 안내서</p>
   <h1>화면·평가 파트</h1>
-  <span class="badge">최신 버전 v2 · 2026-10-12</span>
+  <span class="badge">최신 버전 v2.1 · 2026-10-13</span>
   <p class="lead">4번이 맡은 <b>손님 테이블(화면)</b>과 <b>요리 대회 심사위원(평가)</b> 일을 그림 중심으로 설명합니다. 보고서, README, 발표도 4번이 맡습니다.</p>
-  <p class="meta">먼저 읽을 문서: <a href="01_프로젝트_한눈에.html">01 프로젝트 한눈에</a></p>
+  <p class="meta">먼저 읽을 문서: <a href="01_프로젝트_한눈에.html">01 프로젝트 한눈에</a> · 팀 진행 상황: <a href="03_팀_진행상황.html">03 팀 진행 상황</a></p>
   <div class="box remember">
     <p class="label">이것 세 줄만 기억해도 됩니다</p>
     <ol>
@@ -74,7 +74,7 @@
   <p class="chno">3장</p>
   <h2>화면: 손님 테이블</h2>
   <figure class="pic"><img src="../images/10_screen_design.svg" alt="변환하기 탭과 성능 비교 탭의 화면 설계도"></figure>
-  <p>뼈대는 <code>app/streamlit_app.py</code>에 있습니다. 지금은 테스트셋으로 만든 <b>가짜 응답</b>으로 돌아가고, 1번의 API 주소를 <code>MIGRATION_API_URL</code>에 넣으면 실제 결과를 보여 줍니다.</p>
+  <p>뼈대는 <code>app/streamlit_app.py</code>에 있습니다. 지금은 테스트셋으로 만든 <b>가짜 응답</b>으로 돌아갑니다. 맨 위에서 <b>목표 버전</b>(지금은 LangChain 1.x)을 고릅니다. 팀 그래프가 나오면 <code>MIGRATION_FUNC="src.graph.supervisor:run_migration"</code>으로 함수를 바로 부르고(기본안), HTTP로 부를 때는 <code>MIGRATION_API_URL</code>을 씁니다.</p>
   <div class="table-wrap"><table>
     <tr><th>report가 보내 줄 것 (3번과 약속)</th><th>화면에서 보이는 곳</th></tr>
     <tr><td><code>migrated_code</code> 고친 코드</td><td>④ 변경 후, 바뀐 줄</td></tr>
@@ -134,7 +134,7 @@ python make_charts.py --a results/A_[모델]_[날짜].json --b results/B_[모델
     <tr><th>누구와</th><th>무엇을</th><th>왜</th></tr>
     <tr><td>3번</td><td><code>verify.py</code> 넘기기</td><td>팀 verifier와 평가 채점이 같은 기준이어야 공정함</td></tr>
     <tr><td>3번</td><td>report 출력 모양 (<a href="https://github.com/SKN35shimsungwook/langchain-migration-helper/blob/main/docs/출력모양_합의안.md">합의안</a>)</td><td>화면이 그대로 보여 주고, 평가 결과도 여기서 계산 (<code>run_system.py</code>)</td></tr>
-    <tr><td>1번</td><td>API 주소와 입출력 모양 (<a href="https://github.com/SKN35shimsungwook/langchain-migration-helper/blob/main/docs/API_합의안.md">합의안</a>)</td><td>화면과 평가가 프로그램을 부르는 창구. 연습용 서버로 미리 연결해 둠</td></tr>
+    <tr><td>1번</td><td>그래프를 부르는 방법 (<a href="https://github.com/SKN35shimsungwook/langchain-migration-helper/blob/main/docs/API_합의안.md">합의안</a> 1.1): 기본은 <code>run_migration(code, target_version)</code> 함수, HTTP는 선택</td><td>화면과 평가가 프로그램을 부르는 창구. 두 방법 모두 미리 연결해 둠</td></tr>
     <tr><td>2번</td><td>symbol_map 모양과 근거 ID 규칙 (<a href="https://github.com/SKN35shimsungwook/langchain-migration-helper/blob/main/docs/symbol_map_합의안.md">합의안</a>), 테스트셋 대조</td><td>이사 목록이 진짜 맞는지, 시험지 심볼을 얼마나 덮는지 확인 (<code>check_symbol_map.py</code>)</td></tr>
   </table></div>
 </section>
@@ -170,7 +170,7 @@ python make_charts.py --a results/A_[모델]_[날짜].json --b results/B_[모델
   <div class="checks" id="checks"></div>
 </section>
 
-<footer>최신 버전 v2 · 2026-10-12 · 같은 내용의 MD와 PDF가 같은 폴더에 있습니다. 이전 버전: <code>docs/guide/</code></footer>
+<footer>최신 버전 v2.1 · 2026-10-13 · 같은 내용의 MD와 PDF가 같은 폴더에 있습니다. 이전 버전: <code>docs/guide/</code></footer>
 </div>
 <script>
 window.GUIDE = {

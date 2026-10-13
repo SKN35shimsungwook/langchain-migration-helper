@@ -1,8 +1,28 @@
 # API 합의안 (1번 ↔ 4번)
 
-> 버전 1.0 · 2026-10-13 · 작성: 4번 (화면 · 평가) · 받는 사람: 1번 (그래프 · 백엔드)
+> 버전 1.1 · 2026-10-13 · 작성: 4번 (화면 · 평가) · 받는 사람: 1번 (그래프 · 백엔드)
 > 상태: **합의 전 (초안)** — 아래 "정할 것"에 답해 주면 확정합니다.
+> 1.1 변경: 팀 저장소 코드에 맞춰 **함수 호출을 기본안**으로 바꾸고, **목표 버전(`target_version`)**을 추가했습니다. 아래 0장을 먼저 보세요.
 > 함께 보는 문서: [출력모양_합의안.md](출력모양_합의안.md) (응답 본문 = 3번이 만드는 report)
+
+## 0. 팀 저장소 기준으로 바뀐 점 (1.1)
+
+팀 저장소 dev 브랜치를 보니 **FastAPI가 없고, 화면 자리(`app.py`)가 그래프와 같은 저장소 루트에 있습니다.** 그래서 HTTP 서버를 따로 띄우지 않고 **화면이 그래프 함수를 바로 부르는 방식**을 기본안으로 제안합니다. 1번이 만들 것이 함수 하나로 줄어듭니다.
+
+```python
+# 1번이 만들 함수 하나 (위치 예: src/graph/supervisor.py)
+def run_migration(code: str, target_version: str = "1.x") -> dict:
+    """그래프를 한 번 실행하고 report(dict)를 돌려준다. 모양은 출력모양_합의안.md"""
+```
+
+| | 기본안: 함수 호출 | 선택: HTTP (아래 1~7장) |
+|---|---|---|
+| 1번이 만들 것 | `run_migration()` 함수 하나 | 서버 + 주소 3개 |
+| 화면 · 평가 설정 | `MIGRATION_FUNC="src.graph.supervisor:run_migration"` | `MIGRATION_API_URL="http://localhost:8000"` |
+| 실패 처리 | 검증 실패는 report의 `success: false`, 그래프 오류는 예외 | 검증 실패는 200, 서버 문제만 HTTP 에러 |
+| 준비 상태 | 4번 화면 · 평가 코드에 연결 완료 | 4번 화면 · 평가 코드에 연결 완료 (연습용 서버 포함) |
+
+**목표 버전**: 팀 대화에서 "버전을 골라서 돌리면"으로 정했기 때문에, 화면에 **목표 버전 선택**을 넣고 함수와 요청에 `target_version`을 추가했습니다. 지금은 `"1.x"` 하나로 시작하고, 2번 문서가 늘면 값을 추가합니다. report에도 `target_version`이 들어갑니다.
 
 ## 한 줄 요약
 
@@ -40,13 +60,15 @@ python docs/contracts/api_stub.py          # http://localhost:8000
 | 필드 | 형식 | 필수 | 규칙 |
 |---|---|---|---|
 | `code` | 문자열 | ✅ | 비어 있으면 안 됨, 20000자 이하 |
+| `target_version` | 문자열 | – | 목표 버전. 지금은 `"1.x"`만 (없으면 `"1.x"`). 지원하지 않는 값이면 400 `unsupported_version` |
 | `request_id` | 문자열 | – | 로그를 찾을 때 사용 |
 
 **응답 (200)**: [출력모양_합의안.md](출력모양_합의안.md)의 report에 `request_id`를 더한 것
 
 ```json
 {
-  "contract_version": "1.0",
+  "contract_version": "1.1",
+  "target_version": "1.x",
   "request_id": "b1f0…",
   "original_code": "...",
   "migrated_code": "...",

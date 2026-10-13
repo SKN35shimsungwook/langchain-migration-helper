@@ -22,9 +22,9 @@
 <header class="hero">
   <p class="eyebrow">LANGCHAIN 마이그레이션 도우미 · 팀 모두를 위한 안내서</p>
   <h1>프로젝트 한눈에</h1>
-  <span class="badge">최신 버전 v2 · 2026-10-12 · 새 설계와 새 역할 반영</span>
+  <span class="badge">최신 버전 v2.1 · 2026-10-13 · 새 설계, 새 역할, 팀 저장소 기준 반영</span>
   <p class="lead">우리 팀이 무엇을, 왜, 어떤 순서로 만드는지 <b>주방 이야기</b>와 그림으로 설명합니다.</p>
-  <p class="meta">읽는 시간 약 10분 · 다음 문서: <a href="02_화면평가_파트.html">02 화면·평가 파트</a> (4번 담당)</p>
+  <p class="meta">읽는 시간 약 10분 · 다음 문서: <a href="02_화면평가_파트.html">02 화면·평가 파트</a> (4번 담당) · <a href="03_팀_진행상황.html">03 팀 진행 상황</a></p>
   <div class="box remember">
     <p class="label">이것 세 줄만 기억해도 됩니다</p>
     <ol>
@@ -60,7 +60,7 @@
     <tr><td>② retriever</td><td>이사 목록과 안내서에서 새 위치 찾기</td><td>2번</td></tr>
     <tr><td>③ rewriter</td><td>안내서 쪽수(근거 ID)를 적어 가며 레시피 고쳐 쓰기</td><td>3번</td></tr>
     <tr><td>④ verifier</td><td>(a) 적은 안내서 쪽수가 진짜 있는지 (b) 서랍을 열어 도구와 그 기능이 있는지 확인</td><td>3번</td></tr>
-    <tr><td>⑤ report</td><td>고친 레시피 + 바뀐 목록 + 몇 번 만에 됐는지</td><td>3번</td></tr>
+    <tr><td>⑤ report</td><td>고친 레시피 + 바뀐 목록 + 몇 번 만에 됐는지 (영수증)</td><td>3번 (4번 가능, 확인 중)</td></tr>
   </table></div>
   <div class="box warn">
     <p class="label">되돌아가는 길 (검증 루프)</p>
@@ -77,7 +77,7 @@
   <h2>누가 무엇을 맡나</h2>
   <div class="table-wrap"><table>
     <tr><th>번호</th><th>역할</th><th>맡는 것</th><th>주방 비유</th></tr>
-    <tr><td>1번</td><td>그래프 · 백엔드</td><td>단계 연결, 다시 갈지 판단, API, 샌드박스 환경</td><td>주방 동선과 주문 전달</td></tr>
+    <tr><td>1번</td><td>그래프 · 백엔드</td><td>단계 연결, 다시 갈지 판단, <code>run_migration()</code> 함수, 샌드박스 환경</td><td>주방 동선과 주문 전달</td></tr>
     <tr><td>2번</td><td>데이터 · 검색</td><td>안내서 만들기(Qdrant, symbol_map), retriever</td><td>안내서 만들기와 찾아 주기</td></tr>
     <tr><td>3번</td><td>변환 · 검증</td><td>analyzer, rewriter, verifier, report</td><td>요리사와 검수원</td></tr>
     <tr><td>4번</td><td>화면 · 평가</td><td>Streamlit 화면, 평가 실험 + 보고서 · README · 발표</td><td>손님 테이블과 심사위원</td></tr>
@@ -104,7 +104,8 @@
     <dt>샌드박스</dt><dd>시험용으로 따로 만든 깨끗한 새 주방. 여기서 서랍을 열어 봄</dd>
     <dt>검증 루프</dt><dd>막히면 이유를 적어 다시 찾고 고치는 되돌아가는 길 (최대 2~3번)</dd>
     <dt>State</dt><dd>직원들이 같이 보는 주문서. 각 단계가 칸을 채움</dd>
-    <dt>API</dt><dd>화면과 평가가 프로그램을 부르는 주문 창구</dd>
+    <dt>API</dt><dd>화면과 평가가 프로그램을 부르는 주문 창구. 팀 기본안은 함수 <code>run_migration(code, target_version)</code> 하나</dd>
+    <dt>목표 버전</dt><dd>어느 버전으로 고칠지 고르는 값 (<code>target_version</code>, 지금은 1.x)</dd>
   </dl>
 </section>
 
@@ -115,7 +116,7 @@
   <div class="quiz" id="quiz"></div>
 </section>
 
-<footer>최신 버전 v2 · 2026-10-12 · 같은 내용의 MD와 PDF가 같은 폴더에 있습니다. 이전 버전: <code>docs/guide/</code>, <code>docs/역순설계_쉽게_이해하기.md</code></footer>
+<footer>최신 버전 v2.1 · 2026-10-13 · 같은 내용의 MD와 PDF가 같은 폴더에 있습니다. 이전 버전: <code>docs/guide/</code>, <code>docs/역순설계_쉽게_이해하기.md</code></footer>
 </div>
 <script>
 window.GUIDE = {

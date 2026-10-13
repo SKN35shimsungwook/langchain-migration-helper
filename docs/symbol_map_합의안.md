@@ -1,8 +1,32 @@
 # symbol_map · 근거 ID 합의안 (2번 ↔ 3번 · 4번)
 
-> 버전 1.0 · 2026-10-13 · 작성: 4번 (화면 · 평가) · 받는 사람: 2번 (데이터 · 검색), 참고: 3번
+> 버전 1.1 · 2026-10-13 · 작성: 4번 (화면 · 평가) · 받는 사람: 2번 (데이터 · 검색), 참고: 1번 · 3번
 > 상태: **합의 전 (초안)** — 아래 "정할 것"에 답해 주면 확정합니다.
+> 1.1 변경: 팀 저장소의 `MigrateState`(1번이 만든 모양)와 필드를 어떻게 이어 붙이는지 0장에 추가했습니다. symbol_map 파일 모양은 그대로입니다.
 > 함께 보는 문서: [출력모양_합의안.md](출력모양_합의안.md) (report의 `evidence_id`, `evidence_url`), [API_합의안.md](API_합의안.md)
+
+## 0. 팀 코드의 `MigrateState`와 연결 (1.1)
+
+팀 저장소 `src/graph/state.py`에는 1번이 만든 모양이 있습니다.
+
+```python
+class MigrateState(BaseModel):
+    old: str
+    new: str
+    evidence_id: str
+    kind: Literal["native", "classic_fallback"]
+```
+
+이것은 **"이번 변환에서 고른 이사 한 건"**이고, symbol_map 한 줄은 **"고를 수 있는 이사 방법 전부"**입니다. 그래서 이름을 바꾸지 않고 아래처럼 이어 붙이면 됩니다.
+
+| `MigrateState` | symbol_map 한 줄에서 가져오는 값 | report `changes[]` |
+|---|---|---|
+| `old` | `old` | `old` (코드 줄) |
+| `new` | 최신 방식이면 `new_import` (없어진 것이면 `replacement_imports`), classic 우회면 `fallback_import` | `new` |
+| `evidence_id` | `evidence_ids` 중 실제로 쓴 것 하나 | `evidence_id` |
+| `kind` | `new_import` · `replacement`를 쓰면 `"native"`, `fallback_import`를 쓰면 `"classic_fallback"` | (선택) `kind` |
+
+`kind`는 평가의 **classic 의존 비율**과 같은 구분입니다. 1번도 같은 문제를 보고 있다는 뜻이라, report `changes[]`에 `kind`를 선택 필드로 넣어 주면 화면에서 "classic 우회" 표시를 바로 할 수 있습니다.
 
 ## 한 줄 요약
 

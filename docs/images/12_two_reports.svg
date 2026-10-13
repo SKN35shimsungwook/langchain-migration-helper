@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400" role="img" aria-label="두 가지 report: 요청마다 나오는 report 노드(영수증)와 프로젝트 끝에 쓰는 결과 보고서">
+<style>
+text { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; fill: #18202B; }
+.t { font-size: 22px; font-weight: 700; }
+.h { font-size: 17px; font-weight: 700; }
+.s { font-size: 13px; fill: #4A5565; }
+.c { font-size: 13px; }
+.tag { font-size: 12px; font-weight: 700; }
+@keyframes print { 0%,40% { transform: translateY(0); } 55%,85% { transform: translateY(14px); } 100% { transform: translateY(0); } }
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+.paper { animation: print 4s ease-in-out infinite; }
+.blink { animation: blink 2s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .paper,.blink { animation: none; } }
+</style>
+<rect width="800" height="400" rx="16" fill="#F7F8FA"/>
+<text x="28" y="40" class="t">이름은 같지만 다른 두 "report"</text>
+
+<!-- 왼쪽: report 노드 = 영수증 -->
+<rect x="24" y="60" width="364" height="320" rx="14" fill="#FFFFFF" stroke="#2457C5" stroke-width="2"/>
+<text x="44" y="92" class="h" style="fill:#2457C5">① report 노드 = 영수증</text>
+<text x="44" y="116" class="s">프로그램의 마지막 단계 · 요청마다 자동</text>
+<rect x="60" y="134" width="292" height="40" rx="8" fill="#E4ECFB"/>
+<text x="206" y="159" class="c" text-anchor="middle">analyzer → retriever → rewriter → verifier → <tspan font-weight="700">report</tspan></text>
+<g class="paper">
+  <rect x="120" y="186" width="172" height="120" rx="6" fill="#FFFFFF" stroke="#C9D2DD"/>
+  <text x="136" y="210" class="c">새 코드</text>
+  <text x="136" y="232" class="c">구 → 신 변경표</text>
+  <text x="136" y="254" class="c">근거 링크</text>
+  <text x="136" y="276" class="c">검증 통과 · 2회 시도</text>
+</g>
+<text x="44" y="344" class="c">보는 사람: 화면을 쓰는 사용자</text>
+<rect x="44" y="352" width="196" height="22" rx="11" fill="#FBEBD8"/><text x="142" y="368" class="tag" text-anchor="middle" style="fill:#8A4B12">담당: 3번 또는 4번 (확인 중)</text>
+
+<!-- 오른쪽: 결과 보고서 -->
+<rect x="412" y="60" width="364" height="320" rx="14" fill="#FFFFFF" stroke="#1B7A43" stroke-width="2"/>
+<text x="432" y="92" class="h" style="fill:#1B7A43">② 결과 보고서 = 대회 결과 보고서</text>
+<text x="432" y="116" class="s">프로젝트 산출물 · 끝에 한 번, 사람이 작성</text>
+<rect x="480" y="138" width="230" height="168" rx="6" fill="#FFFFFF" stroke="#C9D2DD"/>
+<rect x="480" y="138" width="230" height="30" rx="6" fill="#E1F3E8"/>
+<text x="595" y="158" class="c" text-anchor="middle" font-weight="700">결과 보고서 · README · 발표</text>
+<text x="498" y="192" class="c">문제와 해결 방법</text>
+<text x="498" y="214" class="c">30문제 실험 결과</text>
+<rect class="blink" x="590" y="226" width="96" height="18" rx="3" fill="#E1F3E8"/>
+<text x="498" y="240" class="c">그래프 3장 <tspan fill="#1B7A43" font-weight="700">[__]%</tspan></text>
+<text x="498" y="266" class="c">한계와 다음 단계</text>
+<text x="432" y="344" class="c">보는 사람: 강사님 · 평가자</text>
+<rect x="432" y="352" width="132" height="22" rx="11" fill="#E1F3E8"/><text x="498" y="368" class="tag" text-anchor="middle" style="fill:#1B7A43">담당: 4번 (확정)</text>
+</svg>

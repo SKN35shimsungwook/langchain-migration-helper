@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 380" width="800" height="380" role="img" aria-label="팀 Git 흐름: 각자 브랜치에서 작업하고 dev로 PR. 4번 브랜치는 dev 최신 상태로 앞당김">
+<style>
+text { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; fill: #18202B; }
+.t { font-size: 22px; font-weight: 700; }
+.h { font-size: 15px; font-weight: 700; }
+.s { font-size: 12.5px; fill: #4A5565; }
+.tag { font-size: 12px; font-weight: 700; }
+@keyframes flow { from { stroke-dashoffset: 24; } to { stroke-dashoffset: 0; } }
+@keyframes hop { 0%,100% { transform: translateX(0); } 50% { transform: translateX(10px); } }
+.flow { stroke-dasharray: 6 6; animation: flow 1.2s linear infinite; }
+.hop { animation: hop 2.4s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .flow,.hop { animation: none; } }
+</style>
+<rect width="800" height="380" rx="16" fill="#F7F8FA"/>
+<text x="28" y="40" class="t">팀 Git 흐름</text>
+<text x="160" y="40" class="s">각자 브랜치에서 작업 → dev로 PR → 확인 후 병합</text>
+
+<!-- dev 줄 -->
+<text x="28" y="104" class="h">dev</text>
+<path d="M90 98 H770" stroke="#2457C5" stroke-width="4"/>
+<circle cx="130" cy="98" r="9" fill="#2457C5"/><circle cx="260" cy="98" r="9" fill="#2457C5"/><circle cx="390" cy="98" r="9" fill="#2457C5"/>
+<text x="260" y="76" class="s" text-anchor="middle">1번 폴더 구조</text>
+<text x="390" y="76" class="s" text-anchor="middle">구조 수정 (지금)</text>
+<circle cx="640" cy="98" r="9" fill="#FFFFFF" stroke="#2457C5" stroke-width="3" stroke-dasharray="4 3"/>
+<text x="640" y="76" class="s" text-anchor="middle">4번 PR (직접, 회의 후)</text>
+
+<!-- 1번 -->
+<text x="28" y="164" class="h">1번</text>
+<path d="M90 158 H330" stroke="#8A94A3" stroke-width="3"/>
+<path class="flow" d="M200 158 L255 104" stroke="#8A94A3" stroke-width="2" fill="none"/>
+<path class="flow" d="M330 158 L385 104" stroke="#8A94A3" stroke-width="2" fill="none"/>
+<text x="404" y="150" class="s">← PR로 dev에 병합 완료</text>
+
+<!-- 2번 -->
+<text x="28" y="214" class="h">2번</text>
+<path d="M390 208 H560" stroke="#8A94A3" stroke-width="3"/>
+<path d="M390 104 L390 208" stroke="#8A94A3" stroke-width="2" stroke-dasharray="3 4"/>
+<text x="570" y="212" class="s">dev와 같음 · 작업 전</text>
+
+<!-- 4번 -->
+<text x="28" y="284" class="h" style="fill:#2457C5">4번 (나)</text>
+<path d="M110 278 H150" stroke="#B8501F" stroke-width="3" stroke-dasharray="5 4"/>
+<circle cx="130" cy="278" r="8" fill="#FFFFFF" stroke="#B8501F" stroke-width="3"/>
+<text x="130" y="306" class="s" text-anchor="middle">예전 위치(main)</text>
+<g class="hop"><path d="M170 278 H350" stroke="#2457C5" stroke-width="3" marker-end="url(#a)"/></g>
+<text x="260" y="268" class="tag" text-anchor="middle" style="fill:#2457C5">앞으로 당기기 (fast-forward)</text>
+<circle cx="390" cy="278" r="9" fill="#2457C5"/>
+<path d="M390 108 L390 268" stroke="#2457C5" stroke-width="2" stroke-dasharray="3 4"/>
+<path d="M390 278 H600" stroke="#2457C5" stroke-width="3"/>
+<path class="flow" d="M600 278 L636 108" stroke="#2457C5" stroke-width="2" fill="none"/>
+<text x="470" y="306" class="s">여기에 화면 · 평가 · 문서를 옮김</text>
+
+<rect x="28" y="326" width="744" height="38" rx="10" fill="#FFFFFF" stroke="#DCE1E7"/>
+<text x="44" y="350" class="s">잃은 작업 0개 · 강제 덮어쓰기 없음 · 다른 사람 브랜치와 dev는 그대로 · 3번 브랜치는 아직 없음</text>
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#2457C5"/></marker></defs>
+</svg>
