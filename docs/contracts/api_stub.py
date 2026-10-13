@@ -17,11 +17,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "app"))
-from backend import _mock, load_testset  # noqa: E402
+from backend import CONTRACT_VERSION, TARGET_VERSIONS, _mock, load_testset  # noqa: E402
 
 TESTSET = load_testset()
 INFO = {
-    "contract_version": "1.0",
+    "contract_version": CONTRACT_VERSION,
+    "target_versions": TARGET_VERSIONS,
     "model": "stub (가짜 응답)",
     "max_attempts": 3,
     "sandbox": {"python": "3.12", "langchain": "1.4.4", "langchain-core": "1.6.9"},
@@ -60,7 +61,10 @@ class Handler(BaseHTTPRequestHandler):
             return self._error(400, "empty_code", "code 에 변환할 코드를 넣어 주세요")
         if len(code) > 20000:
             return self._error(413, "code_too_long", "code 는 20000자 이하여야 합니다")
-        report = _mock(code, TESTSET)
+        target_version = body.get("target_version") or TARGET_VERSIONS[0]
+        if target_version not in TARGET_VERSIONS:
+            return self._error(400, "unsupported_version", f"target_version 은 {TARGET_VERSIONS} 중 하나여야 합니다")
+        report = _mock(code, TESTSET, target_version)
         report.pop("mock", None)
         report.pop("example_id", None)
         report["request_id"] = body.get("request_id") or str(uuid.uuid4())

@@ -4,7 +4,8 @@
 판정은 baseline(A)과 같은 verify.py 로 다시 한다 (EVAL_RULES 5장 '같은 판정기').
 
 실행:
-    $env:MIGRATION_API_URL="http://localhost:8000"     (1번 API 주소, 규칙은 docs/API_합의안.md)
+    $env:MIGRATION_FUNC="src.graph.supervisor:run_migration"   (팀 그래프 함수, 기본안. 규칙은 docs/API_합의안.md)
+    또는 $env:MIGRATION_API_URL="http://localhost:8000"        (HTTP로 부를 때)
     python run_system.py --py verify-env/Scripts/python.exe --model [모델명]
     python run_system.py --py verify-env/Scripts/python.exe --mock      # API 없이 흐름만 확인 (화면용 가짜 응답 사용)
 """
@@ -20,7 +21,7 @@ from verify import judge
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / "app"))
-from backend import ApiError, _mock, api_info, migrate  # noqa: E402
+from backend import ApiError, _mock, api_info, func_target, migrate, mode  # noqa: E402
 
 
 def to_result(item: dict, report: dict, py: str, model: str) -> dict:
@@ -60,13 +61,15 @@ def main():
     results = json.loads(out.read_text(encoding="utf-8")) if out.exists() else []
     done = {r["id"] for r in results}
 
-    if not a.mock:
+    if not a.mock and mode() == "func":
+        print(f"팀 그래프 직접 호출: {func_target()} · 모델은 --model({a.model})과 같은지 직접 확인하세요 (EVAL_RULES 5장).")
+    elif not a.mock:
         try:
             info = api_info()
         except ApiError as e:
             sys.exit(f"API에 연결할 수 없습니다. 1번 API가 켜져 있는지, 주소가 맞는지 확인하세요.\n  ({e})")
         if info is None:
-            sys.exit("MIGRATION_API_URL 이 없습니다. API 주소를 넣거나 --mock 으로 실행하세요.")
+            sys.exit("MIGRATION_FUNC(팀 그래프 함수)나 MIGRATION_API_URL(API 주소)이 없습니다. 둘 중 하나를 넣거나 --mock 으로 실행하세요.")
         print(f"API 정보: 모델 {info.get('model')} · 최대 {info.get('max_attempts')}회 · 샌드박스 {info.get('sandbox')}")
         if info.get("model") != a.model:
             print(f"[주의] --model({a.model})과 API 모델({info.get('model')})이 다릅니다. A와 같은 모델인지 확인하세요 (EVAL_RULES 5장).")

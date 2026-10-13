@@ -5,7 +5,7 @@
     streamlit run app/streamlit_app.py
 
 탭 두 개:
-  변환하기   코드 입력 → 진행 단계 → 결과, 바뀐 줄 비교, 근거 링크, 검증 배지
+  변환하기   목표 버전 선택 + 코드 입력 → 진행 단계 → 결과, 바뀐 줄 비교, 근거 링크, 검증 배지
   성능 비교  eval/charts 의 그래프와 요약표 (make_charts.py 결과)
 """
 
@@ -14,7 +14,7 @@ from pathlib import Path
 
 import streamlit as st
 
-from backend import ApiError, api_base, api_info, load_testset, migrate
+from backend import TARGET_VERSIONS, ApiError, api_info, func_target, load_testset, migrate, mode
 
 ROOT = Path(__file__).resolve().parent.parent
 CHARTS = ROOT / "eval" / "charts"
@@ -36,8 +36,10 @@ st.caption("구버전 LangChain 코드를 최신 버전으로 바꾸고, 문서 
 
 @st.cache_data(ttl=60)
 def backend_status() -> tuple[str, str]:
-    """(배지 글자, 색) — GET /info 로 연결 상태 확인."""
-    if not api_base():
+    """(배지 글자, 색) — 함수 호출이면 그대로, HTTP면 GET /info 로 연결 상태 확인."""
+    if mode() == "func":
+        return f"팀 그래프 직접 호출 · {func_target()}", "green"
+    if mode() == "mock":
         return "가짜 응답 모드", "gray"
     try:
         info = api_info()
@@ -53,7 +55,10 @@ convert_tab, compare_tab = st.tabs([":material/sync_alt: 변환하기", ":materi
 
 with convert_tab:
     labels = {f"{e['id']} · {DIFF_LABEL[e['difficulty']]} · {e['why_broken'][:28]}": e for e in examples}
-    choice = st.selectbox("예제 불러오기", ["직접 입력"] + list(labels), key="example")
+    pick_version, pick_example = st.columns([1, 3])
+    target_version = pick_version.selectbox("목표 버전", [f"LangChain {v}" for v in TARGET_VERSIONS],
+                                            key="target_version").removeprefix("LangChain ")
+    choice = pick_example.selectbox("예제 불러오기", ["직접 입력"] + list(labels), key="example")
     default = labels[choice]["old_code"] if choice in labels else ""
     with st.form("convert"):
         code = st.text_area("구버전 코드", value=default, height=220, key=f"code_{choice}")
@@ -62,7 +67,7 @@ with convert_tab:
     if submitted and code.strip():
         try:
             with st.spinner("파이프라인 실행 중..."):
-                st.session_state["report"] = migrate(code, examples)
+                st.session_state["report"] = migrate(code, examples, target_version)
         except ApiError as e:
             st.session_state.pop("report", None)
             st.error(f"변환 요청에 실패했습니다. {e}", icon=":material/cloud_off:")
@@ -91,6 +96,7 @@ with convert_tab:
                 st.badge(f"검증 통과 · {report['attempts']}회 시도", icon=":material/check_circle:", color="green")
             else:
                 st.badge("검증 실패", icon=":material/error:", color="red")
+            st.badge(f"목표 LangChain {report.get('target_version', '1.x')}", icon=":material/flag:", color="gray")
             evidence = report["changes"]
             if evidence:
                 valid = sum(c["evidence_ok"] for c in evidence)

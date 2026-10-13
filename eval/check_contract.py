@@ -28,6 +28,7 @@ def check(report: dict) -> list[str]:
         return obj[key]
 
     need(report, "contract_version", str, "report")
+    need(report, "target_version", str, "report")  # 1.1 에서 추가 (목표 버전 선택)
     need(report, "original_code", str, "report")
     need(report, "migrated_code", str, "report")
 
