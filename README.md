@@ -5,7 +5,7 @@
 **문서 근거**(공식 마이그레이션 가이드 · 릴리스 노트 검색)와 **실행 근거**(최신 환경에서 import · 속성 검증)로 이중 검증합니다.
 검증에 실패하면 에러 종류와 대상을 피드백으로 다시 검색해서 고칩니다.
 
-**바로 가기**: [발표 자료](https://skn35shimsungwook.github.io/langchain-migration-helper/presentation/발표자료.html) · [쉬운 안내서](docs/guide_v2/01_프로젝트_한눈에.md) · [역할 분담표](docs/역할분담표.md) · [평가 규칙](eval/EVAL_RULES.md) · [안내서 모음 웹페이지](https://skn35shimsungwook.github.io/langchain-migration-helper/)
+**바로 가기**: [발표 자료](https://skn35shimsungwook.github.io/langchain-migration-helper/presentation/발표자료.html) · [쉬운 안내서](docs/guide_v2/01_프로젝트_한눈에.md) · [역할 분담표](docs/역할분담표.md) · 팀 합의안([출력 모양](docs/출력모양_합의안.md) · [API](docs/API_합의안.md) · [symbol_map](docs/symbol_map_합의안.md)) · [평가 규칙](eval/EVAL_RULES.md) · [작업 기록](docs/작업기록.md) · [안내서 모음 웹페이지](https://skn35shimsungwook.github.io/langchain-migration-helper/)
 
 | | |
 |---|---|
@@ -20,8 +20,9 @@
 | 역할 분담 | 1 그래프·백엔드 / 2 데이터·검색 / 3 변환·검증 / 4 화면·평가 ([역할분담표](docs/역할분담표.md)) | ✅ 확정 |
 | 평가 설계 | 평가 기준과 실험 규칙 ([EVAL_RULES.md](eval/EVAL_RULES.md)), 팀 verifier와 같은 판정 기준 | ✅ 완료 |
 | 테스트셋 | 구버전 코드 30개, 최신 환경에서 깨지는 것 확인 ([testset.json](eval/testset.json)) | ✅ 완료 |
-| 평가 도구 | 판정기(import · 속성), baseline 실험, 그래프 스크립트 | ✅ 완료 (API 없이 흐름 확인) |
-| 화면 | 변환하기 탭, 성능 비교 탭 ([app/](app/)) | 🟡 뼈대 완성 (가짜 응답으로 동작) |
+| 평가 도구 | 판정기(import · 속성), 일반 AI 실험(A), 우리 시스템 실험(B), 그래프, 검사기 2종(report · symbol_map) | ✅ 완료 (API 없이 흐름 확인) |
+| 화면 | 변환하기 탭, 성능 비교 탭 ([app/](app/)) | 🟡 뼈대 완성, API 연결 준비 완료 (연습용 서버로 확인) |
+| 팀 합의안 | [출력 모양](docs/출력모양_합의안.md)(3번) · [API](docs/API_합의안.md)(1번) · [symbol_map](docs/symbol_map_합의안.md)(2번) | 🟡 작성 완료, 팀 답변 대기 |
 | 안내서 v2 | 프로젝트 한눈에 / 화면·평가 파트 (MD · PDF · 웹) | ✅ 완료 |
 | 발표 자료 | 14장 초안 (그림 중심) | 🟡 초안 (결과 숫자 미입력) |
 | 챗봇 본체 | 오프라인 준비, 파이프라인, 검색, 변환·검증 (1~3번) | ⏳ 진행 중 |
@@ -74,6 +75,19 @@ from langchain.chains import LLMChain          → ModuleNotFoundError: No modul
 
 단계 연결, 다시 갈지 판단, API는 1번이 맡습니다. **화면과 평가는 파이프라인 바깥**에서 API로 파이프라인을 불러 쓰며, 4번이 맡습니다.
 
+### 팀 사이 약속
+
+```text
+2번 symbol_map · Qdrant ──같은 근거 ID──▶ 3번 report ──▶ 1번 API ──┬──▶ 4번 화면
+   (symbol_map 합의안)                    (출력 모양 합의안)  (API 합의안) └──▶ 4번 평가
+```
+
+| 합의안 | 누구와 | 핵심 |
+|---|---|---|
+| [출력 모양](docs/출력모양_합의안.md) | 3번 ↔ 4번 | report 모양 하나로 화면과 평가가 함께 씀. 평가 결과는 4번이 report에서 계산 |
+| [API](docs/API_합의안.md) | 1번 ↔ 4번 | `POST /migrate`, `GET /info`, `GET /health`. 검증 실패도 HTTP 200 |
+| [symbol_map](docs/symbol_map_합의안.md) | 2번 ↔ 3번 · 4번 | 이사 목록 모양, 근거 ID `문서#섹션-번호` |
+
 - 파이프라인: LangGraph · LLM: [모델명] · 벡터 DB: Qdrant · 화면: Streamlit
 - 근거 자료: [LangChain v1 마이그레이션 가이드](https://docs.langchain.com/oss/python/migrate/langchain-v1), 릴리스 노트
 
@@ -112,7 +126,8 @@ from langchain.chains import LLMChain          → ModuleNotFoundError: No modul
 
 - **`langchain-community`는 import만 해도 지원 종료 경고를 냅니다.** (2026-10-12, langchain-community 0.4.2) 지금은 통과해도 곧 깨질 수 있어 `uses_community`로 따로 집계합니다.
 - **`langchain_classic`으로 우회하면 옛 체인도 import가 됩니다.** 최신 방식은 아니므로 `uses_classic`으로 따로 집계합니다.
-- `langchain_classic.agents`에서 `initialize_agent`, `AgentType`, `AgentExecutor`는 classic 우회로 import되지만, `load_tools`는 `langchain-community` 의존성 문제로 실패합니다. (2026-10-13 하나씩 다시 확인해서 바로잡음: 처음에는 여러 이름을 한 줄로 가져와 전부 실패하는 것처럼 보였음)
+- **에이전트도 classic으로 우회됩니다.** `langchain_classic.agents`에서 `initialize_agent`, `AgentType`, `AgentExecutor`는 import되고, `load_tools`만 `langchain-community` 의존성 문제로 실패합니다. 어려운 문제도 우회로 "통과"할 수 있으므로 classic 의존 비율이 중요합니다.
+  (처음에는 여러 이름을 한 줄로 가져와 전부 실패하는 것처럼 보였고, 2026-10-13 하나씩 다시 확인해서 바로잡았습니다. [작업 기록](docs/작업기록.md)의 정정 기록 참고)
 
 ## 7. 한계와 다음 단계
 
@@ -136,6 +151,8 @@ streamlit run app/streamlit_app.py
 
 실제 API가 나오기 전에는 연습용 서버로 연결을 시험할 수 있습니다: `python docs/contracts/api_stub.py`
 
+화면 위쪽 배지로 연결 상태를 알 수 있습니다: 회색 "가짜 응답 모드" · 초록 "API 연결됨 · 모델 · 최대 시도" · 빨강 "API 연결 안 됨"
+
 ### 8-2. 챗봇 본체
 
 ```bash
@@ -154,9 +171,13 @@ python check_testset.py testset.json --py verify-env/Scripts/python.exe
 python run_baseline.py --py verify-env/Scripts/python.exe --model [모델명]
 python run_system.py --py verify-env/Scripts/python.exe --model [모델명]   # MIGRATION_API_URL 필요
 python make_charts.py --a results/A_[모델명]_[날짜].json --b results/B_[모델명]_[날짜].json
+
+# 팀원 결과물 검사
+python check_contract.py report.json --py verify-env/Scripts/python.exe          # 3번 report 모양 + 판정 일치
+python check_symbol_map.py symbol_map.json --py verify-env/Scripts/python.exe --testset testset.json   # 2번 symbol_map
 ```
 
-OpenAI API 키는 환경 변수 `OPENAI_API_KEY`로 설정합니다. `run_baseline.py`는 `--limit 3`(3문제 먼저), `--mock`(API 없이 흐름만 확인)을 지원합니다.
+OpenAI API 키는 환경 변수 `OPENAI_API_KEY`로 설정합니다. `run_baseline.py`와 `run_system.py`는 `--limit 3`(3문제 먼저), `--mock`(API 없이 흐름만 확인)을 지원하고, 중간에 멈춰도 이어서 실행됩니다. `run_system.py`는 API의 모델이 `--model`과 다르면 경고합니다.
 
 ## 9. 폴더 구조
 
@@ -186,6 +207,7 @@ langchain_migration/
     ├── 출력모양_합의안.md      # 3번 report 모양 (contracts/ 에 예시 JSON)
     ├── API_합의안.md           # 1번 API 규칙 (contracts/api_stub.py 연습용 서버)
     ├── symbol_map_합의안.md    # 2번 이사 목록 · 근거 ID 규칙
+    ├── contracts/             # 예시 JSON (report 2개, symbol_map), 연습용 API 서버
     ├── 작업기록.md
     ├── 데이터_출처_조사.md
     ├── guide/                 # 안내서 이전 버전 v1
@@ -204,7 +226,7 @@ langchain_migration/
 | **API 합의안** | 1번 API 주소 3개, 요청·응답, 에러 규칙, 연습용 서버 | [MD](docs/API_합의안.md) |
 | **symbol_map 합의안** | 2번 이사 목록 모양, 근거 ID 규칙, Qdrant payload, 테스트셋 대조 | [MD](docs/symbol_map_합의안.md) |
 | 평가 기준과 실험 규칙 | 성공 기준, 지표, 실험 조건, 결과 형식 | [MD](eval/EVAL_RULES.md) |
-| 작업 기록 | 무엇을 왜 했는지, 확인한 결과와 남은 일 | [MD](docs/작업기록.md) |
+| 작업 기록 | 지금 기준(역할 · 약속 · 주요 결정 · 정정), 날짜별 기록, 남은 일 | [MD](docs/작업기록.md) |
 | 데이터 출처 조사 | RAG 문서와 테스트 코드 출처 | [MD](docs/데이터_출처_조사.md) |
 | 이전 버전 | 안내서 v1(역할 변경 전), 역순 설계 초판 | [guide/](docs/guide/) · [역순설계](docs/역순설계_쉽게_이해하기.md) |
 
