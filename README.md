@@ -202,10 +202,14 @@ OpenAI API 키는 환경 변수 `OPENAI_API_KEY`로 설정합니다. `run_baseli
 
 ## 9. 폴더 구조
 
+**팀 저장소에 올릴 사본**: [for_team_repo/](for_team_repo/)는 팀 저장소와 **같은 폴더 구조**로 4번 파일만 모은 사본입니다(`app.py`, `src/ui/`, `eval/`, `docs/`). 팀 저장소에 그대로 덮어 복사하면 되고, 바뀌는 기존 파일은 `app.py` 하나입니다. 원본(`app/`, `eval/`, `docs/`)을 고친 뒤에는 `python tools/make_team_copy.py`로 사본을 다시 만듭니다. 올리는 순서는 [4번_화면평가_올리는법.md](for_team_repo/docs/4번_화면평가_올리는법.md)에 있습니다.
+
 ```text
 langchain_migration/
 ├── README.md
 ├── index.html                 # GitHub Pages 목차 페이지
+├── for_team_repo/             # 팀 저장소와 같은 구조의 4번 파일 사본 (tools/make_team_copy.py가 만듦, 직접 고치지 않음)
+├── tools/                     # make_team_copy.py: 원본 → for_team_repo/ 사본 만들기
 │                              # 챗봇 본체(src/, data/)는 팀 저장소에 있음
 ├── app/                       # 화면 (4번)
 │   ├── streamlit_app.py       # 변환하기 · 성능 비교 탭

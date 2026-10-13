@@ -275,7 +275,7 @@
 </tr>
 </tbody>
 </table></div>
-<p><strong>팀 저장소에 옮길 자리 (계획)</strong> — 1번에게 확인받은 뒤 <strong>4번이 직접</strong> 올립니다.</p>
+<p><strong>팀 저장소에 옮길 자리 (계획)</strong> — 1번에게 확인받은 뒤 <strong>4번이 직접</strong> 올립니다. 이 구조 그대로 모은 사본이 <a href="https://github.com/SKN35shimsungwook/langchain-migration-helper/tree/main/for_team_repo">for_team_repo/</a>에 있어서, 덮어 복사만 하면 됩니다 (바뀌는 기존 파일은 <code>app.py</code> 하나).</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -453,7 +453,7 @@ git branch          # * &lt;4번 브랜치&gt; 가 보이면 됨
 </tr>
 <tr>
 <td>4</td>
-<td>4번 브랜치에 화면 · 평가 · 문서를 옮기고 <strong>직접</strong> dev로 PR</td>
+<td><code>for_team_repo/</code>를 4번 브랜치에 덮어 복사하고 <strong>직접</strong> dev로 PR</td>
 <td>1번 확인 후</td>
 </tr>
 <tr>
@@ -512,7 +512,7 @@ window.GUIDE = {
     ["3번에게 verify.py 넘기기", "출력 모양 합의안 함께"],
     ["2번과 근거 ID 규칙 · 벡터 DB 공유 방법 정하기", "symbol_map 합의안"],
     ["비교 모델, 최대 시도 횟수 정하기", "EVAL_RULES 9장"],
-    ["1번 확인 후 내 브랜치에 옮기고 직접 PR", "app.py, src/ui/, eval/, docs/"]
+    ["1번 확인 후 for_team_repo/ 를 내 브랜치에 복사하고 직접 PR", "바뀌는 기존 파일은 app.py 하나"]
   ]
 };
 </script>
