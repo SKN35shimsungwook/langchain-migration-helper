@@ -58,6 +58,8 @@
     <tr><td><code>check_testset.py</code></td><td>시험지 검사기</td><td>실행해서 "통과 30/30" 보기</td></tr>
     <tr><td><code>verify.py</code></td><td>채점 로봇</td><td>3번에게 넘겨 verifier (b)의 출발점으로 쓰게 하기</td></tr>
     <tr><td><code>run_baseline.py</code></td><td>상대 선수 시험 기계</td><td>일반 AI 30문제 실행</td></tr>
+    <tr><td><code>run_system.py</code></td><td>우리 선수 시험 기계</td><td>30문제를 API로 돌리고 report를 평가 결과로 바꾸기</td></tr>
+    <tr><td><code>check_contract.py</code></td><td>접시 모양 검사기</td><td>3번 report가 약속한 모양인지 확인</td></tr>
     <tr><td><code>make_charts.py</code></td><td>점수판 그리기</td><td>그래프 3장과 요약표 만들기</td></tr>
   </table></div>
   <div class="box tip">
@@ -130,8 +132,7 @@ python make_charts.py --a results/A_[모델]_[날짜].json --b results/B_[모델
   <div class="table-wrap"><table>
     <tr><th>누구와</th><th>무엇을</th><th>왜</th></tr>
     <tr><td>3번</td><td><code>verify.py</code> 넘기기</td><td>팀 verifier와 평가 채점이 같은 기준이어야 공정함</td></tr>
-    <tr><td>3번</td><td>report 출력 모양</td><td>화면이 그대로 보여 줌 (3장 표)</td></tr>
-    <tr><td>3번</td><td>verifier 결과 모양 (<code>attempts</code>, <code>first_try_success</code>, <code>evidence</code>, <code>attempt_log</code>)</td><td>평가 그래프가 이 값으로 그려짐</td></tr>
+    <tr><td>3번</td><td>report 출력 모양 (<a href="https://github.com/SKN35shimsungwook/langchain-migration-helper/blob/main/docs/출력모양_합의안.md">합의안</a>)</td><td>화면이 그대로 보여 주고, 평가 결과도 여기서 계산 (<code>run_system.py</code>)</td></tr>
     <tr><td>1번</td><td>API 주소와 입출력 모양</td><td>화면과 평가가 프로그램을 부르는 창구</td></tr>
     <tr><td>2번</td><td><code>symbol_map.json</code> ↔ 테스트셋 <code>target_imports</code> 대조</td><td>시험지 정답 방향과 이사 목록이 서로 맞는지 확인</td></tr>
   </table></div>
@@ -193,8 +194,7 @@ window.GUIDE = {
   checks: [
     ["01, 02 안내서를 읽고 퀴즈 풀기", "틀린 문제는 해설 다시 읽기"],
     ["팀과 비교 모델, 최대 시도(2 또는 3회) 정하기", "EVAL_RULES 9장"],
-    ["3번에게 verify.py 넘기고 verifier 결과 모양 합의", "attempts, first_try_success, evidence, attempt_log"],
-    ["3번과 report 출력 모양 합의", "3장 표"],
+    ["3번에게 verify.py 넘기고 출력 모양 합의안 보내기", "docs/출력모양_합의안.md"],
     ["1번과 API 주소와 입출력 모양 합의", "화면과 평가가 같이 씀"],
     ["2번의 symbol_map과 테스트셋 정답 방향 대조", "서로 맞는지"],
     ["시험용 새 주방 만들고 버전 고정", "4장 1단계"],

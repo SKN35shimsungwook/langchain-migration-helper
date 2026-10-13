@@ -150,6 +150,7 @@ uv pip install --python verify-env/Scripts/python.exe langchain langchain-core l
 verify-env/Scripts/python.exe -m pip freeze > requirements-verify.txt
 python check_testset.py testset.json --py verify-env/Scripts/python.exe
 python run_baseline.py --py verify-env/Scripts/python.exe --model [모델명]
+python run_system.py --py verify-env/Scripts/python.exe --model [모델명]   # MIGRATION_API_URL 필요
 python make_charts.py --a results/A_[모델명]_[날짜].json --b results/B_[모델명]_[날짜].json
 ```
 
@@ -171,12 +172,15 @@ langchain_migration/
 │   ├── check_testset.py       # 테스트 코드가 최신 환경에서 깨지는지 확인
 │   ├── verify.py              # 공용 판정기 (import · 속성), 팀 verifier (b)의 출발점
 │   ├── run_baseline.py        # baseline(일반 LLM) 실험
+│   ├── run_system.py          # 우리 시스템 실험 (report → 평가 결과)
+│   ├── check_contract.py      # report가 합의한 모양인지 검사
 │   └── make_charts.py         # 결과 그래프와 요약표
 ├── presentation/              # 발표 자료 (원본, 웹 버전, PDF)
 └── docs/
     ├── guide_v2/              # 쉬운 안내서 최신 (MD · PDF · HTML)
     ├── images/                # 설명 그림 (움직이는 SVG, static/은 슬라이드용 정지 그림)
     ├── 역할분담표.md
+    ├── 출력모양_합의안.md      # 3번 report 모양 (contracts/ 에 예시 JSON)
     ├── 작업기록.md
     ├── 데이터_출처_조사.md
     ├── guide/                 # 안내서 이전 버전 v1
@@ -191,6 +195,7 @@ langchain_migration/
 | **01 프로젝트 한눈에** (최신 v2) | 주방 비유, 새 설계(기본 설계), 역할, 용어 사전 (팀 모두용) | [MD](docs/guide_v2/01_프로젝트_한눈에.md) · [PDF](docs/guide_v2/01_프로젝트_한눈에.pdf) · [웹](https://skn35shimsungwook.github.io/langchain-migration-helper/docs/guide_v2/01_프로젝트_한눈에.html) |
 | **02 화면·평가 파트** (최신 v2) | 역설계, 평가, 화면, 따라 하기, 결과 읽기, 맞출 것, 발표 질문, 체크리스트 | [MD](docs/guide_v2/02_화면평가_파트.md) · [PDF](docs/guide_v2/02_화면평가_파트.pdf) · [웹](https://skn35shimsungwook.github.io/langchain-migration-helper/docs/guide_v2/02_화면평가_파트.html) |
 | **역할 분담표** | 네 역할, 1번과 3번의 경계, 서로 맞춰야 하는 것 | [MD](docs/역할분담표.md) |
+| **출력 모양 합의안** | 3번 report 모양 (화면과 평가가 함께 씀), 예시 JSON, 검사 방법 | [MD](docs/출력모양_합의안.md) |
 | 평가 기준과 실험 규칙 | 성공 기준, 지표, 실험 조건, 결과 형식 | [MD](eval/EVAL_RULES.md) |
 | 작업 기록 | 무엇을 왜 했는지, 확인한 결과와 남은 일 | [MD](docs/작업기록.md) |
 | 데이터 출처 조사 | RAG 문서와 테스트 코드 출처 | [MD](docs/데이터_출처_조사.md) |
