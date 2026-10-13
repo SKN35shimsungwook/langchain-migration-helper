@@ -1,0 +1,136 @@
+{
+  "symbol_map_version": "1.0",
+  "langchain_version": "1.4.4",
+  "generated_at": "2026-10-13",
+  "symbols": [
+    {
+      "old": "langchain.chat_models.ChatOpenAI",
+      "status": "moved",
+      "new_import": "from langchain_openai import ChatOpenAI",
+      "replacement": null,
+      "replacement_imports": [],
+      "fallback_import": null,
+      "package": "langchain-openai",
+      "evidence_ids": [
+        "v1-migration#chat-models-01"
+      ]
+    },
+    {
+      "old": "langchain.llms.OpenAI",
+      "status": "moved",
+      "new_import": "from langchain_openai import OpenAI",
+      "replacement": null,
+      "replacement_imports": [],
+      "fallback_import": null,
+      "package": "langchain-openai",
+      "evidence_ids": [
+        "v1-migration#chat-models-01"
+      ]
+    },
+    {
+      "old": "langchain.prompts.PromptTemplate",
+      "status": "moved",
+      "new_import": "from langchain_core.prompts import PromptTemplate",
+      "replacement": null,
+      "replacement_imports": [],
+      "fallback_import": null,
+      "package": "langchain-core",
+      "evidence_ids": [
+        "v1-migration#prompts-02"
+      ]
+    },
+    {
+      "old": "langchain.schema.Document",
+      "status": "moved",
+      "new_import": "from langchain_core.documents import Document",
+      "replacement": null,
+      "replacement_imports": [],
+      "fallback_import": null,
+      "package": "langchain-core",
+      "evidence_ids": [
+        "v1-migration#schema-04"
+      ]
+    },
+    {
+      "old": "langchain.text_splitter.RecursiveCharacterTextSplitter",
+      "status": "moved",
+      "new_import": "from langchain_text_splitters import RecursiveCharacterTextSplitter",
+      "replacement": null,
+      "replacement_imports": [],
+      "fallback_import": null,
+      "package": "langchain-text-splitters",
+      "evidence_ids": [
+        "v1-migration#text-splitters-05"
+      ]
+    },
+    {
+      "old": "langchain.vectorstores.FAISS",
+      "status": "moved",
+      "new_import": "from langchain_community.vectorstores import FAISS",
+      "replacement": null,
+      "replacement_imports": [],
+      "fallback_import": null,
+      "package": "langchain-community",
+      "evidence_ids": [
+        "v1-migration#community-06"
+      ]
+    },
+    {
+      "old": "langchain.chains.LLMChain",
+      "status": "removed",
+      "new_import": null,
+      "replacement": "LCEL로 연결: chain = prompt | llm | StrOutputParser()",
+      "replacement_imports": [
+        "from langchain_core.output_parsers import StrOutputParser"
+      ],
+      "fallback_import": "from langchain_classic.chains import LLMChain",
+      "package": "langchain-core",
+      "evidence_ids": [
+        "v1-migration#llmchain-03",
+        "v1-migration#classic-07"
+      ]
+    },
+    {
+      "old": "langchain.memory.ConversationBufferMemory",
+      "status": "removed",
+      "new_import": null,
+      "replacement": "대화 기록은 create_agent + 체크포인터(InMemorySaver)와 thread_id로 관리",
+      "replacement_imports": [
+        "from langgraph.checkpoint.memory import InMemorySaver"
+      ],
+      "fallback_import": "from langchain_classic.memory import ConversationBufferMemory",
+      "package": "langgraph",
+      "evidence_ids": [
+        "v1-migration#memory-08",
+        "v1-migration#classic-07"
+      ]
+    },
+    {
+      "old": "langchain.agents.initialize_agent",
+      "status": "removed",
+      "new_import": null,
+      "replacement": "create_agent(model, tools, system_prompt=...)",
+      "replacement_imports": [
+        "from langchain.agents import create_agent"
+      ],
+      "fallback_import": "from langchain_classic.agents import initialize_agent",
+      "package": "langchain",
+      "evidence_ids": [
+        "v1-migration#create-agent-01",
+        "v1-migration#classic-07"
+      ]
+    },
+    {
+      "old": "langchain.tools.tool",
+      "status": "unchanged",
+      "new_import": "from langchain.tools import tool",
+      "replacement": null,
+      "replacement_imports": [],
+      "fallback_import": null,
+      "package": "langchain",
+      "evidence_ids": [
+        "v1-migration#tools-09"
+      ]
+    }
+  ]
+}
