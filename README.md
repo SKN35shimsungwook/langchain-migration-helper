@@ -1,5 +1,11 @@
 # LangChain 버전 마이그레이션 도우미
 
+> **📌 현재 상태 (2026-10-15 발표 기준)** — 이 저장소는 **초기 기획 · 문서 저장소** (10-12 ~ 10-13: 기획, 안내서, 합의안, 회의록) 입니다. 최신 코드 · 결과 · 문서는 아래에 있습니다.
+> - **배포 화면 (Langration)**: https://langchain-migration-assistant-btn5chcr8ragnwts68rmhf.streamlit.app
+> - **배포 저장소 (최신 전체)**: [langchain-migration-assistant](https://github.com/SKN35shimsungwook/langchain-migration-assistant) — README · [프로젝트 최종 보고서](https://github.com/SKN35shimsungwook/langchain-migration-assistant/blob/main/docs/프로젝트_최종_보고서.md) · [작업 기록](https://github.com/SKN35shimsungwook/langchain-migration-assistant/blob/main/docs/작업_기록.md) · [발표자료](https://github.com/SKN35shimsungwook/langchain-migration-assistant/tree/main/발표자료)
+> - **팀 저장소**: [SKN35-3rd-4Team](https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN35-3rd-4Team) (dev · sungwook)
+> - **결과**: 같은 gpt-4o-mini로 공통 기준 통과 일반 LLM 0% → 우리 챗봇 57% (실행 기준 0% → 87%), 자체 평가 83.3점 · 평가 질문 36개(1.x로 올리기 30 + 버전 오가기 6)
+
 > 구버전 LangChain 코드를 최신 버전(1.x)으로 바꿔 주고, **바꾼 코드가 실제로 동작하는지까지 확인하는** 코드 마이그레이션 챗봇
 
 **문서 근거**(공식 마이그레이션 가이드 · 릴리스 노트 검색)와 **실행 근거**(최신 환경에서 import · 속성 검증)로 이중 검증합니다.
